@@ -1,0 +1,31 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#344871"/>
+
+  <!-- Left 60% - Credentials graphic -->
+  <rect width="720" height="630" fill="#006DD6" opacity="0.1"/>
+
+  <!-- Book icons placeholder -->
+  <rect x="100" y="100" width="120" height="160" fill="#006DD6" opacity="0.3" rx="5"/>
+  <rect x="240" y="150" width="120" height="160" fill="#1877F2" opacity="0.3" rx="5"/>
+  <rect x="380" y="100" width="120" height="160" fill="#006DD6" opacity="0.3" rx="5"/>
+  <rect x="180" y="320" width="120" height="160" fill="#1877F2" opacity="0.3" rx="5"/>
+  <rect x="320" y="370" width="120" height="160" fill="#006DD6" opacity="0.3" rx="5"/>
+
+  <!-- Right 40% - Dark background -->
+  <rect x="720" width="480" height="630" fill="#344871"/>
+
+  <!-- Right side content -->
+  <text x="760" y="100" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white">Meet Rofsan Sir</text>
+
+  <text x="760" y="180" font-family="Arial, sans-serif" font-size="32" fill="#006DD6">• CAIE Examiner</text>
+  <text x="760" y="240" font-family="Arial, sans-serif" font-size="32" fill="white">• 8+ Years Experience</text>
+  <text x="760" y="300" font-family="Arial, sans-serif" font-size="32" fill="white">• 3000+ Students</text>
+  <text x="760" y="360" font-family="Arial, sans-serif" font-size="32" fill="white">• 5 Books Published</text>
+
+  <text x="760" y="480" font-family="Arial, sans-serif" font-size="28" fill="#E2E8F0">O Level Bengali Expert</text>
+
+  <!-- Badge -->
+  <rect x="760" y="520" width="250" height="50" rx="25" fill="#006DD6"/>
+  <text x="780" y="555" font-family="Arial, sans-serif" font-size="20" fill="white">University of Chittagong</text>
+</svg>

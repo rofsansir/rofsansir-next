@@ -1,0 +1,228 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Rofsan Sir — Design System
+   Ported from rofsansir-prototype into Tailwind CSS v4 @theme.
+   Palette: cream / paper / ink / plum / marigold (+ rose, teal)
+   Type: Bricolage Grotesque (display) · Inter (body) · Hind Siliguri (bn)
+   ============================================================ */
+
+@theme {
+  /* --- Color palette --- */
+  --color-cream: #f3ede1;
+  --color-paper: #fbf7ef;
+  --color-ink: #221a15;
+  --color-plum: #382033;
+  --color-plum-2: #4a2b42;
+  --color-plum-3: #5e3852;
+  --color-marigold: #e2a039;
+  --color-marigold-soft: #f1c878;
+  --color-marigold-deep: #b97a23;
+  --color-rose: #c7654f;
+  --color-teal: #1f5550;
+  --color-muted: #73665b;
+
+  /* --- Fonts (CSS vars are wired by next/font in layout.tsx) --- */
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-bengali: var(--font-bengali), var(--font-inter), sans-serif;
+
+  /* --- Shadows --- */
+  --shadow-luxe: 0 30px 80px -30px rgba(56, 32, 51, 0.35);
+  --shadow-card: 0 14px 40px -20px rgba(56, 32, 51, 0.22);
+
+  /* --- Animations --- */
+  --animate-marquee: marquee 32s linear infinite;
+  --animate-marquee-slow: marquee 70s linear infinite;
+  --animate-spin-slow: spinSlow 26s linear infinite;
+  --animate-floaty: floaty 6s ease-in-out infinite;
+  --animate-floaty-slow: floaty 9s ease-in-out infinite;
+  --animate-shimmer: shimmer 3.2s linear infinite;
+  --animate-blob: blob 22s ease-in-out infinite;
+  --animate-ping-soft: pingSoft 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes spinSlow {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes floaty {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes shimmer {
+    to {
+      background-position: 200% center;
+    }
+  }
+  @keyframes blob {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(40px, -30px) scale(1.08);
+    }
+    66% {
+      transform: translate(-30px, 20px) scale(0.96);
+    }
+  }
+  @keyframes pingSoft {
+    75%,
+    100% {
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
+}
+
+/* --- Base --- */
+:root {
+  --background: #f3ede1; /* cream */
+  --foreground: #221a15; /* ink */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* subtle paper grain */
+  background-image: radial-gradient(rgba(56, 32, 51, 0.04) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* Bengali passages */
+:lang(bn),
+.font-bengali {
+  font-family: var(--font-bengali);
+}
+
+::selection {
+  background: var(--color-marigold);
+  color: var(--color-ink);
+}
+
+/* ------------------------------------------------------------
+   Signature premium effects
+   ------------------------------------------------------------ */
+
+/* Grain/noise overlay — apply to dark sections (.noise) */
+.noise {
+  position: relative;
+}
+.noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.noise > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Shimmering gold text (the "A*") */
+.text-shimmer {
+  background: linear-gradient(
+    100deg,
+    var(--color-marigold-deep),
+    var(--color-marigold),
+    var(--color-marigold-soft),
+    var(--color-marigold),
+    var(--color-marigold-deep)
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: var(--animate-shimmer);
+}
+
+/* Outline numerals ("01"–"05") */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(34, 26, 21, 0.16);
+}
+
+/* Carousel edge fade */
+.edge-fade {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 7%,
+    #000 93%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 7%,
+    #000 93%,
+    transparent
+  );
+}
+
+/* Marquee track helper */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  flex-wrap: nowrap;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Hide scrollbar (carousels) */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ------------------------------------------------------------
+   Reduced motion
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
