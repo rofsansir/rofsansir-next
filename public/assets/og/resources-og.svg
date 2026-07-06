@@ -1,0 +1,35 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#344871"/>
+
+  <!-- Left 60% - Books collage -->
+  <rect width="720" height="630" fill="#006DD6" opacity="0.15"/>
+
+  <!-- Book spines -->
+  <rect x="80" y="80" width="80" height="200" fill="#006DD6" opacity="0.4" rx="3"/>
+  <rect x="170" y="120" width="80" height="200" fill="#1877F2" opacity="0.4" rx="3"/>
+  <rect x="260" y="80" width="80" height="200" fill="#006DD6" opacity="0.4" rx="3"/>
+  <rect x="350" y="150" width="80" height="200" fill="#1877F2" opacity="0.4" rx="3"/>
+  <rect x="440" y="80" width="80" height="200" fill="#006DD6" opacity="0.4" rx="3"/>
+  <rect x="530" y="120" width="80" height="200" fill="#1877F2" opacity="0.4" rx="3"/>
+
+  <!-- Arrow icon -->
+  <path d="M 150 450 L 200 500 L 150 550" stroke="#006DD6" stroke-width="8" fill="none" opacity="0.5"/>
+  <path d="M 200 500 L 350 500" stroke="#006DD6" stroke-width="8" opacity="0.5"/>
+
+  <!-- Right 40% -->
+  <rect x="720" width="480" height="630" fill="#344871"/>
+
+  <!-- Right side content -->
+  <text x="760" y="120" font-family="Arial, sans-serif" font-size="44" font-weight="bold" fill="white">Free O Level Bengali</text>
+
+  <text x="760" y="220" font-family="Arial, sans-serif" font-size="36" fill="#006DD6">Resources &amp; Notes</text>
+
+  <text x="760" y="320" font-family="Arial, sans-serif" font-size="24" fill="#E2E8F0">• Past Papers</text>
+  <text x="760" y="370" font-family="Arial, sans-serif" font-size="24" fill="#E2E8F0">• Exam Tips</text>
+  <text x="760" y="420" font-family="Arial, sans-serif" font-size="24" fill="#E2E8F0">• Mock Tests</text>
+
+  <!-- Download button -->
+  <rect x="760" y="500" width="200" height="60" rx="30" fill="#006DD6"/>
+  <text x="800" y="540" font-family="Arial, sans-serif" font-size="24" fill="white">Download Now ↓</text>
+</svg>

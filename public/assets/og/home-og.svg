@@ -1,0 +1,35 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#344871"/>
+
+  <!-- Left 60% - Gradient overlay -->
+  <defs>
+    <linearGradient id="teacherGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#006DD6;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#344871;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="720" height="630" fill="url(#teacherGradient)"/>
+
+  <!-- Decorative circles -->
+  <circle cx="200" cy="100" r="150" fill="#006DD6" opacity="0.1"/>
+  <circle cx="600" cy="500" r="100" fill="#1877F2" opacity="0.15"/>
+
+  <!-- Right 40% - Dark background -->
+  <rect x="720" width="480" height="630" fill="#344871"/>
+
+  <!-- Right side content -->
+  <text x="760" y="120" font-family="Arial, sans-serif" font-size="52" font-weight="bold" fill="white">O Level Bengali</text>
+
+  <text x="760" y="250" font-family="Arial, sans-serif" font-size="64" font-weight="bold" fill="#006DD6">Achieve A*</text>
+
+  <text x="760" y="380" font-family="Arial, sans-serif" font-size="36" fill="#E2E8F0">with Rofsan Sir</text>
+
+  <!-- Badge -->
+  <rect x="760" y="450" width="280" height="60" rx="30" fill="#006DD6"/>
+  <text x="780" y="490" font-family="Arial, sans-serif" font-size="24" fill="white">✓ CAIE Examiner</text>
+
+  <!-- Logo placeholder -->
+  <circle cx="100" cy="100" r="50" fill="white" opacity="0.1"/>
+  <text x="100" y="110" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="white" text-anchor="middle">RS</text>
+</svg>
