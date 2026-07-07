@@ -154,21 +154,30 @@ h5 {
   z-index: 1;
 }
 
-/* Shimmering gold text (the "A*") */
+/* Shimmering gold text (the "A*") — matches prototype .shimmer */
 .text-shimmer {
   background: linear-gradient(
     100deg,
-    var(--color-marigold-deep),
-    var(--color-marigold),
-    var(--color-marigold-soft),
-    var(--color-marigold),
-    var(--color-marigold-deep)
+    #b97a23 0%,
+    #b97a23 38%,
+    #f7e3b8 50%,
+    #b97a23 62%,
+    #b97a23 100%
   );
-  background-size: 200% auto;
+  background-size: 250% 100%;
   -webkit-background-clip: text;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
   color: transparent;
-  animation: var(--animate-shimmer);
+  animation: shimmerSweep 4.5s linear infinite;
+}
+@keyframes shimmerSweep {
+  0% {
+    background-position: 160% 0;
+  }
+  100% {
+    background-position: -60% 0;
+  }
 }
 
 /* Outline numerals ("01"–"05") */
