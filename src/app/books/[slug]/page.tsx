@@ -138,22 +138,13 @@ export default async function BookDetailPage({
             </p>
 
             <div className="mt-2 flex flex-wrap gap-3">
-              <Button
-                href={`${site.contact.whatsapp}?text=${encodeURIComponent(
-                  `Hi Rofsan Sir, I'm interested in the book "${book.title}".`,
-                )}`}
-                external
-                size="lg"
-              >
-                Enquire on WhatsApp
+              <Button href="/courses" size="lg">
+                Learn with these books
               </Button>
-              <Button href="/books" variant="outline" size="lg">
-                All Books
+              <Button href={site.contact.whatsapp} external variant="outline" size="lg">
+                Ask on WhatsApp
               </Button>
             </div>
-            <p className="text-xs text-muted">
-              Purchase links coming soon — message Rofsan Sir to order.
-            </p>
           </div>
         </Container>
       </section>

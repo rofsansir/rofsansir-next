@@ -62,6 +62,7 @@ export default function ResourcesPage() {
                       </span>
                       <div className="min-w-0 flex-1">
                         <h3
+                          lang={r.bengali ? "bn" : undefined}
                           className={`font-semibold leading-snug text-ink ${
                             r.bengali ? "font-bengali" : ""
                           }`}

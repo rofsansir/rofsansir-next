@@ -41,7 +41,10 @@ function FaqItem({ q, a, enSummary }: { q: string; a: string; enSummary?: string
         <ChevronDown className="h-5 w-5 shrink-0 text-marigold-deep transition-transform duration-300 group-open:rotate-180" />
       </summary>
       <div className="mt-3 space-y-2 text-sm leading-relaxed text-muted">
-        <p className={enSummary ? "whitespace-pre-line font-bengali text-ink/85" : "whitespace-pre-line"}>
+        <p
+          lang={enSummary ? "bn" : undefined}
+          className={enSummary ? "whitespace-pre-line font-bengali text-ink/85" : "whitespace-pre-line"}
+        >
           {a}
         </p>
         {enSummary && (
