@@ -4,6 +4,7 @@ export type TipArticle = {
   id: number;
   slug: string;
   title: string;
+  ogTitle: string;
   subtitle: string;
   content: string[];
   category: string;
@@ -23,6 +24,12 @@ const slugById: Record<number, string> = {
   8: "how-to-prepare-paper-02",
 };
 
+/** English title for OG images (2 titles are Bengali; OG font has no Bengali glyphs). */
+const ogTitleById: Record<number, string> = {
+  1: "What Happens If You Don't Take O Level Bangla?",
+  2: "The Academic & Career Cost of Skipping O Level Bangla",
+};
+
 const categoryById: Record<number, string> = {
   1: "Parents",
   2: "Parents",
@@ -40,6 +47,7 @@ export const articles: TipArticle[] = (rawData as Raw[]).map((a) => ({
   id: a.id,
   slug: slugById[a.id] ?? `article-${a.id}`,
   title: a.title,
+  ogTitle: ogTitleById[a.id] ?? a.title,
   subtitle: a.subtitle,
   content: a.content,
   category: categoryById[a.id] ?? "General",
