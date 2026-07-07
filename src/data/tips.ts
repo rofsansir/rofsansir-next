@@ -3,7 +3,13 @@
 export type Tip = {
   slug: string;
   title: string;
-  category: "Students" | "Parents" | "Paper 1" | "Paper 2" | "General";
+  category:
+    | "Students"
+    | "Parents"
+    | "Paper 1"
+    | "Paper 2"
+    | "General"
+    | "Examiner Insight";
   excerpt: string;
   readTime: string;
   thumb: string;
