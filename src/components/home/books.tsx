@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { Container, Eyebrow, SectionNumber } from "@/components/ui/primitives";
-import { Marquee } from "@/components/ui/marquee";
+import { InfiniteTrack } from "@/components/ui/infinite-track";
 import { cn } from "@/lib/cn";
 import { books } from "@/data/books";
 
+/** Infinite, drag-scrollable bookshelf. */
 export function Books() {
   return (
     <section id="books" className="noise relative overflow-hidden bg-plum text-cream">
@@ -19,7 +20,7 @@ export function Books() {
         </div>
       </Container>
 
-      <Marquee speed="slow" className="py-6" itemClassName="gap-6 px-3">
+      <InfiniteTrack className="py-6" trackClassName="gap-6" speed={0.4}>
         {books.map((b) => (
           <article
             key={b.slug}
@@ -31,6 +32,7 @@ export function Books() {
                 alt={b.title}
                 fill
                 sizes="160px"
+                draggable={false}
                 className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
               />
             </div>
@@ -53,7 +55,7 @@ export function Books() {
             </p>
           </article>
         ))}
-      </Marquee>
+      </InfiniteTrack>
 
       <Container>
         <p className="pb-16 text-center text-sm text-cream/60 md:pb-24">
