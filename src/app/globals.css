@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ============================================================
-   Rofsan Sir — Design System
+   Rofsan Sir   Design System
    Ported from rofsansir-prototype into Tailwind CSS v4 @theme.
    Palette: cream / paper / ink / plum / marigold (+ rose, teal)
    Type: Bricolage Grotesque (display) · Inter (body) · Hind Siliguri (bn)
@@ -38,7 +38,7 @@
   --animate-floaty: floaty 6s ease-in-out infinite;
   --animate-floaty-slow: floaty 9s ease-in-out infinite;
   --animate-shimmer: shimmer 3.2s linear infinite;
-  --animate-blob: blob 22s ease-in-out infinite;
+  --animate-blob: blob 18s ease-in-out infinite;
   --animate-ping-soft: pingSoft 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
 
   @keyframes marquee {
@@ -73,11 +73,8 @@
     100% {
       transform: translate(0, 0) scale(1);
     }
-    33% {
-      transform: translate(40px, -30px) scale(1.08);
-    }
-    66% {
-      transform: translate(-30px, 20px) scale(0.96);
+    50% {
+      transform: translate(26px, -22px) scale(1.08);
     }
   }
   @keyframes pingSoft {
@@ -136,7 +133,7 @@ h5 {
    Signature premium effects
    ------------------------------------------------------------ */
 
-/* Grain/noise overlay — apply to dark sections (.noise) */
+/* Grain/noise overlay   apply to dark sections (.noise) */
 .noise {
   position: relative;
 }
@@ -154,7 +151,7 @@ h5 {
   z-index: 1;
 }
 
-/* Shimmering gold text (the "A*") — matches prototype .shimmer */
+/* Shimmering gold text (the "A*")   matches prototype .shimmer */
 .text-shimmer {
   background: linear-gradient(
     100deg,

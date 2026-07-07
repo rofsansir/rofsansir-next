@@ -2,7 +2,7 @@ import { cn } from "@/lib/cn";
 
 /**
  * Infinite CSS marquee. Duplicates children for a seamless loop and pauses on
- * hover. `speed`: "normal" (32s) | "slow" (70s). Pure CSS — no JS.
+ * hover. `speed`: "normal" (32s) | "slow" (70s). Pure CSS   no JS.
  */
 export function Marquee({
   children,

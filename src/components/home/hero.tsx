@@ -59,8 +59,8 @@ export function Hero() {
       className="relative overflow-hidden px-4 pb-12 pt-28 md:pb-20 md:pt-36"
     >
       <BlobField />
-      <Container className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
-        {/* Left — copy */}
+      <Container className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
+        {/* Left   copy */}
         <div className="flex flex-col items-start gap-6">
           <span className="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-paper/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-muted shadow-sm backdrop-blur">
             <span className="relative flex h-2 w-2">
@@ -111,7 +111,7 @@ export function Hero() {
           </motion.h1>
 
           <div className="flex min-h-[4.2rem] items-center gap-1 sm:min-h-[2.9rem]">
-            <span className="font-display text-xl font-bold text-marigold-deep sm:text-2xl md:text-[1.9rem]">
+            <span className="font-display text-xl font-bold text-marigold-deep sm:text-2xl md:whitespace-nowrap md:text-[1.9rem]">
               {tagline}
               <span className="caret" aria-hidden />
             </span>
@@ -141,7 +141,7 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Right — portrait cluster (tilt + parallax on mouse-move) */}
+        {/* Right   portrait cluster (tilt + parallax on mouse-move) */}
         <div className="relative mx-auto w-full max-w-sm lg:max-w-md">
           <Starburst className="pointer-events-none absolute -right-6 -top-8 h-24 w-24 text-marigold/60" />
 

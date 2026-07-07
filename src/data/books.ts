@@ -20,7 +20,7 @@ export const books: Book[] = [
     subtitle: "A Complete Guide to O Level Bengali",
     code: "3204/02",
     summary:
-      "A structured guide to CAIE O Level Bengali Paper 02 — foundational grammar and core concepts, built for English-medium students.",
+      "A structured guide to CAIE O Level Bengali Paper 02   foundational grammar and core concepts, built for English-medium students.",
     image: "/assets/books/1.png",
   },
   {
@@ -31,7 +31,7 @@ export const books: Book[] = [
     subtitle: "A Complete Guide to Composition Writing",
     code: "3204/01",
     summary:
-      "An exam-focused guide to Paper 01 — Letter, Report, Dialogue, Speech and Composition writing with marking-scheme insight.",
+      "An exam-focused guide to Paper 01   Letter, Report, Dialogue, Speech and Composition writing with marking-scheme insight.",
     image: "/assets/books/2.png",
   },
   {

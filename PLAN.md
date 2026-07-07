@@ -1,26 +1,26 @@
-# Rofsan Sir — Next.js Redesign: Implementation Plan
+# Rofsan Sir   Next.js Redesign: Implementation Plan
 
 > Transform the premium prototype (`rofsansir-prototype`) into a production Next.js site,
 > migrating all content from the existing Vite SPA (`rofsansir-static`), with SEO and
 > social-share previews (WhatsApp/Facebook/Twitter/LinkedIn) as a first-class requirement.
 
 **Domain:** `rofsansir.com` · **Target dir:** `rofsansir-nextjs/` (currently empty)
-**Author/brand:** Rofsan Khan — CAIE O Level Bengali Examiner & author, Lalmatia, Dhaka.
+**Author/brand:** Rofsan Khan   CAIE O Level Bengali Examiner & author, Lalmatia, Dhaka.
 
 ---
 
 ## 1. Goals & Success Criteria
 
-1. **Premium redesign** — adopt the prototype's warm, editorial, "tutoring atelier" aesthetic
+1. **Premium redesign**   adopt the prototype's warm, editorial, "tutoring atelier" aesthetic
    (cream/plum/marigold, Bricolage Grotesque + Inter, noise textures, shimmer, count-ups,
    marquees, tilt) applied **consistently across every page**, not just the home page.
-2. **SEO-native** — server-rendered/SSG HTML so every page is crawlable; rich `metadata`,
+2. **SEO-native**   server-rendered/SSG HTML so every page is crawlable; rich `metadata`,
    dynamic OG images, JSON-LD, sitemap, robots. **A shared link must render a branded card
    with the correct title + description** in WhatsApp/social.
-3. **Full content migration** — carry over all 15+ pages, 117 past papers, 5 books, tips,
-   FAQ, videos, resources — fixing the P0 content defects found in the audit along the way.
-4. **Performance & a11y** — `next/image`, font optimization, `prefers-reduced-motion`, AA contrast.
-5. **No SEO regression** — permanent redirects for every old URL so indexed links keep working.
+3. **Full content migration**   carry over all 15+ pages, 117 past papers, 5 books, tips,
+   FAQ, videos, resources   fixing the P0 content defects found in the audit along the way.
+4. **Performance & a11y**   `next/image`, font optimization, `prefers-reduced-motion`, AA contrast.
+5. **No SEO regression**   permanent redirects for every old URL so indexed links keep working.
 
 ---
 
@@ -30,12 +30,12 @@
 |---|---|---|
 | Framework | **Next.js 15 (App Router) + React 19 + TypeScript** | Native SSG/SSR solves the old site's "Helmet tags invisible to crawlers" problem (the whole reason for the hacky prerender script). |
 | Styling | **Tailwind CSS v4** (`@theme`) | Matches the static site's stack; port the prototype's CDN config into a real build. |
-| Fonts | **`next/font`** — Bricolage Grotesque (display), Inter (body), + a Bengali font (Hind Siliguri or Noto Sans Bengali; keep Kalpurush as fallback) | Zero layout shift, self-hosted, premium typography preserved; Bengali glyphs for `bn` content. |
-| Animation | **Framer Motion (`motion`)** for reveals/parallax/tilt + **CSS** for marquees/shimmer/blobs (ported directly). Custom hooks (`useCountUp`, `useTypewriter`) where Framer isn't the right fit. *(Decision A1: Framer Motion — chosen.)* | Less custom code, easy to extend; marquees/shimmer stay CSS; all motion gated behind `prefers-reduced-motion` via `useReducedMotion`. |
+| Fonts | **`next/font`**   Bricolage Grotesque (display), Inter (body), + a Bengali font (Hind Siliguri or Noto Sans Bengali; keep Kalpurush as fallback) | Zero layout shift, self-hosted, premium typography preserved; Bengali glyphs for `bn` content. |
+| Animation | **Framer Motion (`motion`)** for reveals/parallax/tilt + **CSS** for marquees/shimmer/blobs (ported directly). Custom hooks (`useCountUp`, `useTypewriter`) where Framer isn't the right fit. *(Decision A1: Framer Motion   chosen.)* | Less custom code, easy to extend; marquees/shimmer stay CSS; all motion gated behind `prefers-reduced-motion` via `useReducedMotion`. |
 | UI primitives | **shadcn/ui** (install only what's used: Button, Dialog, Accordion, Select, Tooltip) + Radix (already familiar from old site) | Accessible, unstyled-by-default, fits the custom design system. |
 | Icons | **lucide-react** (matches old site; replace prototype's inline SVGs with a shared set) | Consistency, tree-shakeable. |
 | Content | **Typed JSON/TS in `src/data/`** (port existing), **MDX** for long-form (book sections, tip articles) | Rich rendering for articles; data stays diff-friendly. |
-| SEO images | **`next/og` (`ImageResponse`)** via `app/**/opengraph-image.tsx` | Dynamic branded OG cards per page — solves the WhatsApp-preview requirement beautifully without hand-making 100+ images. |
+| SEO images | **`next/og` (`ImageResponse`)** via `app/**/opengraph-image.tsx` | Dynamic branded OG cards per page   solves the WhatsApp-preview requirement beautifully without hand-making 100+ images. |
 | Deployment | **Vercel** (recommended) or any Node host | First-class Next support; OG image gen works out of the box. |
 
 **Output mode:** Default SSG (static export where possible). Past-paper/book/tip routes use
@@ -62,9 +62,9 @@ muted      #73665b   muted body text / meta
 ```
 
 ### Typography
-- **Display:** Bricolage Grotesque (500–800, opsz) — all headings, big numbers, names, quotes.
-- **Body:** Inter (400–700) — body, nav, buttons, meta.
-- **Bengali:** Hind Siliguri / Noto Sans Bengali — for `bn` passages (FAQ parent answers, taglines).
+- **Display:** Bricolage Grotesque (500–800, opsz)   all headings, big numbers, names, quotes.
+- **Body:** Inter (400–700)   body, nav, buttons, meta.
+- **Bengali:** Hind Siliguri / Noto Sans Bengali   for `bn` passages (FAQ parent answers, taglines).
 - Treatments: `text-balance` on H1s, `tracking-tight` headings, uppercase `tracking-widest`
   eyebrows, outline numerals (`-webkit-text-stroke`) for "01"–"05" section indices.
 
@@ -103,7 +103,7 @@ Consolidate, fix IA defects from the audit, and keep old URLs alive via redirect
 | `/resources` | ResourcesPage | **Fix the 6 broken `#` links** (P0). |
 | `/faq` | FAQPage | Consolidated student + parent FAQ. |
 | `/class/8`, `/class/9`, `/class/10` | Class 8/9/10 pages | Group under `/class`; **promote out of footer-only** (IA fix). |
-| `/fees` | **NEW** | Pricing/enrollment (P0 — none exists today). |
+| `/fees` | **NEW** | Pricing/enrollment (P0   none exists today). |
 | `/contact` | ContactPage | Fix "O & A Level" → "O Level" (P0). |
 | `/privacy-policy`, `/terms-of-service` | same | Ported. |
 
@@ -129,7 +129,7 @@ This is the heart of the "share a link → see title + description" goal.
 - `alternates.canonical` on every route. `openGraph`/`twitter` `type`, `url`, `siteName`,
   `locale` (`en_US` + `bn_BD` `alternate`), `images`.
 
-### 5.2 Dynamic OG images (`next/og`) — the WhatsApp-preview win
+### 5.2 Dynamic OG images (`next/og`)   the WhatsApp-preview win
 - `app/opengraph-image.tsx` (site default) + per-section `opengraph-image.tsx` /
   `opengraph-image.tsx` with `alt`, `size: 1200×630`.
 - Each renders a **branded card**: cream/plum bg, marigold accent, Rofsan Sir logo, the page
@@ -147,9 +147,9 @@ Port & expand the old `StructuredData.tsx` into route-level schema:
 - Emit via `<script type="application/ld+json">` (rendered server-side → crawlable).
 
 ### 5.4 Crawl infrastructure
-- `app/sitemap.ts` — auto-include all static routes + dynamic (books/tips/papers) from JSON.
-- `app/robots.ts` — allow all, point to `https://rofsansir.com/sitemap.xml`.
-- `app/manifest.ts` — PWA manifest (fix the old "MyWebSite" placeholder name).
+- `app/sitemap.ts`   auto-include all static routes + dynamic (books/tips/papers) from JSON.
+- `app/robots.ts`   allow all, point to `https://rofsansir.com/sitemap.xml`.
+- `app/manifest.ts`   PWA manifest (fix the old "MyWebSite" placeholder name).
 - Favicon set ported into `app/` (`icon.svg`, `apple-icon.png`, etc.) and `public/`.
 
 ### 5.5 Performance & UX signals (Core Web Vitals)
@@ -197,7 +197,7 @@ Copy from both folders → `public/assets/` (and `public/logos/`):
 
 > Each phase = shippable increment. Tracked in the project Task List.
 
-### Phase 0 — Foundation (no UI yet)
+### Phase 0   Foundation (no UI yet)
 - Init Next.js 15 (App Router, TS, Tailwind v4, ESLint, Prettier w/ tailwind plugin).
 - Port design tokens to `@theme`; wire `next/font` (Bricolage + Inter + Bengali).
 - Project structure (`src/app`, `src/components`, `src/data`, `src/content`, `src/lib`, `src/hooks`).
@@ -205,35 +205,35 @@ Copy from both folders → `public/assets/` (and `public/logos/`):
 - Copy + optimize all assets into `public/`.
 - Git init, `.gitignore`, `CLAUDE.md`/`README.md`.
 
-### Phase 1 — Design-system layer & shared components
+### Phase 1   Design-system layer & shared components
 - Navbar (glass pill, scroll state, mobile menu), Footer.
 - Primitives: Button, Badge, Pill, Card, Section, Eyebrow, Stat, Avatar, Marquee, Reveal,
   NoiseSection, BlobBackground, Starburst, ShimmerText.
 - Hooks: `useScrollReveal`, `useCountUp`, `useTypewriter`, `useTilt`, `usePrefersReducedMotion`.
 - Layout: shared `<PageShell>` (nav + footer + floating WhatsApp/back-to-top).
 
-### Phase 2 — Homepage (port the prototype to React)
+### Phase 2   Homepage (port the prototype to React)
 - Hero, Trust strip, Achievement ticker, Video/About teaser, Hall of Fame, Gallery,
-  Testimonials, Books, Admission CTA — 1:1 with the prototype, premium effects intact.
+  Testimonials, Books, Admission CTA   1:1 with the prototype, premium effects intact.
 
-### Phase 3 — Core content pages (apply the design system)
+### Phase 3   Core content pages (apply the design system)
 - About (condensed + sticky ToC), Courses, Contact, FAQ (accordion), Resources (fixed links),
   Class 8/9/10, Privacy, Terms. Each with its own `metadata` + JSON-LD.
 
-### Phase 4 — Dynamic/library pages (SSG via generateStaticParams)
+### Phase 4   Dynamic/library pages (SSG via generateStaticParams)
 - `/books` index + `/books/[slug]` (5, +purchase links).
 - `/past-papers` index (filter by year/paper) + `/past-papers/[slug]` (117).
 - `/examiner-tips` index + `/examiner-tips/[slug]` (8 MDX).
 - Per-page `generateMetadata`, `opengraph-image`, JSON-LD, breadcrumbs.
 
-### Phase 5 — SEO, polish & launch readiness
+### Phase 5   SEO, polish & launch readiness
 - Dynamic OG images for every section/route.
 - Full JSON-LD pass; sitemap/robots verification.
 - Image/perf audit (Lighthouse), a11y pass (contrast, focus, reduced-motion).
-- Redirects for all old URLs; 404 page; analytics (Plausible/Umami — P2).
-- New `/results` + `/fees` pages (needs content — see Open Decisions).
+- Redirects for all old URLs; 404 page; analytics (Plausible/Umami   P2).
+- New `/results` + `/fees` pages (needs content   see Open Decisions).
 
-### Phase 6 — Content/UX fixes folded in (from audit)
+### Phase 6   Content/UX fixes folded in (from audit)
 - **P0:** fix 6 `#` resource links; replace placeholder YouTube IDs; fix Contact "O & A Level";
   fix relative image paths; add pricing/fees; add enrollment flow.
 - **P1:** substantiate claims on `/results`; book purchase links; consolidate FAQ; trim About.
@@ -243,11 +243,11 @@ Copy from both folders → `public/assets/` (and `public/logos/`):
 
 ## 9. Open Decisions (need your input)
 
-- ~~**A1 — Animation:** Framer Motion (chosen). Marquees/shimmer/blobs stay CSS.~~ ✅
-- ~~**A2 — Scope:** Homepage vertical slice first (Phase 0→2), then scale to all pages.~~ ✅
-- **A3 — New content I'll need from you:** `/fees` pricing & `/results` proof assets; **book purchase links** (Amazon/website/WhatsApp?); the **correct YouTube video IDs** (replace `dQw4w9WgXcQ` / `ScMzIvxBSi4` placeholders).
-- **A4 — Deployment:** Vercel (recommended) or your existing host? (Affects OG image + edge setup.)
-- **A5 — Bengali UX:** bilingual toggle, or keep current mixed inline approach?
+- ~~**A1   Animation:** Framer Motion (chosen). Marquees/shimmer/blobs stay CSS.~~ ✅
+- ~~**A2   Scope:** Homepage vertical slice first (Phase 0→2), then scale to all pages.~~ ✅
+- **A3   New content I'll need from you:** `/fees` pricing & `/results` proof assets; **book purchase links** (Amazon/website/WhatsApp?); the **correct YouTube video IDs** (replace `dQw4w9WgXcQ` / `ScMzIvxBSi4` placeholders).
+- **A4   Deployment:** Vercel (recommended) or your existing host? (Affects OG image + edge setup.)
+- **A5   Bengali UX:** bilingual toggle, or keep current mixed inline approach?
 
 ---
 
@@ -255,8 +255,8 @@ Copy from both folders → `public/assets/` (and `public/logos/`):
 
 Tracked in the Task List (`TaskList`). Each phase is a task; status updates as work lands.
 
-- ✅ **Phase 0 — Foundation** (Next 16 scaffold, design tokens, next/font, base SEO, asset migration)
-- ✅ **Phase 1 — Design-system layer** (primitives, motion hooks, Navbar/Footer/FloatingActions)
-- ✅ **Phase 2 — Homepage** (prototype ported — Hero, Trust, Ticker, About teaser, Hall of Fame,
+- ✅ **Phase 0   Foundation** (Next 16 scaffold, design tokens, next/font, base SEO, asset migration)
+- ✅ **Phase 1   Design-system layer** (primitives, motion hooks, Navbar/Footer/FloatingActions)
+- ✅ **Phase 2   Homepage** (prototype ported   Hero, Trust, Ticker, About teaser, Hall of Fame,
   Gallery, Testimonials, Books, Admission CTA; JSON-LD; build green; live at `localhost:3000`)
-- ⏳ **Phases 3–6** — pending your review of the homepage slice.
+- ⏳ **Phases 3–6**   pending your review of the homepage slice.

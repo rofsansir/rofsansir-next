@@ -61,7 +61,7 @@ export function Books() {
 
       <Container>
         <p className="pb-16 text-center text-sm text-cream/60 md:pb-24">
-          Part of the O Level Bengali Plus series — written by Rofsan Sir.
+          Part of the O Level Bengali Plus series   written by Rofsan Sir.
         </p>
       </Container>
     </section>

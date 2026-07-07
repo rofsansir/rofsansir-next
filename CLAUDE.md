@@ -1,4 +1,4 @@
-# Rofsan Sir — Next.js Site (CLAUDE.md / AGENTS.md)
+# Rofsan Sir   Next.js Site (CLAUDE.md / AGENTS.md)
 
 Premium redesign of **rofsansir.com** (Cambridge CAIE O Level Bengali examiner
 Rofsan Khan). Ported from `../rofsansir-prototype` (design) and
@@ -6,7 +6,7 @@ Rofsan Khan). Ported from `../rofsansir-prototype` (design) and
 
 ## Stack
 - **Next.js 16 (App Router)** + React 19 + TypeScript (strict)
-- **Tailwind CSS v4** (`@theme` in `src/app/globals.css`) — **no `tailwind.config.js`**
+- **Tailwind CSS v4** (`@theme` in `src/app/globals.css`)   **no `tailwind.config.js`**
 - **Framer Motion** (`motion`) for reveals/parallax/tilt; CSS for marquees/shimmer/blobs
 - **lucide-react** icons; **clsx + tailwind-merge** via `cn()`
 - Fonts via `next/font`: Bricolage Grotesque (display), Inter (body), Hind Siliguri (bn)
@@ -38,14 +38,14 @@ src/
   app/           # routes, layout, globals.css, sitemap.ts, robots.ts, manifest.ts, opengraph-image.tsx
   components/    # UI primitives + sections (Phase 1+)
   data/          # typed content ported from static site (Phase 3+)
-  content/       # MDX long-form (tips/books — Phase 4)
+  content/       # MDX long-form (tips/books   Phase 4)
   hooks/         # useCountUp, useTypewriter, ... (Phase 1+)
   lib/           # site.ts (config), cn.ts, utils
 ```
 
-## SEO (first-class requirement — "share a link → branded card with title + description")
+## SEO (first-class requirement   "share a link → branded card with title + description")
 - Per-route `metadata` / `generateMetadata`; root defaults in `app/layout.tsx`.
-- **Dynamic OG images** via `next/og` (`opengraph-image.tsx`) — per route in Phase 5.
+- **Dynamic OG images** via `next/og` (`opengraph-image.tsx`)   per route in Phase 5.
 - JSON-LD: Organization/Person/Course/FAQPage/Article/Book.
 - `app/sitemap.ts`, `app/robots.ts`, `app/manifest.ts`.
 - `next.config.ts` → `redirects()` for all old URLs (no SEO regression).
@@ -55,4 +55,4 @@ Content migrated from `../rofsansir-static/resources/js/data/*.json` into `src/d
 Site config (name, url, contact, social, nav) in `src/lib/site.ts`.
 
 ## Phase status
-See `PLAN.md` §8 and the Task List. Currently: **Phase 0 (Foundation) — in progress.**
+See `PLAN.md` §8 and the Task List. Currently: **Phase 0 (Foundation)   in progress.**
