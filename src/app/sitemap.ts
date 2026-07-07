@@ -7,7 +7,22 @@ import { site } from "@/lib/site";
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const staticRoutes = ["/", "/about", "/courses", "/results", "/books", "/examiner-tips", "/past-papers", "/resources", "/faq", "/contact", "/privacy-policy", "/terms-of-service"];
+  const staticRoutes = [
+    "/",
+    "/about",
+    "/courses",
+    "/results",
+    "/books",
+    "/examiner-tips",
+    "/resources",
+    "/faq",
+    "/contact",
+    "/class/8",
+    "/class/9",
+    "/class/10",
+    "/privacy-policy",
+    "/terms-of-service",
+  ];
 
   return staticRoutes.map((path) => ({
     url: `${site.url}${path}`,

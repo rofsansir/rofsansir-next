@@ -33,6 +33,13 @@ const nextConfig: NextConfig = {
         destination: "/books",
         permanent: true,
       },
+      { source: "/tips", destination: "/examiner-tips", permanent: true },
+      { source: "/class-8", destination: "/class/8", permanent: true },
+      { source: "/class-viii", destination: "/class/8", permanent: true },
+      { source: "/class-9", destination: "/class/9", permanent: true },
+      { source: "/class-ix", destination: "/class/9", permanent: true },
+      { source: "/class-10", destination: "/class/10", permanent: true },
+      { source: "/class-x", destination: "/class/10", permanent: true },
     ];
   },
 };

@@ -70,6 +70,24 @@ export function Footer() {
           ))}
         </div>
 
+        <nav className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs text-cream/50">
+          <Link href="/faq" className="transition-colors hover:text-cream">
+            FAQ
+          </Link>
+          <Link
+            href="/privacy-policy"
+            className="transition-colors hover:text-cream"
+          >
+            Privacy
+          </Link>
+          <Link
+            href="/terms-of-service"
+            className="transition-colors hover:text-cream"
+          >
+            Terms
+          </Link>
+        </nav>
+
         <p className="max-w-md text-xs leading-relaxed text-cream/40">
           © {year} {site.legalName}. {site.address.area}, {site.address.city}. ·
           Developed by{" "}
