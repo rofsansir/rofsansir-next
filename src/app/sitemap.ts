@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
+import { books } from "@/data/books";
 import { pastPapers } from "@/data/past-papers";
 
 /**
@@ -40,5 +41,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }));
 
-  return [...staticEntries, ...paperEntries];
+  const bookEntries: MetadataRoute.Sitemap = books.map((b) => ({
+    url: `${site.url}/books/${b.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
+
+  return [...staticEntries, ...bookEntries, ...paperEntries];
 }

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Image from "next/image";
-import { BookOpen } from "lucide-react";
+import { ArrowRight, BookOpen } from "lucide-react";
 import { PageHero } from "@/components/ui/page-hero";
 import { Container, ShimmerText } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 import { site } from "@/lib/site";
 import { books } from "@/data/books";
@@ -63,7 +63,10 @@ export default function BooksPage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {books.map((b, i) => (
               <Reveal key={b.slug} delay={(i % 3) * 0.06}>
-                <article className="group flex h-full flex-col rounded-[1.75rem] border border-ink/10 bg-paper/70 p-5 shadow-sm transition-shadow hover:shadow-card">
+                <Link
+                  href={`/books/${b.slug}`}
+                  className="group flex h-full flex-col rounded-[1.75rem] border border-ink/10 bg-paper/70 p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-marigold/40 hover:shadow-card"
+                >
                   <div className="relative mx-auto aspect-[3/4] w-44 overflow-hidden rounded-2xl bg-cream shadow-luxe">
                     <Image
                       src={b.image}
@@ -102,18 +105,11 @@ export default function BooksPage() {
                     </p>
                   </div>
 
-                  <Button
-                    href={`${site.contact.whatsapp}?text=${encodeURIComponent(
-                      `Hi Rofsan Sir, I'm interested in the book "${b.title}".`,
-                    )}`}
-                    external
-                    variant="outline"
-                    size="sm"
-                    className="mt-5 w-full"
-                  >
-                    Enquire about this book
-                  </Button>
-                </article>
+                  <span className="mt-5 flex items-center gap-1.5 text-sm font-semibold text-marigold-deep">
+                    View details
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                </Link>
               </Reveal>
             ))}
           </div>
