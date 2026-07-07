@@ -5,7 +5,7 @@ import { ImageResponse } from "next/og";
  * card. Per-route dynamic OG images are added in Phase 5; each shareable URL
  * will generate its own title + description card via this same approach.
  */
-export const alt = "Rofsan Sir — Your route to A* in O Level Bengali";
+export const alt = "Rofsan Sir   Your route to A* in O Level Bengali";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

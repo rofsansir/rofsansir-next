@@ -29,7 +29,7 @@ export const boards: { name: string; logo: string }[] = [
   { name: "Elites", logo: "/logos/ELITES.png" },
 ];
 
-/** Hall of Fame — top achievers. */
+/** Hall of Fame   top achievers. */
 export type Achiever = {
   name: string;
   meta: string;
@@ -103,7 +103,7 @@ export const testimonials: Testimonial[] = [
     year: "O Level 2025",
     image: "/assets/students/Akib.png",
     quote:
-      "Even with moderate attention, his notes covered everything. Classes felt like engaging stories — he truly simplifies complex topics.",
+      "Even with moderate attention, his notes covered everything. Classes felt like engaging stories   he truly simplifies complex topics.",
   },
   {
     name: "Suprova Barua",
@@ -123,7 +123,7 @@ export const testimonials: Testimonial[] = [
   },
 ];
 
-/** Gallery carousel — alternating class banners and classroom shots. */
+/** Gallery carousel   alternating class banners and classroom shots. */
 export const gallery: { src: string; alt: string }[] = [
   { src: "/assets/class-banner/ClassVIII.jpg", alt: "Class VIII batch at Rofsan Sir" },
   { src: "/assets/teacher/2.jpg", alt: "Classroom session with Rofsan Sir" },

@@ -40,12 +40,6 @@ export function Gallery() {
           </figure>
         ))}
       </InfiniteTrack>
-
-      <Container>
-        <p className="mt-4 text-center text-xs text-muted">
-          Drag to explore · auto-scrolls continuously
-        </p>
-      </Container>
     </section>
   );
 }

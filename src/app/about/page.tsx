@@ -26,12 +26,12 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "About Rofsan Sir",
   description:
-    "Meet Rofsan Khan — a CAIE-approved O Level Bengali Examiner, published author and educator with 8+ years guiding English-medium students to A* and A in Cambridge & Edexcel Bengali.",
+    "Meet Rofsan Khan   a CAIE-approved O Level Bengali Examiner, published author and educator with 8+ years guiding English-medium students to A* and A in Cambridge & Edexcel Bengali.",
   alternates: { canonical: "/about" },
   openGraph: {
     title: "About Rofsan Sir",
     description:
-      "Meet Rofsan Khan — CAIE-approved O Level Bengali Examiner, published author, and educator with 8+ years of experience.",
+      "Meet Rofsan Khan   CAIE-approved O Level Bengali Examiner, published author, and educator with 8+ years of experience.",
     url: `${site.url}/about`,
     type: "website",
   },
@@ -112,7 +112,7 @@ export default function AboutPage() {
               Bengali Examiner with over eight years of experience teaching O
               Level Bengali in English-medium academic settings. He is widely
               respected for his clear, structured, and student-friendly teaching
-              approach — helping learners, especially those who struggle or feel
+              approach   helping learners, especially those who struggle or feel
               anxious about Bengali, build confidence and achieve consistent
               examination success.
             </p>
@@ -179,7 +179,7 @@ export default function AboutPage() {
                 Sir
               </>
             }
-            description="Six principles behind the consistent results — a philosophy built for English-medium learners aiming for the top grades."
+            description="Six principles behind the consistent results   a philosophy built for English-medium learners aiming for the top grades."
             align="center"
             className="mx-auto items-center"
           />

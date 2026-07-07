@@ -28,14 +28,11 @@ export function Eyebrow({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.2em]",
+        "inline-flex items-center text-xs font-semibold uppercase tracking-[0.2em]",
         dark ? "text-marigold-soft" : "text-marigold-deep",
         className,
       )}
     >
-      <span
-        className={cn("h-px w-8", dark ? "bg-marigold-soft/50" : "bg-marigold/70")}
-      />
       {children}
     </span>
   );

@@ -55,7 +55,7 @@ export function Testimonials() {
 
         <div className="relative mx-auto mt-10 max-w-3xl">
           <div className="rounded-[2rem] border border-ink/10 bg-paper p-8 shadow-card md:p-12">
-            {/* Author — shown first (top), so you see who's speaking */}
+            {/* Author   shown first (top), so you see who's speaking */}
             <div className="flex items-center gap-3">
               <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border-2 border-paper shadow-card">
                 <Image

@@ -31,7 +31,7 @@ export function Navbar() {
       >
         <Link
           href="/"
-          aria-label="Rofsan Sir — home"
+          aria-label="Rofsan Sir   home"
           className="flex shrink-0 items-center"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
