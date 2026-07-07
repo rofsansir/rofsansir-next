@@ -95,7 +95,7 @@ Consolidate, fix IA defects from the audit, and keep old URLs alive via redirect
 | `/courses` | RoutinePage | Rename from `/routine`; `/courses` becomes canonical. |
 | `/results` | **NEW** | Hall-of-Fame proof page (P1: substantiate A\*/3000+ claims). |
 | `/books` | **NEW index** | Grid of 5 books. |
-| `/books/[slug]` | 5 BookDetail pages | `/o-level-bengali-X-plus` → `/books/basic-plus` etc. + **add purchase links** (P1). |
+| `/books/[slug]` | 5 BookDetail pages | `/o-level-bengali-X-plus` → `/books/basic-plus` etc. |
 | `/examiner-tips` | ExaminerTipsPage | Rename from `/tips`; acts as the blog index. |
 | `/examiner-tips/[slug]` | tip articles | 8 articles via MDX. |
 | `/past-papers` | **NEW index** | Browse/filter 117 CAIE 3204 papers by year & paper type (no index existed before). |
@@ -103,7 +103,7 @@ Consolidate, fix IA defects from the audit, and keep old URLs alive via redirect
 | `/resources` | ResourcesPage | **Fix the 6 broken `#` links** (P0). |
 | `/faq` | FAQPage | Consolidated student + parent FAQ. |
 | `/class/8`, `/class/9`, `/class/10` | Class 8/9/10 pages | Group under `/class`; **promote out of footer-only** (IA fix). |
-| `/fees` | **NEW** | Pricing/enrollment (P0   none exists today). |
+| ~~`/fees`~~ | ~~NEW~~ | **Dropped** — no pricing page. |
 | `/contact` | ContactPage | Fix "O & A Level" → "O Level" (P0). |
 | `/privacy-policy`, `/terms-of-service` | same | Ported. |
 
@@ -113,7 +113,7 @@ Consolidate, fix IA defects from the audit, and keep old URLs alive via redirect
 `/class-10→/class/10` (+ x), `/o-level-bengali-*-plus→/books/*`.
 
 **Nav (new):** Home · About · Courses · Results · Books · Examiner Tips · Resources · Contact
-+ sticky "Book a Free Class" CTA (→ `/fees` or admission form). Mobile: same, hamburger.
++ sticky "Book a Free Class" CTA (→ admission form). Mobile: same, hamburger.
 
 ---
 
@@ -142,8 +142,8 @@ Port & expand the old `StructuredData.tsx` into route-level schema:
 - `EducationalOrganization` + `Person` (Rofsan Khan) on root.
 - `Course` (O Level Bengali 3204, in-person Dhaka) on `/courses`.
 - `FAQPage` on `/faq` (auto-built from `faq.json`).
-- `Article` + `BreadcrumbList` on tips/articles; `Book` + `Offer` on `/books/[slug]` (once
-  purchase links exist); `ItemList` on past-papers & books indexes.
+- `Article` + `BreadcrumbList` on tips/articles; `Book` on `/books/[slug]`;
+  `ItemList` on past-papers & books indexes.
 - Emit via `<script type="application/ld+json">` (rendered server-side → crawlable).
 
 ### 5.4 Crawl infrastructure
@@ -221,7 +221,7 @@ Copy from both folders → `public/assets/` (and `public/logos/`):
   Class 8/9/10, Privacy, Terms. Each with its own `metadata` + JSON-LD.
 
 ### Phase 4   Dynamic/library pages (SSG via generateStaticParams)
-- `/books` index + `/books/[slug]` (5, +purchase links).
+- `/books` index + `/books/[slug]` (5).
 - `/past-papers` index (filter by year/paper) + `/past-papers/[slug]` (117).
 - `/examiner-tips` index + `/examiner-tips/[slug]` (8 MDX).
 - Per-page `generateMetadata`, `opengraph-image`, JSON-LD, breadcrumbs.
@@ -231,13 +231,13 @@ Copy from both folders → `public/assets/` (and `public/logos/`):
 - Full JSON-LD pass; sitemap/robots verification.
 - Image/perf audit (Lighthouse), a11y pass (contrast, focus, reduced-motion).
 - Redirects for all old URLs; 404 page; analytics (Plausible/Umami   P2).
-- New `/results` + `/fees` pages (needs content   see Open Decisions).
+- New `/results` page (live). No `/fees` page.
 
 ### Phase 6   Content/UX fixes folded in (from audit)
 - **P0:** fix 6 `#` resource links; replace placeholder YouTube IDs; fix Contact "O & A Level";
-  fix relative image paths; add pricing/fees; add enrollment flow.
-- **P1:** substantiate claims on `/results`; book purchase links; consolidate FAQ; trim About.
-- **P2:** a11y (≥14px nav, contrast, bilingual glosses), lead capture, analytics.
+  fix relative image paths; enrollment flow (no pricing page).
+- **P1:** substantiate claims on `/results` (live); consolidate FAQ; trim About.
+- **P2:** a11y (≥14px nav, contrast, bilingual glosses, lang attrs), lead capture, analytics.
 
 ---
 
@@ -245,7 +245,8 @@ Copy from both folders → `public/assets/` (and `public/logos/`):
 
 - ~~**A1   Animation:** Framer Motion (chosen). Marquees/shimmer/blobs stay CSS.~~ ✅
 - ~~**A2   Scope:** Homepage vertical slice first (Phase 0→2), then scale to all pages.~~ ✅
-- **A3   New content I'll need from you:** `/fees` pricing & `/results` proof assets; **book purchase links** (Amazon/website/WhatsApp?); the **correct YouTube video IDs** (replace `dQw4w9WgXcQ` / `ScMzIvxBSi4` placeholders).
+- ~~**A3 — Content I'll need from you:**~~ Mostly resolved. Remaining: the **correct YouTube
+  video ID** for the homepage teaser (currently `tAlxNZrj7xU`).
 - **A4   Deployment:** Vercel (recommended) or your existing host? (Affects OG image + edge setup.)
 - **A5   Bengali UX:** bilingual toggle, or keep current mixed inline approach?
 
