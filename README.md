@@ -33,3 +33,4 @@ npm run lint
 ## Status
 **Phase 0 (Foundation)** — scaffold, design system, fonts, base SEO, and asset migration complete.
 Homepage vertical slice (Phases 1–2) in progress. See PLAN.md §8 and the task list.
+# rofsansir-next
