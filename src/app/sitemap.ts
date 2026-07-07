@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 import { books } from "@/data/books";
+import { articles } from "@/data/tip-articles";
 import { pastPapers } from "@/data/past-papers";
 
 /**
@@ -48,5 +49,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticEntries, ...bookEntries, ...paperEntries];
+  const articleEntries: MetadataRoute.Sitemap = articles.map((a) => ({
+    url: `${site.url}/examiner-tips/${a.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
+
+  return [...staticEntries, ...bookEntries, ...articleEntries, ...paperEntries];
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Image from "next/image";
 import { Clock, Play } from "lucide-react";
 import { PageHero } from "@/components/ui/page-hero";
@@ -6,7 +7,7 @@ import { Container, SectionHeading, ShimmerText } from "@/components/ui/primitiv
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
 import { videos, videoThumb, videoUrl } from "@/data/videos";
-import { tips } from "@/data/tips";
+import { articles } from "@/data/tip-articles";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -113,14 +114,17 @@ export default function ExaminerTipsPage() {
                 Topics we <ShimmerText>cover</ShimmerText>
               </>
             }
-            description="In-depth articles landing soon. For now, dive into the videos above or ask Rofsan Sir directly."
+            description="In-depth articles by Rofsan Sir — exam strategy, paper guides and the parent perspective."
           />
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
-            {tips.map((t, i) => (
-              <Reveal key={t.slug} delay={(i % 2) * 0.05}>
-                <div className="flex h-full items-start gap-4 rounded-[1.5rem] border border-ink/10 bg-cream p-5 shadow-sm">
+            {articles.map((a, i) => (
+              <Reveal key={a.slug} delay={(i % 2) * 0.05}>
+                <Link
+                  href={`/examiner-tips/${a.slug}`}
+                  className="group flex h-full items-start gap-4 rounded-[1.5rem] border border-ink/10 bg-cream p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-marigold/40 hover:shadow-card"
+                >
                   <Image
-                    src={t.thumb}
+                    src={a.thumb}
                     alt=""
                     width={64}
                     height={64}
@@ -129,19 +133,23 @@ export default function ExaminerTipsPage() {
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
                       <span className="rounded-full bg-marigold/15 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-marigold-deep">
-                        {t.category}
+                        {a.category}
                       </span>
                       <span className="flex items-center gap-1 text-[11px] text-muted">
                         <Clock className="h-3 w-3" />
-                        {t.readTime}
+                        {a.readTime}
                       </span>
                     </div>
                     <h3 className="mt-2 font-semibold leading-snug text-ink">
-                      {t.title}
+                      {a.title}
                     </h3>
-                    <p className="mt-1 text-sm text-muted">{t.excerpt}</p>
+                    {a.subtitle && (
+                      <p className="mt-1 line-clamp-2 text-sm text-muted">
+                        {a.subtitle}
+                      </p>
+                    )}
                   </div>
-                </div>
+                </Link>
               </Reveal>
             ))}
           </div>
