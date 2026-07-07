@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowUp, MessageCircle } from "lucide-react";
+import { ArrowUp } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa6";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/cn";
 
@@ -24,7 +25,7 @@ export function FloatingActions() {
         aria-label="WhatsApp Rofsan Sir"
         className="fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-luxe transition-transform hover:scale-105"
       >
-        <MessageCircle className="h-6 w-6" />
+        <FaWhatsapp className="h-7 w-7" />
       </a>
       <button
         type="button"
