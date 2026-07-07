@@ -57,20 +57,11 @@ export const metadata: Metadata = {
     title: `${site.name}   ${site.tagline}`,
     description: site.description,
     locale: site.locale,
-    images: [
-      {
-        url: site.defaultOgImage,
-        width: 1200,
-        height: 630,
-        alt: `${site.name}   ${site.tagline}`,
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${site.name}   ${site.tagline}`,
     description: site.description,
-    images: [site.defaultOgImage],
   },
   icons: {
     icon: [{ url: "/logos/favicon.svg", type: "image/svg+xml" }],
