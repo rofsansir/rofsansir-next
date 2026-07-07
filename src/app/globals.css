@@ -214,16 +214,25 @@ h5 {
   display: none;
 }
 
-/* ------------------------------------------------------------
-   Reduced motion
-   ------------------------------------------------------------ */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
+/* Typewriter caret (marigold block, hard blink) */
+.caret {
+  display: inline-block;
+  width: 3px;
+  height: 1.05em;
+  margin-left: 3px;
+  margin-bottom: -2px;
+  background: var(--color-marigold);
+  border-radius: 1px;
+  vertical-align: text-bottom;
+  animation: caretBlink 1.05s infinite;
+}
+@keyframes caretBlink {
+  0%,
+  49.9% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
   }
 }

@@ -43,17 +43,15 @@ export function Navbar() {
         </Link>
 
         <div className="hidden items-center gap-0.5 lg:flex">
-          {mainNav
-            .filter((n) => n.href !== "/")
-            .map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="rounded-full px-3.5 py-2 text-sm font-medium text-ink/70 transition-colors hover:bg-ink/5 hover:text-ink"
-              >
-                {item.label}
-              </Link>
-            ))}
+          {mainNav.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="rounded-full px-3.5 py-2 text-sm font-medium text-ink/70 transition-colors hover:bg-ink/5 hover:text-ink"
+            >
+              {item.label}
+            </Link>
+          ))}
         </div>
 
         <div className="flex items-center gap-2">

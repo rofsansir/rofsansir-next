@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Inter, Hind_Siliguri } from "next/font/google";
+import { MotionConfig } from "motion/react";
 import "./globals.css";
 import { site } from "@/lib/site";
 import { Navbar } from "@/components/site/navbar";
@@ -106,10 +107,12 @@ export default function RootLayout({
       className={`${bricolage.variable} ${inter.variable} ${bengali.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-cream text-ink">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <FloatingActions />
+        <MotionConfig reducedMotion="never">
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <FloatingActions />
+        </MotionConfig>
       </body>
     </html>
   );

@@ -254,3 +254,9 @@ Copy from both folders → `public/assets/` (and `public/logos/`):
 ## 10. Progress
 
 Tracked in the Task List (`TaskList`). Each phase is a task; status updates as work lands.
+
+- ✅ **Phase 0 — Foundation** (Next 16 scaffold, design tokens, next/font, base SEO, asset migration)
+- ✅ **Phase 1 — Design-system layer** (primitives, motion hooks, Navbar/Footer/FloatingActions)
+- ✅ **Phase 2 — Homepage** (prototype ported — Hero, Trust, Ticker, About teaser, Hall of Fame,
+  Gallery, Testimonials, Books, Admission CTA; JSON-LD; build green; live at `localhost:3000`)
+- ⏳ **Phases 3–6** — pending your review of the homepage slice.
