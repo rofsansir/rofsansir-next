@@ -31,6 +31,7 @@ npm run lint
 - **[CLAUDE.md](./CLAUDE.md)**   conventions & project guide for contributors/AI agents.
 
 ## Status
-**Phase 0 (Foundation)**   scaffold, design system, fonts, base SEO, and asset migration complete.
-Homepage vertical slice (Phases 1–2) in progress. See PLAN.md §8 and the task list.
+**Build complete (Phases 0–5).** Premium redesign, full content migration (~150 static
+routes incl. 117 past papers, 5 books, 8 examiner-tip articles), SEO-native with per-route
+dynamic OG images, JSON-LD, sitemap and redirects. See PLAN.md for details.
 # rofsansir-next
