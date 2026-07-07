@@ -2,6 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Inter, Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
+import { Navbar } from "@/components/site/navbar";
+import { Footer } from "@/components/site/footer";
+import { FloatingActions } from "@/components/site/floating-actions";
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
@@ -103,7 +106,10 @@ export default function RootLayout({
       className={`${bricolage.variable} ${inter.variable} ${bengali.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-cream text-ink">
-        {children}
+        <Navbar />
+        <main className="flex-1">{children}</main>
+        <Footer />
+        <FloatingActions />
       </body>
     </html>
   );
