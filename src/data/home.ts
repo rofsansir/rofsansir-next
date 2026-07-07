@@ -19,7 +19,7 @@ export const tickerItems: string[] = [
   "99 marks",
   "3,000+ students",
   "Cambridge Examiner",
-  "5 published books",
+  "Author of the O Level Bengali Book Series",
   "8+ years",
 ];
 
