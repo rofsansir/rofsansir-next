@@ -126,27 +126,25 @@ export function ShimmerText({
   return <span className={cn("text-shimmer", className)}>{children}</span>;
 }
 
-/** Slowly rotating decorative starburst. */
+/** Slowly rotating decorative sparkle (matches prototype: 8 perimeter dashes). */
 export function Starburst({ className }: { className?: string }) {
   return (
     <svg
       aria-hidden
       viewBox="0 0 100 100"
+      fill="none"
       className={cn("animate-spin-slow", className)}
     >
-      {Array.from({ length: 12 }).map((_, i) => (
-        <line
-          key={i}
-          x1="50"
-          y1="50"
-          x2="50"
-          y2="6"
-          stroke="currentColor"
-          strokeWidth="3"
-          strokeLinecap="round"
-          transform={`rotate(${i * 30} 50 50)`}
-        />
-      ))}
+      <g stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+        <line x1="50" y1="2" x2="50" y2="18" />
+        <line x1="50" y1="82" x2="50" y2="98" />
+        <line x1="2" y1="50" x2="18" y2="50" />
+        <line x1="82" y1="50" x2="98" y2="50" />
+        <line x1="14" y1="14" x2="26" y2="26" />
+        <line x1="74" y1="74" x2="86" y2="86" />
+        <line x1="86" y1="14" x2="74" y2="26" />
+        <line x1="26" y1="74" x2="14" y2="86" />
+      </g>
     </svg>
   );
 }

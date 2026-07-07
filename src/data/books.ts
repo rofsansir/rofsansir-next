@@ -26,7 +26,7 @@ export const books: Book[] = [
   {
     slug: "o-level-bengali-composition-plus",
     title: "O Level Bengali Composition Plus",
-    badge: "Bestseller",
+    badge: "",
     badgeTone: "gold",
     subtitle: "A Complete Guide to Composition Writing",
     code: "3204/01",
@@ -48,7 +48,7 @@ export const books: Book[] = [
   {
     slug: "o-level-bengali-revision-plus",
     title: "O Level Bengali Revision Plus",
-    badge: "Bestseller",
+    badge: "",
     badgeTone: "gold",
     subtitle: "Topic-wise Past Paper Practice",
     code: "3204",
