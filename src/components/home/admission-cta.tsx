@@ -1,4 +1,5 @@
-import { MessageCircle, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa6";
 import { Container, ShimmerText } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
@@ -28,7 +29,7 @@ export function AdmissionCta() {
               </p>
               <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
                 <Button href={site.contact.whatsapp} external size="lg">
-                  <MessageCircle className="h-4 w-4" /> WhatsApp Rofsan Sir
+                  <FaWhatsapp className="h-4 w-4" /> WhatsApp Rofsan Sir
                 </Button>
                 <Button
                   href={`tel:${site.contact.phonePrimaryTel}`}

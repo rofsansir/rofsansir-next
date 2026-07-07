@@ -1,9 +1,10 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
+import { pastPapers } from "@/data/past-papers";
 
 /**
- * Auto sitemap. Static routes listed here; dynamic routes (books, tips,
- * past-papers) are appended in Phase 4 via generateStaticParams.
+ * Auto sitemap. Static routes + past-paper detail pages (SSG via
+ * generateStaticParams). Book/tip detail pages appended as those land.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -16,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/examiner-tips",
     "/resources",
     "/faq",
+    "/past-papers",
     "/contact",
     "/class/8",
     "/class/9",
@@ -24,10 +26,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/terms-of-service",
   ];
 
-  return staticRoutes.map((path) => ({
+  const staticEntries: MetadataRoute.Sitemap = staticRoutes.map((path) => ({
     url: `${site.url}${path}`,
     lastModified: now,
     changeFrequency: path === "/" ? "weekly" : "monthly",
     priority: path === "/" ? 1 : 0.7,
   }));
+
+  const paperEntries: MetadataRoute.Sitemap = pastPapers.map((p) => ({
+    url: `${site.url}/past-papers/${p.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.5,
+  }));
+
+  return [...staticEntries, ...paperEntries];
 }
