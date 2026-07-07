@@ -47,6 +47,12 @@ export const site = {
     linkedin: "https://www.linkedin.com/in/rofsankhan",
     youtube: "https://www.youtube.com/@olevelbengali",
   },
+
+  /** Site developer credit (footer). */
+  craft: {
+    name: "Revolop Technologies",
+    url: "https://revolop.com",
+  },
 } as const;
 
 /** Primary site navigation. Section pages are added as routes land. */

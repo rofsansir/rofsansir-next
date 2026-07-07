@@ -72,7 +72,15 @@ export function Footer() {
 
         <p className="max-w-md text-xs leading-relaxed text-cream/40">
           © {year} {site.legalName}. {site.address.area}, {site.address.city}. ·
-          Crafted by sakibian.com
+          Developed by{" "}
+          <a
+            href={site.craft.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-cream/60 underline-offset-2 transition-colors hover:text-marigold hover:underline"
+          >
+            {site.craft.name}
+          </a>
         </p>
       </div>
     </footer>

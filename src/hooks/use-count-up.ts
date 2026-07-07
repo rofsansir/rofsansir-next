@@ -1,11 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView, useReducedMotion } from "motion/react";
+import { useInView } from "motion/react";
 
 /**
  * Counts up to `target` once the element scrolls into view.
- * Respects prefers-reduced-motion (jumps to final value).
  */
 export function useCountUp<T extends HTMLElement>(
   target: number,
@@ -14,17 +13,12 @@ export function useCountUp<T extends HTMLElement>(
 ) {
   const ref = useRef<T>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
-  const reduce = useReducedMotion();
   const [value, setValue] = useState(0);
 
   const shouldRun = start || inView;
 
   useEffect(() => {
     if (!shouldRun) return;
-    if (reduce) {
-      setValue(target);
-      return;
-    }
     let raf = 0;
     const t0 = performance.now();
     const tick = (now: number) => {
@@ -35,7 +29,7 @@ export function useCountUp<T extends HTMLElement>(
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [shouldRun, target, duration, reduce]);
+  }, [shouldRun, target, duration]);
 
   return { ref, value };
 }

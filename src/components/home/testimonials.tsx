@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { Container, Eyebrow, SectionNumber } from "@/components/ui/primitives";
 import { cn } from "@/lib/cn";
@@ -10,16 +10,14 @@ import { testimonials } from "@/data/home";
 
 export function Testimonials() {
   const [i, setI] = useState(0);
-  const reduce = useReducedMotion();
   const n = testimonials.length;
   const go = (d: number) => setI((p) => (p + d + n) % n);
   const active = testimonials[i];
 
   useEffect(() => {
-    if (reduce) return;
     const t = setInterval(() => setI((p) => (p + 1) % n), 6500);
     return () => clearInterval(t);
-  }, [n, reduce]);
+  }, [n]);
 
   return (
     <section id="voices" className="px-4 py-16 md:py-24">
@@ -44,9 +42,9 @@ export function Testimonials() {
             <AnimatePresence mode="wait">
               <motion.blockquote
                 key={i}
-                initial={reduce ? false : { opacity: 0, y: 12 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={reduce ? undefined : { opacity: 0, y: -12 }}
+                exit={{ opacity: 0, y: -12 }}
                 transition={{ duration: 0.4 }}
                 className="mt-5"
               >

@@ -4,7 +4,6 @@ import Image from "next/image";
 import {
   motion,
   useMotionValue,
-  useReducedMotion,
   useSpring,
   type Variants,
 } from "motion/react";
@@ -28,7 +27,6 @@ const wordVariants: Variants = {
 const WORDS = ["Your", "route", "to", "A*", "in", "O", "Level", "Bengali"];
 
 export function Hero() {
-  const reduce = useReducedMotion();
   const tagline = useTypewriter(heroTypewriter);
   const { ref: countRef, value } = useCountUp<HTMLSpanElement>(3000);
 
@@ -59,19 +57,17 @@ export function Hero() {
           </span>
 
           <motion.h1
-            initial={reduce ? false : "hidden"}
+            initial="hidden"
             animate="show"
-            variants={
-              reduce
-                ? undefined
-                : { show: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } } }
-            }
+            variants={{
+              show: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } },
+            }}
             className="text-balance text-4xl font-extrabold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl"
           >
             {WORDS.map((w, i) => (
               <motion.span
                 key={i}
-                variants={reduce ? undefined : wordVariants}
+                variants={wordVariants}
                 className="mr-[0.25em] inline-block"
               >
                 {w === "A*" ? (
@@ -83,10 +79,12 @@ export function Hero() {
             ))}
           </motion.h1>
 
-          <p className="flex min-h-[1.75rem] items-center gap-1 text-base font-medium text-plum md:text-lg">
-            <span>{tagline}</span>
-            <span className="inline-block w-px animate-pulse self-stretch bg-plum" />
-          </p>
+          <div className="flex min-h-[4.2rem] items-center gap-1 sm:min-h-[2.9rem]">
+            <span className="font-display text-xl font-bold text-marigold-deep sm:text-2xl md:text-[1.9rem]">
+              {tagline}
+              <span className="caret" aria-hidden />
+            </span>
+          </div>
 
           <ul className="grid w-full max-w-lg grid-cols-1 gap-2.5 sm:grid-cols-2">
             {heroStats.map((s) => (
@@ -117,8 +115,8 @@ export function Hero() {
           <Starburst className="absolute -right-8 -top-8 h-24 w-24 text-marigold/30" />
 
           <motion.div
-            onMouseMove={reduce ? undefined : onMove}
-            onMouseLeave={reduce ? undefined : onLeave}
+            onMouseMove={onMove}
+            onMouseLeave={onLeave}
             style={{ rotateX: rx, rotateY: ry, transformPerspective: 1000 }}
             className="relative aspect-[4/5] overflow-hidden rounded-[2.4rem] border-4 border-paper shadow-luxe"
           >

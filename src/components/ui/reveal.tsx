@@ -1,9 +1,9 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { cn } from "@/lib/cn";
 
-/** Fade + rise into view (once). Respects prefers-reduced-motion. */
+/** Fade + rise into view (once). */
 export function Reveal({
   children,
   className,
@@ -17,14 +17,13 @@ export function Reveal({
   y?: number;
   as?: "div" | "span" | "li";
 }) {
-  const reduce = useReducedMotion();
   const MotionTag = motion[as];
 
   return (
     <MotionTag
       className={cn(className)}
-      initial={reduce ? false : { opacity: 0, y }}
-      whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
     >
