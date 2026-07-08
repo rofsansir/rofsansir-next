@@ -6,9 +6,6 @@ export function TrustStrip() {
   return (
     <div className="border-y border-ink/10 bg-paper/50">
       <Container className="flex flex-col items-center gap-5 py-6 md:flex-row md:justify-center md:gap-10">
-        <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-          Trusted Curriculum &amp; Boards
-        </span>
         <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
           {boards.map((b) => (
             <Image

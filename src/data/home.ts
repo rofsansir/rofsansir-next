@@ -25,7 +25,6 @@ export const tickerItems: string[] = [
 
 export const boards: { name: string; logo: string }[] = [
   { name: "Cambridge (CAIE)", logo: "/logos/cambridge-logo.png" },
-  { name: "Pearson Edexcel", logo: "/logos/edexcellogo.png" },
   { name: "Elites", logo: "/logos/ELITES.png" },
 ];
 
@@ -137,8 +136,6 @@ export const gallery: { src: string; alt: string }[] = [
 export const aboutTeaser = {
   eyebrow: "Meet Your Teacher",
   title: "Learn from the examiner's lens",
-  body:
-    "Rofsan Sir is a CAIE-trained educator and CAIE-approved O Level Bengali Examiner with 9+ years guiding English-medium students to A* and A.",
   videoId: "tAlxNZrj7xU", // "Why do students miss the A* in O Level Bangla?"
   poster: "/assets/teacher/intro-poster.png",
 };

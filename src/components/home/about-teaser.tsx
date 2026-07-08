@@ -32,9 +32,6 @@ export function AboutTeaser() {
           </div>
         </Reveal>
 
-        <p className="mx-auto mt-6 max-w-2xl text-center leading-relaxed text-muted md:text-lg">
-          {aboutTeaser.body}
-        </p>
         <div className="mt-6 flex justify-center">
           <Button href="#admission" variant="dark">
             Book a Free Consultation

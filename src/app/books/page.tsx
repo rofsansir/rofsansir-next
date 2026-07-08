@@ -5,7 +5,6 @@ import { ArrowRight, BookOpen } from "lucide-react";
 import { PageHero } from "@/components/ui/page-hero";
 import { Container, ShimmerText } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
-import { cn } from "@/lib/cn";
 import { site } from "@/lib/site";
 import { books } from "@/data/books";
 
@@ -75,18 +74,6 @@ export default function BooksPage() {
                       sizes="176px"
                       className="object-contain p-3 transition-transform duration-500 group-hover:scale-105"
                     />
-                    {b.badge && (
-                      <span
-                        className={cn(
-                          "absolute left-4 top-4 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider",
-                          b.badgeTone === "emerald"
-                            ? "bg-emerald-300 text-emerald-950"
-                            : "bg-marigold text-ink",
-                        )}
-                      >
-                        {b.badge}
-                      </span>
-                    )}
                   </div>
 
                   <div className="mt-5 flex flex-1 flex-col">

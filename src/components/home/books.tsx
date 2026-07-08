@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { Container, Eyebrow, SectionNumber } from "@/components/ui/primitives";
 import { InfiniteTrack } from "@/components/ui/infinite-track";
-import { cn } from "@/lib/cn";
 import { books } from "@/data/books";
 
 /** Infinite, drag-scrollable bookshelf. */
@@ -36,18 +35,6 @@ export function Books() {
                 className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
               />
             </div>
-            {b.badge && (
-              <span
-                className={cn(
-                  "absolute left-5 top-5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider",
-                  b.badgeTone === "emerald"
-                    ? "bg-emerald-300 text-emerald-950"
-                    : "bg-marigold text-ink",
-                )}
-              >
-                {b.badge}
-              </span>
-            )}
             <h3 className="mt-4 font-display text-sm font-bold leading-snug text-cream">
               {b.title}
             </h3>

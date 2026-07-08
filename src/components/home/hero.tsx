@@ -67,7 +67,7 @@ export function Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping-soft rounded-full bg-marigold" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-marigold-deep" />
             </span>
-            CAIE Examiner · 9+ Years
+            Cambridge Examiner of Bengali · Assessment Specialist
           </span>
 
           <motion.h1
@@ -134,9 +134,6 @@ export function Hero() {
           <div className="flex flex-wrap items-center gap-3 pt-1">
             <Button href="#admission" size="lg">
               Start Learning <ArrowRight className="h-4 w-4" />
-            </Button>
-            <Button href="#books" variant="outline" size="lg">
-              View Books
             </Button>
           </div>
         </div>
