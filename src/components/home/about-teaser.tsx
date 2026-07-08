@@ -11,7 +11,7 @@ export function AboutTeaser() {
           <Eyebrow>{aboutTeaser.eyebrow}</Eyebrow>
           <div className="flex items-center gap-4">
             <SectionNumber>01</SectionNumber>
-            <h2 className="text-3xl font-extrabold leading-tight tracking-tight md:text-5xl">
+            <h2 className="text-2xl font-extrabold leading-tight tracking-tight md:text-5xl">
               {aboutTeaser.title}
             </h2>
           </div>

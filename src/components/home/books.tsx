@@ -13,7 +13,7 @@ export function Books() {
           <Eyebrow dark>Author of O Level Bengali Book Series</Eyebrow>
           <div className="flex items-center gap-4">
             <SectionNumber>05</SectionNumber>
-            <h2 className="text-3xl font-extrabold tracking-tight md:text-5xl">
+            <h2 className="text-2xl font-extrabold tracking-tight md:text-5xl">
               The O Level Bengali bookshelf
             </h2>
           </div>

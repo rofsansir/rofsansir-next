@@ -69,7 +69,7 @@ export function SectionHeading({
         {numeral && <SectionNumber>{numeral}</SectionNumber>}
         <h2
           className={cn(
-            "text-balance text-3xl font-extrabold leading-tight tracking-tight md:text-5xl",
+            "text-balance text-2xl font-extrabold leading-tight tracking-tight md:text-5xl",
             dark ? "text-cream" : "text-ink",
           )}
         >
