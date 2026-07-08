@@ -14,7 +14,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/",
     "/about",
     "/courses",
-    "/results",
     "/books",
     "/examiner-tips",
     "/resources",

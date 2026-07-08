@@ -59,7 +59,6 @@ export const site = {
 export const mainNav: { label: string; href: string }[] = [
   { label: "Home", href: "/" },
   { label: "Courses", href: "/courses" },
-  { label: "Results", href: "/results" },
   { label: "Books", href: "/books" },
   { label: "Examiner Tips", href: "/examiner-tips" },
   { label: "Resources", href: "/resources" },

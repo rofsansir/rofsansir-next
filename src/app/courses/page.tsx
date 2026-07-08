@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
 import {
-  BadgeCheck,
   BookOpen,
   CheckCircle2,
-  ClipboardCheck,
-  Globe,
   GraduationCap,
   Laptop,
-  LineChart,
   MapPin,
 } from "lucide-react";
 import { PageHero } from "@/components/ui/page-hero";
@@ -16,24 +12,17 @@ import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 import { site } from "@/lib/site";
-import { classModes, curriculum, programs, whyRofsan } from "@/data/programs";
-
-const whyIcon = {
-  examiner: BadgeCheck,
-  aligned: Globe,
-  scripts: ClipboardCheck,
-  progress: LineChart,
-} as const;
+import { classModes, curriculum, programs } from "@/data/programs";
 
 export const metadata: Metadata = {
   title: "Courses & Admission",
   description:
-    "O Level Bengali batches for Class VIII (Foundation), IX (Regular) and X (Exam Focused)   online & offline at Lalmatia, Dhaka. Aligned with Cambridge CAIE & Pearson Edexcel 3204.",
+    "O Level Bengali batches for Class VIII (Foundation), IX (Regular) and X (Exam Focused), online & offline at Lalmatia, Dhaka. Aligned with Cambridge CAIE & Pearson Edexcel 3204.",
   alternates: { canonical: "/courses" },
   openGraph: {
     title: "Courses & Admission · Rofsan Sir",
     description:
-      "O Level Bengali batches for Class VIII, IX and X   online & offline, aligned with CAIE & Edexcel 3204.",
+      "O Level Bengali batches for Class VIII, IX and X, online & offline, aligned with CAIE & Edexcel 3204.",
     url: `${site.url}/courses`,
   },
 };
@@ -74,14 +63,11 @@ export default function CoursesPage() {
             O Level Bengali <ShimmerText>Courses</ShimmerText>
           </>
         }
-        subtitle="Specialised preparation for Cambridge & Edexcel O Level Bengali, designed for English-medium students. Three batches, one goal: A*."
+        subtitle="Examiner-led O Level Bengali for Cambridge CAIE & Pearson Edexcel (3204). Class VIII, IX and X, online or at our Lalmatia, Dhaka campus."
       >
         <div className="flex flex-wrap gap-3 pt-2">
           <Button href={site.contact.whatsapp} external size="lg">
             Book a Free Consultation
-          </Button>
-          <Button href="#programs" variant="outline" size="lg">
-            View Programs
           </Button>
         </div>
       </PageHero>
@@ -89,11 +75,7 @@ export default function CoursesPage() {
       {/* Programs */}
       <section id="programs" className="px-4 py-16 md:py-24">
         <Container>
-          <SectionHeading
-            eyebrow="Our Programs"
-            title="A batch for every stage"
-            description="Designed for different skill levels to ensure every student reaches their target grade."
-          />
+          <SectionHeading eyebrow="Our Programs" title="A batch for every stage" />
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             {programs.map((p, i) => (
               <Reveal key={p.title} delay={i * 0.06}>
@@ -158,7 +140,6 @@ export default function CoursesPage() {
                 Structured for <ShimmerText>exam success</ShimmerText>
               </>
             }
-            description="Every lesson is designed around the Cambridge O Level Bengali assessment objectives."
           />
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             {curriculum.map((c, i) => (
@@ -189,11 +170,7 @@ export default function CoursesPage() {
       {/* Class modes */}
       <section className="px-4 py-16 md:py-24">
         <Container>
-          <SectionHeading
-            eyebrow="How You Learn"
-            title="Offline or online   your choice"
-            description="Join in person at our Lalmatia campus or learn live from anywhere."
-          />
+          <SectionHeading eyebrow="How You Learn" title="Offline or online" />
           <div className="mt-10 grid gap-5 md:grid-cols-2">
             {classModes.map((m, i) => (
               <Reveal key={m.title} delay={i * 0.06}>
@@ -213,7 +190,6 @@ export default function CoursesPage() {
                       <p className="text-sm text-muted">{m.subtitle}</p>
                     </div>
                   </div>
-                  <p className="mt-4 text-sm text-ink/80">{m.desc}</p>
                   <ul className="mt-4 flex flex-wrap gap-2">
                     {m.points.map((pt) => (
                       <li
@@ -231,34 +207,6 @@ export default function CoursesPage() {
         </Container>
       </section>
 
-      {/* Why Rofsan Sir (dark) */}
-      <section className="noise relative overflow-hidden bg-plum text-cream">
-        <Container className="relative py-16 md:py-24">
-          <SectionHeading
-            dark
-            eyebrow="Why Rofsan Sir"
-            title="Taught by the examiner, not just a teacher"
-            description="What actually moves grades - the specifics behind the results."
-          />
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {whyRofsan.map((w, i) => {
-              const Icon = whyIcon[w.icon];
-              return (
-                <Reveal key={w.title} delay={i * 0.05}>
-                  <div className="h-full rounded-3xl border border-cream/10 bg-cream/5 p-5 backdrop-blur">
-                    <Icon className="h-6 w-6 text-marigold" />
-                    <h3 className="mt-3 font-display text-base font-bold text-cream">
-                      {w.title}
-                    </h3>
-                    <p className="mt-1.5 text-sm text-cream/65">{w.desc}</p>
-                  </div>
-                </Reveal>
-              );
-            })}
-          </div>
-        </Container>
-      </section>
-
       {/* CTA */}
       <section className="px-4 py-16 md:py-24">
         <Container>
@@ -267,8 +215,7 @@ export default function CoursesPage() {
               Secure your <ShimmerText>spot</ShimmerText>
             </h2>
             <p className="max-w-xl text-muted">
-              Spaces in examiner-led batches are strictly limited. Book a free
-              consultation to find the right batch.
+              Book a free consultation to find the right batch.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Button href={site.contact.whatsapp} external size="lg">

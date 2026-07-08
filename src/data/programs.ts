@@ -51,31 +51,6 @@ export const programs: Program[] = [
   },
 ];
 
-/** Merged, de-duplicated differentiators (was academicAdvantage + eliteSupport).
- *  Deliberately excludes fees and class size (kept off-site by request). */
-export const whyRofsan = [
-  {
-    icon: "examiner",
-    title: "Examiner-Led Instruction",
-    desc: "Coaching from a Cambridge CAIE examiner - students learn exactly what earns marks, not guesswork.",
-  },
-  {
-    icon: "aligned",
-    title: "Cambridge & Edexcel Aligned",
-    desc: "Every lesson maps to the O Level Bengali 3204 assessment objectives for both boards.",
-  },
-  {
-    icon: "scripts",
-    title: "Weekly Script Checks & Mocks",
-    desc: "Scripts and timed mock papers marked to real CAIE grade boundaries, each with a personalised improvement plan.",
-  },
-  {
-    icon: "progress",
-    title: "Progress You Can See",
-    desc: "24/7 access to notes and recorded sessions, plus regular progress briefings for parents.",
-  },
-] as const;
-
 export const classModes = [
   {
     title: "Offline",
