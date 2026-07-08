@@ -114,7 +114,7 @@ export default function ExaminerTipsPage() {
                 Topics we <ShimmerText>cover</ShimmerText>
               </>
             }
-            description="In-depth articles by Rofsan Sir — exam strategy, paper guides and the parent perspective."
+            description="In-depth articles by Rofsan Sir - exam strategy, paper guides and the parent perspective."
           />
           <div className="mt-10 grid gap-4 sm:grid-cols-2">
             {articles.map((a, i) => (

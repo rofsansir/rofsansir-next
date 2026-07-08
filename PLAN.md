@@ -102,7 +102,7 @@ Consolidate, fix IA defects from the audit, and keep old URLs alive via redirect
 | `/resources` | ResourcesPage | **Fix the 6 broken `#` links** (P0). |
 | `/faq` | FAQPage | Consolidated student + parent FAQ. |
 | `/class/8`, `/class/9`, `/class/10` | Class 8/9/10 pages | Group under `/class`; **promote out of footer-only** (IA fix). |
-| ~~`/fees`~~ | ~~NEW~~ | **Dropped** — no pricing page. |
+| ~~`/fees`~~ | ~~NEW~~ | **Dropped** - no pricing page. |
 | `/contact` | ContactPage | Fix "O & A Level" → "O Level" (P0). |
 | `/privacy-policy`, `/terms-of-service` | same | Ported. |
 
@@ -244,7 +244,7 @@ Copy from both folders → `public/assets/` (and `public/logos/`):
 
 - ~~**A1   Animation:** Framer Motion (chosen). Marquees/shimmer/blobs stay CSS.~~ ✅
 - ~~**A2   Scope:** Homepage vertical slice first (Phase 0→2), then scale to all pages.~~ ✅
-- ~~**A3 — Content I'll need from you:**~~ Mostly resolved. Remaining: the **correct YouTube
+- ~~**A3 - Content I'll need from you:**~~ Mostly resolved. Remaining: the **correct YouTube
   video ID** for the homepage teaser (currently `tAlxNZrj7xU`).
 - **A4   Deployment:** Vercel (recommended) or your existing host? (Affects OG image + edge setup.)
 - **A5   Bengali UX:** bilingual toggle, or keep current mixed inline approach?

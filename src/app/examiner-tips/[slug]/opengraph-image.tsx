@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { OG_CONTENT_TYPE, OG_SIZE, ogCard } from "@/lib/og";
 import { getArticle } from "@/data/tip-articles";
 
-export const alt = "Examiner tip — Rofsan Sir";
+export const alt = "Examiner tip - Rofsan Sir";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 

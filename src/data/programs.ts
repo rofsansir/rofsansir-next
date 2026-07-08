@@ -51,24 +51,30 @@ export const programs: Program[] = [
   },
 ];
 
-export const academicAdvantage = [
+/** Merged, de-duplicated differentiators (was academicAdvantage + eliteSupport).
+ *  Deliberately excludes fees and class size (kept off-site by request). */
+export const whyRofsan = [
   {
-    title: "Certified Teacher",
-    desc: "Expert teacher with 8+ years of experience in leading institutions.",
+    icon: "examiner",
+    title: "Examiner-Led Instruction",
+    desc: "Coaching from a Cambridge CAIE examiner - students learn exactly what earns marks, not guesswork.",
   },
   {
-    title: "Small Batches",
-    desc: "Strictly limited students per batch for personalized, interactive learning.",
+    icon: "aligned",
+    title: "Cambridge & Edexcel Aligned",
+    desc: "Every lesson maps to the O Level Bengali 3204 assessment objectives for both boards.",
   },
   {
-    title: "International Curriculum Aligned",
-    desc: "Aligned with Cambridge (CAIE) and Pearson Edexcel global standards.",
+    icon: "scripts",
+    title: "Weekly Script Checks & Mocks",
+    desc: "Scripts and timed mock papers marked to real CAIE grade boundaries, each with a personalised improvement plan.",
   },
   {
-    title: "High-Tech Classroom",
-    desc: "Tracks student progress, performance, and analytical reports.",
+    icon: "progress",
+    title: "Progress You Can See",
+    desc: "24/7 access to notes and recorded sessions, plus regular progress briefings for parents.",
   },
-];
+] as const;
 
 export const classModes = [
   {
@@ -113,13 +119,4 @@ export const curriculum = [
       "Personalised Feedback & Improvement Plan",
     ],
   },
-];
-
-export const eliteSupport = [
-  { title: "Weekly Script Checks", desc: "Detailed corrections based on CAIE grade boundaries." },
-  { title: "A* Grade Vocabulary", desc: "Exclusive word banks that impress Cambridge markers." },
-  { title: "Mock Marathons", desc: "Time-bound simulations to build exam-day stamina." },
-  { title: "Interactive Portal", desc: "Access notes and recorded modules 24/7." },
-  { title: "Parent Connect", desc: "Transparent progress reporting and monthly briefings." },
-  { title: "One-to-One Solve", desc: "Dedicated slots for complex grammar resolution." },
 ];

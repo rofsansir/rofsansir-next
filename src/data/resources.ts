@@ -25,13 +25,13 @@ export const resources: Resource[] = [
     file: "O Level Bengali Letter & Report Practice.pdf",
   },
   {
-    title: "Letter Practice — Historical Place",
+    title: "Letter Practice - Historical Place",
     category: "Letters & Reports",
     file: "Letter practice ঐতিহাসিক স্থান.pdf",
     bengali: true,
   },
   {
-    title: "Report Practice — Tree Plantation",
+    title: "Report Practice - Tree Plantation",
     category: "Letters & Reports",
     file: "Report Practice - বৃক্ষরোপণ.pdf",
     bengali: true,
@@ -42,7 +42,7 @@ export const resources: Resource[] = [
     file: "O Level Bengali Essay Examples (Science).pdf",
   },
   {
-    title: "Essay — A Journey (with example)",
+    title: "Essay - A Journey (with example)",
     category: "Essays",
     file: "Essay - Journey with example IS_ Rofsan Sir.pdf",
   },
@@ -70,7 +70,7 @@ export const resources: Resource[] = [
     bengali: true,
   },
   {
-    title: "Shandhi Exam — 100 Marks QP",
+    title: "Shandhi Exam - 100 Marks QP",
     category: "Grammar",
     file: "QP Shandhi Exam (all) 100 Marks.pdf",
   },

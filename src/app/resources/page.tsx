@@ -8,14 +8,14 @@ import { resources, resourceHref } from "@/data/resources";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Resources — Free O Level Bengali Downloads",
+  title: "Resources - Free O Level Bengali Downloads",
   description:
-    "Free O Level Bengali study PDFs by Rofsan Sir — letter & report formats, essays, idioms, shor shondhi formulas, comprehension and sentence transformation.",
+    "Free O Level Bengali study PDFs by Rofsan Sir - letter & report formats, essays, idioms, shor shondhi formulas, comprehension and sentence transformation.",
   alternates: { canonical: "/resources" },
   openGraph: {
     title: "Free Resources · Rofsan Sir",
     description:
-      "Download free O Level Bengali study PDFs — letters, essays, grammar, comprehension.",
+      "Download free O Level Bengali study PDFs - letters, essays, grammar, comprehension.",
     url: `${site.url}/resources`,
   },
 };
@@ -38,7 +38,7 @@ export default function ResourcesPage() {
             Download &amp; <ShimmerText>learn</ShimmerText>
           </>
         }
-        subtitle="A growing library of free O Level Bengali study PDFs — formats, formulas, essays and practice, all written by Rofsan Sir."
+        subtitle="A growing library of free O Level Bengali study PDFs - formats, formulas, essays and practice, all written by Rofsan Sir."
       />
 
       {categories.map((cat) => {

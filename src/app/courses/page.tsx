@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import {
+  BadgeCheck,
   BookOpen,
   CheckCircle2,
+  ClipboardCheck,
+  Globe,
   GraduationCap,
   Laptop,
+  LineChart,
   MapPin,
-  Trophy,
-  Users,
 } from "lucide-react";
 import { PageHero } from "@/components/ui/page-hero";
 import { Container, SectionHeading, ShimmerText } from "@/components/ui/primitives";
@@ -14,13 +16,14 @@ import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 import { site } from "@/lib/site";
-import {
-  academicAdvantage,
-  classModes,
-  curriculum,
-  eliteSupport,
-  programs,
-} from "@/data/programs";
+import { classModes, curriculum, programs, whyRofsan } from "@/data/programs";
+
+const whyIcon = {
+  examiner: BadgeCheck,
+  aligned: Globe,
+  scripts: ClipboardCheck,
+  progress: LineChart,
+} as const;
 
 export const metadata: Metadata = {
   title: "Courses & Admission",
@@ -228,48 +231,30 @@ export default function CoursesPage() {
         </Container>
       </section>
 
-      {/* Academic advantage (dark) */}
+      {/* Why Rofsan Sir (dark) */}
       <section className="noise relative overflow-hidden bg-plum text-cream">
         <Container className="relative py-16 md:py-24">
           <SectionHeading
             dark
-            eyebrow="Academic Advantage"
-            title="The difference is in the method"
-            description="A proven teaching methodology built on examiner insight."
+            eyebrow="Why Rofsan Sir"
+            title="Taught by the examiner, not just a teacher"
+            description="What actually moves grades - the specifics behind the results."
           />
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {academicAdvantage.map((a, i) => (
-              <Reveal key={a.title} delay={i * 0.05}>
-                <div className="h-full rounded-3xl border border-cream/10 bg-cream/5 p-5 backdrop-blur">
-                  <Trophy className="h-6 w-6 text-marigold" />
-                  <h3 className="mt-3 font-display text-base font-bold text-cream">
-                    {a.title}
-                  </h3>
-                  <p className="mt-1.5 text-sm text-cream/65">{a.desc}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          {/* Elite support */}
-          <div className="mt-14">
-            <div className="flex items-center gap-2 text-marigold-soft">
-              <Users className="h-5 w-5" />
-              <h3 className="font-display text-xl font-bold text-cream">
-                Elite Support Ecosystem
-              </h3>
-            </div>
-            <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {eliteSupport.map((s) => (
-                <div
-                  key={s.title}
-                  className="rounded-2xl border border-cream/10 bg-cream/5 p-4"
-                >
-                  <p className="font-semibold text-cream">{s.title}</p>
-                  <p className="mt-1 text-sm text-cream/65">{s.desc}</p>
-                </div>
-              ))}
-            </div>
+            {whyRofsan.map((w, i) => {
+              const Icon = whyIcon[w.icon];
+              return (
+                <Reveal key={w.title} delay={i * 0.05}>
+                  <div className="h-full rounded-3xl border border-cream/10 bg-cream/5 p-5 backdrop-blur">
+                    <Icon className="h-6 w-6 text-marigold" />
+                    <h3 className="mt-3 font-display text-base font-bold text-cream">
+                      {w.title}
+                    </h3>
+                    <p className="mt-1.5 text-sm text-cream/65">{w.desc}</p>
+                  </div>
+                </Reveal>
+              );
+            })}
           </div>
         </Container>
       </section>

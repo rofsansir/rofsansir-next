@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { OG_CONTENT_TYPE, OG_SIZE, ogCard } from "@/lib/og";
 import { books } from "@/data/books";
 
-export const alt = "Rofsan Sir — O Level Bengali guidebook";
+export const alt = "Rofsan Sir - O Level Bengali guidebook";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 

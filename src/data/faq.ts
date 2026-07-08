@@ -52,7 +52,7 @@ export const parentFaqs: Faq[] = [
     q: "My child is weak in Bangla. Can they still do well?",
     a: "হ্যাঁ। English-medium শিক্ষার্থীদের জন্য Bangla challenging হলেও সঠিক guidance, structured practice এবং step-by-step approach থাকলে উন্নতি সম্ভব। syllabus-এ ব্যবহৃত ভাষা ও task structure English-medium learners মাথায় রেখেই তৈরি।",
     enSummary:
-      "Yes. With the right guidance and a step-by-step approach, English-medium learners can improve — the syllabus is designed with them in mind.",
+      "Yes. With the right guidance and a step-by-step approach, English-medium learners can improve - the syllabus is designed with them in mind.",
   },
   {
     q: "How much daily time is required for Bangla preparation?",

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const sections = [
   {
     h: "Information we collect",
-    p: "We only collect the information you choose to share with us — for example, your name, phone number or message when you contact us via WhatsApp, phone, email or an admission enquiry form. We do not require you to create an account to browse this website.",
+    p: "We only collect the information you choose to share with us - for example, your name, phone number or message when you contact us via WhatsApp, phone, email or an admission enquiry form. We do not require you to create an account to browse this website.",
   },
   {
     h: "How we use your information",
@@ -25,7 +25,7 @@ const sections = [
   },
   {
     h: "Third-party services",
-    p: "Some features link to or embed third-party services — including WhatsApp, YouTube (video lessons) and Google Maps (campus location). These services have their own privacy policies and may set their own cookies when you interact with them.",
+    p: "Some features link to or embed third-party services - including WhatsApp, YouTube (video lessons) and Google Maps (campus location). These services have their own privacy policies and may set their own cookies when you interact with them.",
   },
   {
     h: "Data security",

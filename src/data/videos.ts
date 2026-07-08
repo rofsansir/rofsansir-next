@@ -19,14 +19,14 @@ export const videos: Video[] = [
   {
     id: "2",
     videoId: "MCuveciqCV0",
-    title: "O Level Bengali — Last 3 Months Preparation | Paper 1 Strategy",
+    title: "O Level Bengali - Last 3 Months Preparation | Paper 1 Strategy",
     duration: "5:40",
     category: "Paper 1",
   },
   {
     id: "5",
     videoId: "XVkO44dEq48",
-    title: "O Level Bangla Coaching — Admission Open",
+    title: "O Level Bangla Coaching - Admission Open",
     duration: "1:30",
     category: "Overview",
   },
@@ -40,7 +40,7 @@ export const videos: Video[] = [
   {
     id: "8",
     videoId: "Ktr2lmfm2Z4",
-    title: "Exam Tips — O Level Bangla Paper 2",
+    title: "Exam Tips - O Level Bangla Paper 2",
     duration: "7:37",
     category: "Paper 2",
   },

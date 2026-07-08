@@ -11,7 +11,7 @@ export default function Image() {
       eyebrow: "Free Resources",
       title: "Download & learn",
       description:
-        "Free O Level Bengali study PDFs — letter formats, essays, idioms, shor shondhi formulas and comprehension.",
+        "Free O Level Bengali study PDFs - letter formats, essays, idioms, shor shondhi formulas and comprehension.",
     }),
     OG_SIZE,
   );

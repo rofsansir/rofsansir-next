@@ -38,7 +38,7 @@ export function generateMetadata({
     const prog = levelMap[level as Level];
     if (!prog) return { title: "Not found" };
     return {
-      title: `${prog.title} — ${levelName[level as Level]}`,
+      title: `${prog.title} - ${levelName[level as Level]}`,
       description: `${prog.title} (${levelName[level as Level]}): ${prog.features.join(", ")}. ${prog.type}, ${prog.duration}.`,
       alternates: { canonical: `/class/${level}` },
       openGraph: {
@@ -68,7 +68,7 @@ export default async function ClassPage({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Course",
-    name: `${prog.title} — ${levelName[level as Level]}`,
+    name: `${prog.title} - ${levelName[level as Level]}`,
     description: prog.features.join(", "),
     provider: { "@type": "EducationalOrganization", name: site.legalName, url: site.url },
   };

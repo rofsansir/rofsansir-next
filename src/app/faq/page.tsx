@@ -8,14 +8,14 @@ import { parentFaqs, studentFaqs } from "@/data/faq";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "FAQ — O Level Bengali Questions Answered",
+  title: "FAQ - O Level Bengali Questions Answered",
   description:
     "Answers for students and parents on O Level Bengali: difficulty, English-medium learners, when to start, memorization, daily study time and more.",
   alternates: { canonical: "/faq" },
   openGraph: {
     title: "FAQ · Rofsan Sir",
     description:
-      "O Level Bengali FAQs for students and parents — difficulty, timing, memorization and more.",
+      "O Level Bengali FAQs for students and parents - difficulty, timing, memorization and more.",
     url: `${site.url}/faq`,
   },
 };
@@ -73,7 +73,7 @@ export default function FaqPage() {
             Questions, <ShimmerText>answered</ShimmerText>
           </>
         }
-        subtitle="Everything students and parents ask about O Level Bengali — difficulty, timing, memorization and how Rofsan Sir teaches."
+        subtitle="Everything students and parents ask about O Level Bengali - difficulty, timing, memorization and how Rofsan Sir teaches."
       />
 
       <section className="px-4 py-10 md:py-16">
@@ -92,7 +92,7 @@ export default function FaqPage() {
           <div>
             <SectionHeading eyebrow="For Parents" title="Parent questions" />
             <p className="mt-3 text-sm text-muted">
-              বাংলা এবং English — answers in Bengali with a short English summary.
+              বাংলা এবং English - answers in Bengali with a short English summary.
             </p>
             <div className="mt-8 flex flex-col gap-3">
               {parentFaqs.map((f, i) => (
@@ -112,7 +112,7 @@ export default function FaqPage() {
               Still have a question?
             </h2>
             <p className="max-w-xl text-muted">
-              WhatsApp Rofsan Sir directly — happy to help you and your child
+              WhatsApp Rofsan Sir directly - happy to help you and your child
               plan the right path.
             </p>
             <Button href={site.contact.whatsapp} external size="lg">

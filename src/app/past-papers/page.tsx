@@ -7,14 +7,14 @@ import { pastPapers, years } from "@/data/past-papers";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Past Papers — CAIE O Level Bengali (3204)",
+  title: "Past Papers - CAIE O Level Bengali (3204)",
   description:
     "Free CAIE O Level Bengali (3204) past papers, 2004–2025. Download question papers and mark schemes with examiner guidance from Rofsan Sir.",
   alternates: { canonical: "/past-papers" },
   openGraph: {
     title: "O Level Bengali Past Papers (CAIE 3204) · Rofsan Sir",
     description:
-      "Free CAIE 3204 past papers 2004–2025 — question papers and mark schemes.",
+      "Free CAIE 3204 past papers 2004–2025 - question papers and mark schemes.",
     url: `${site.url}/past-papers`,
   },
 };
@@ -32,7 +32,7 @@ export default function PastPapersPage() {
             O Level Bengali <ShimmerText>past papers</ShimmerText>
           </>
         }
-        subtitle={`Every CAIE O Level Bengali (3204) paper we could gather — ${pastPapers.length} papers from ${minYear} to ${maxYear}. Question papers, mark schemes and examiner materials, free to download.`}
+        subtitle={`Every CAIE O Level Bengali (3204) paper we could gather - ${pastPapers.length} papers from ${minYear} to ${maxYear}. Question papers, mark schemes and examiner materials, free to download.`}
       />
 
       <section className="px-4 py-10 md:py-14">

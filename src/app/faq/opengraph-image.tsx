@@ -11,7 +11,7 @@ export default function Image() {
       eyebrow: "FAQ",
       title: "Questions, answered",
       description:
-        "O Level Bengali FAQs for students and parents — difficulty, timing, memorization and more.",
+        "O Level Bengali FAQs for students and parents - difficulty, timing, memorization and more.",
     }),
     OG_SIZE,
   );

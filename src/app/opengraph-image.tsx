@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { OG_CONTENT_TYPE, OG_SIZE, ogCard } from "@/lib/og";
 
-export const alt = "Rofsan Sir — Your route to A* in O Level Bengali";
+export const alt = "Rofsan Sir - Your route to A* in O Level Bengali";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 

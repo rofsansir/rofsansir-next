@@ -20,6 +20,9 @@ npm run lint     # eslint
 ```
 
 ## Conventions
+- **GOLDEN RULE: never use an em dash (the em dash character, Unicode U+2014) anywhere** -
+  content, copy, code, comments, docs. Use a hyphen (`-`), or rewrite with a comma or colon.
+  This is absolute.
 - Use `@/*` alias (→ `src/*`).
 - **Use design tokens, not raw hex.** Colors: `cream paper ink plum plum-2 plum-3
   marigold marigold-soft marigold-deep rose teal muted`. Shadows: `shadow-luxe shadow-card`.

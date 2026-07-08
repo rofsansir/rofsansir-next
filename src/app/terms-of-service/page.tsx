@@ -21,7 +21,7 @@ const sections = [
   },
   {
     h: "Intellectual property",
-    p: "All content on this site — including text, lessons, guidebooks, study materials, photographs and the Rofsan Sir brand — is owned by or licensed to us and protected by copyright. You may not reproduce it without permission.",
+    p: "All content on this site - including text, lessons, guidebooks, study materials, photographs and the Rofsan Sir brand - is owned by or licensed to us and protected by copyright. You may not reproduce it without permission.",
   },
   {
     h: "Courses and enrollment",

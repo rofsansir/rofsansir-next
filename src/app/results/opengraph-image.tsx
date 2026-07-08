@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { OG_CONTENT_TYPE, OG_SIZE, ogCard } from "@/lib/og";
 
-export const alt = "Rofsan Sir — Hall of Fame";
+export const alt = "Rofsan Sir - Hall of Fame";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 
