@@ -27,8 +27,8 @@ npm run lint     # eslint
   `animate-spin-slow`, `animate-floaty`, `animate-blob`, etc.
 - Signature classes: `.noise` (grain overlay on dark sections), `.text-shimmer` (gold A\*),
   `.text-outline` (numerals 01–05), `.edge-fade` (carousel mask), `.no-scrollbar`.
-- **All motion must respect `prefers-reduced-motion`** (global CSS handles CSS animations;
-  use `useReducedMotion()` from `motion` for JS-driven effects).
+- Animations always play (`MotionConfig reducedMotion="never"` in `app/layout.tsx`);
+  do not add `prefers-reduced-motion` handling.
 - Images: use `next/image` with explicit `width`/`height`; assets live in `public/assets/`.
 - Server Components by default; add `"use client"` only where needed (motion, interactivity).
 

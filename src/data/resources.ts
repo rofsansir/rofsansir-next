@@ -1,4 +1,5 @@
-/** Free downloadable study resources (real PDFs in /public/assets/pdfs/). */
+/** Free downloadable study resources (PDFs offloaded to R2 under assets/pdfs/). */
+import { assetUrl } from "@/lib/assets";
 
 export type Resource = {
   title: string;
@@ -85,4 +86,4 @@ export const resources: Resource[] = [
   },
 ];
 
-export const resourceHref = (file: string) => `/assets/pdfs/${encodeURI(file)}`;
+export const resourceHref = (file: string) => assetUrl(`assets/pdfs/${file}`);

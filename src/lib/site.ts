@@ -58,11 +58,11 @@ export const site = {
 /** Primary site navigation. Section pages are added as routes land. */
 export const mainNav: { label: string; href: string }[] = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
   { label: "Courses", href: "/courses" },
   { label: "Results", href: "/results" },
   { label: "Books", href: "/books" },
   { label: "Examiner Tips", href: "/examiner-tips" },
   { label: "Resources", href: "/resources" },
+  { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];

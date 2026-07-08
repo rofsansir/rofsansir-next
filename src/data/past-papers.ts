@@ -1,4 +1,5 @@
 import rawData from "./past-papers.json";
+import { assetUrl } from "@/lib/assets";
 
 export type PastPaper = {
   id: number;
@@ -20,6 +21,7 @@ export type PastPaper = {
 
 export const pastPapers: PastPaper[] = (rawData as PastPaper[])
   .filter((p) => p.isActive === 1)
+  .map((p) => ({ ...p, url: assetUrl(p.filePath) }))
   .sort((a, b) => b.year - a.year || a.paperType.localeCompare(b.paperType));
 
 /** Distinct years, newest first. */

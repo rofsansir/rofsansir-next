@@ -19,7 +19,7 @@
    with the correct title + description** in WhatsApp/social.
 3. **Full content migration**   carry over all 15+ pages, 117 past papers, 5 books, tips,
    FAQ, videos, resources   fixing the P0 content defects found in the audit along the way.
-4. **Performance & a11y**   `next/image`, font optimization, `prefers-reduced-motion`, AA contrast.
+4. **Performance & a11y**   `next/image`, font optimization, AA contrast.
 5. **No SEO regression**   permanent redirects for every old URL so indexed links keep working.
 
 ---
@@ -31,7 +31,7 @@
 | Framework | **Next.js 15 (App Router) + React 19 + TypeScript** | Native SSG/SSR solves the old site's "Helmet tags invisible to crawlers" problem (the whole reason for the hacky prerender script). |
 | Styling | **Tailwind CSS v4** (`@theme`) | Matches the static site's stack; port the prototype's CDN config into a real build. |
 | Fonts | **`next/font`**   Bricolage Grotesque (display), Inter (body), + a Bengali font (Hind Siliguri or Noto Sans Bengali; keep Kalpurush as fallback) | Zero layout shift, self-hosted, premium typography preserved; Bengali glyphs for `bn` content. |
-| Animation | **Framer Motion (`motion`)** for reveals/parallax/tilt + **CSS** for marquees/shimmer/blobs (ported directly). Custom hooks (`useCountUp`, `useTypewriter`) where Framer isn't the right fit. *(Decision A1: Framer Motion   chosen.)* | Less custom code, easy to extend; marquees/shimmer stay CSS; all motion gated behind `prefers-reduced-motion` via `useReducedMotion`. |
+| Animation | **Framer Motion (`motion`)** for reveals/parallax/tilt + **CSS** for marquees/shimmer/blobs (ported directly). Custom hooks (`useCountUp`, `useTypewriter`) where Framer isn't the right fit. *(Decision A1: Framer Motion   chosen.)* | Less custom code, easy to extend; marquees/shimmer stay CSS. |
 | UI primitives | **shadcn/ui** (install only what's used: Button, Dialog, Accordion, Select, Tooltip) + Radix (already familiar from old site) | Accessible, unstyled-by-default, fits the custom design system. |
 | Icons | **lucide-react** (matches old site; replace prototype's inline SVGs with a shared set) | Consistency, tree-shakeable. |
 | Content | **Typed JSON/TS in `src/data/`** (port existing), **MDX** for long-form (book sections, tip articles) | Rich rendering for articles; data stays diff-friendly. |
@@ -76,7 +76,6 @@ muted      #73665b   muted body text / meta
 - Dramatic shadows: `luxe` `0 30px 80px -30px rgba(56,32,51,.35)`, `card` `0 14px 40px -20px rgba(56,32,51,.22)`.
 - Motion: scroll-reveal (IntersectionObserver), count-up stats, typewriter tagline/testimonial,
   infinite marquees (pause-on-hover), 3D portrait tilt + parallax, slow-spin starburst.
-- **All motion respects `prefers-reduced-motion`.**
 
 ### Spacing & radius
 Container `max-w-7xl`, `px-4 md:px-6`, sections `py-16 md:py-24`.
@@ -209,7 +208,7 @@ Copy from both folders → `public/assets/` (and `public/logos/`):
 - Navbar (glass pill, scroll state, mobile menu), Footer.
 - Primitives: Button, Badge, Pill, Card, Section, Eyebrow, Stat, Avatar, Marquee, Reveal,
   NoiseSection, BlobBackground, Starburst, ShimmerText.
-- Hooks: `useScrollReveal`, `useCountUp`, `useTypewriter`, `useTilt`, `usePrefersReducedMotion`.
+- Hooks: `useScrollReveal`, `useCountUp`, `useTypewriter`, `useTilt`.
 - Layout: shared `<PageShell>` (nav + footer + floating WhatsApp/back-to-top).
 
 ### Phase 2   Homepage (port the prototype to React)
@@ -229,7 +228,7 @@ Copy from both folders → `public/assets/` (and `public/logos/`):
 ### Phase 5   SEO, polish & launch readiness
 - Dynamic OG images for every section/route.
 - Full JSON-LD pass; sitemap/robots verification.
-- Image/perf audit (Lighthouse), a11y pass (contrast, focus, reduced-motion).
+- Image/perf audit (Lighthouse), a11y pass (contrast, focus).
 - Redirects for all old URLs; 404 page; analytics (Plausible/Umami   P2).
 - New `/results` page (live). No `/fees` page.
 
