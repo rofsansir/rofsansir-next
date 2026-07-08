@@ -11,7 +11,7 @@ export default function Image() {
       eyebrow: "About",
       title: "Meet your Bengali Teacher",
       description:
-        "CAIE-approved O Level Bengali Examiner, author and educator with 8+ years guiding English-medium students to A*.",
+        "CAIE-approved O Level Bengali Examiner, author and educator with 9+ years guiding English-medium students to A*.",
     }),
     OG_SIZE,
   );

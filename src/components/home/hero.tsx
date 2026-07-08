@@ -67,7 +67,7 @@ export function Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping-soft rounded-full bg-marigold" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-marigold-deep" />
             </span>
-            CAIE Examiner · 8+ Years
+            CAIE Examiner · 9+ Years
           </span>
 
           <motion.h1

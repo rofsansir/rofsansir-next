@@ -26,19 +26,19 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "About Rofsan Sir",
   description:
-    "Meet Rofsan Khan   a CAIE-approved O Level Bengali Examiner, published author and educator with 8+ years guiding English-medium students to A* and A in Cambridge & Edexcel Bengali.",
+    "Meet Rofsan Khan   a CAIE-approved O Level Bengali Examiner, published author and educator with 9+ years guiding English-medium students to A* and A in Cambridge & Edexcel Bengali.",
   alternates: { canonical: "/about" },
   openGraph: {
     title: "About Rofsan Sir",
     description:
-      "Meet Rofsan Khan   CAIE-approved O Level Bengali Examiner, published author, and educator with 8+ years of experience.",
+      "Meet Rofsan Khan   CAIE-approved O Level Bengali Examiner, published author, and educator with 9+ years of experience.",
     url: `${site.url}/about`,
     type: "website",
   },
 };
 
 const stats = [
-  { value: "8+", label: "Years teaching" },
+  { value: "9+", label: "Years teaching" },
   { value: "3,000+", label: "Students mentored" },
   { value: "98%", label: "A* & A success" },
   { value: "5", label: "Published books" },
@@ -109,7 +109,7 @@ export default function AboutPage() {
 
             <p className="max-w-xl text-base leading-relaxed text-muted md:text-lg">
               Rofsan Sir is a CAIE-trained educator and CAIE-approved O Level
-              Bengali Examiner with over eight years of experience teaching O
+              Bengali Examiner with over nine years of experience teaching O
               Level Bengali in English-medium academic settings. He is widely
               respected for his clear, structured, and student-friendly teaching
               approach   helping learners, especially those who struggle or feel

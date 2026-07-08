@@ -1,7 +1,7 @@
 /** Homepage content (hero, ticker, boards, gallery, students, testimonials, teaser). */
 
 export const heroStats: string[] = [
-  "8+ Years Experience",
+  "9+ Years Experience",
   "3,000+ Students Mentored",
   "Author of O Level Bengali Book Series",
   "98% A* & A Success Rate",
@@ -20,7 +20,7 @@ export const tickerItems: string[] = [
   "3,000+ students",
   "Cambridge Examiner",
   "Author of the O Level Bengali Book Series",
-  "8+ years",
+  "9+ years",
 ];
 
 export const boards: { name: string; logo: string }[] = [
@@ -138,7 +138,7 @@ export const aboutTeaser = {
   eyebrow: "Meet Your Teacher",
   title: "Learn from the examiner's lens",
   body:
-    "Rofsan Sir is a CAIE-trained educator and CAIE-approved O Level Bengali Examiner with 8+ years guiding English-medium students to A* and A.",
+    "Rofsan Sir is a CAIE-trained educator and CAIE-approved O Level Bengali Examiner with 9+ years guiding English-medium students to A* and A.",
   videoId: "tAlxNZrj7xU", // "Why do students miss the A* in O Level Bangla?"
   poster: "/assets/teacher/intro-poster.png",
 };

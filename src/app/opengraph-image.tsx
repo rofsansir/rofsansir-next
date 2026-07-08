@@ -8,7 +8,7 @@ export const contentType = OG_CONTENT_TYPE;
 export default function Image() {
   return new ImageResponse(
     ogCard({
-      eyebrow: "CAIE Examiner · 8+ Years",
+      eyebrow: "CAIE Examiner · 9+ Years",
       title: "Your route to A* in O Level Bengali",
       description:
         "Master O Level Bengali with CAIE Examiner Rofsan Sir. Hall of Fame, examiner tips, free past papers and the O Level Bengali guidebook series.",
