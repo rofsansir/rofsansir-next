@@ -19,11 +19,11 @@ export function Gallery() {
         </div>
       </Container>
 
-      <InfiniteTrack
-        className="mt-8 px-4 md:px-6"
-        trackClassName="gap-4"
-        speed={0.5}
-      >
+      <div className="mt-8 -mx-4 md:-mx-6">
+        <InfiniteTrack
+          trackClassName="gap-4"
+          speed={0.5}
+        >
         {gallery.map((g, i) => (
           <figure
             key={i}
@@ -40,6 +40,7 @@ export function Gallery() {
           </figure>
         ))}
       </InfiniteTrack>
+      </div>
     </section>
   );
 }
