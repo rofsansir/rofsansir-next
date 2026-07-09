@@ -7,15 +7,15 @@ import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 import { site } from "@/lib/site";
-import { classModes, programs, type Program } from "@/data/programs";
+import { classModes, courses, type Course } from "@/data/courses";
 
 const LEVELS = ["8", "9", "10"] as const;
 type Level = (typeof LEVELS)[number];
 
-const levelMap: Record<Level, Program> = {
-  "8": programs[0],
-  "9": programs[1],
-  "10": programs[2],
+const levelMap: Record<Level, Course> = {
+  "8": courses[0],
+  "9": courses[1],
+  "10": courses[2],
 };
 
 const levelName: Record<Level, string> = {
@@ -50,7 +50,7 @@ export function generateMetadata({
   })();
 }
 
-const accentRing: Record<Program["accent"], string> = {
+const accentRing: Record<Course["accent"], string> = {
   marigold: "bg-marigold/15 text-marigold-deep",
   plum: "bg-cream/10 text-marigold-soft",
   teal: "bg-teal/10 text-teal",

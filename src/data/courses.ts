@@ -1,6 +1,6 @@
-/** Courses / programs / curriculum content (migrated from static site). */
+/** Courses / batches / curriculum content (migrated from static site). */
 
-export type Program = {
+export type Course = {
   title: string;
   batch: string;
   type: string;
@@ -9,7 +9,7 @@ export type Program = {
   accent: "marigold" | "plum" | "teal";
 };
 
-export const programs: Program[] = [
+export const courses: Course[] = [
   {
     title: "Foundation Batch",
     batch: "Class VIII",

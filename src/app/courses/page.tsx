@@ -12,7 +12,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 import { site } from "@/lib/site";
-import { classModes, curriculum, programs } from "@/data/programs";
+import { classModes, curriculum, courses } from "@/data/courses";
 
 export const metadata: Metadata = {
   title: "Courses & Admission",
@@ -77,7 +77,7 @@ export default function CoursesPage() {
         <Container>
           <SectionHeading eyebrow="Our Programs" title="A batch for every stage" />
           <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {programs.map((p, i) => (
+            {courses.map((p, i) => (
               <Reveal key={p.title} delay={i * 0.06}>
                 <div className="flex h-full flex-col rounded-[1.75rem] border border-ink/10 bg-paper/70 p-6 shadow-sm transition-shadow hover:shadow-card">
                   <div className="flex items-center justify-between">
