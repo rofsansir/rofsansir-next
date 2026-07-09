@@ -51,7 +51,8 @@ export function InfiniteTrack({
       const u = unit();
       if (!dragging.current && u > 0) {
         offset.current -= speed;
-        if (-offset.current >= u) offset.current += u;
+        while (offset.current <= -u) offset.current += u;
+        while (offset.current > 0) offset.current -= u;
         track.style.transform = `translate3d(${offset.current}px,0,0)`;
       }
       raf.current = requestAnimationFrame(tick);

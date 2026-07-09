@@ -31,7 +31,7 @@ export function HallOfFame() {
       </Container>
 
       <div className="mt-10 -mx-4 md:-mx-6">
-        <InfiniteTrack trackClassName="gap-4 md:gap-6" speed={0.5}>
+        <InfiniteTrack trackClassName="gap-4 md:gap-6" speed={-0.5}>
           {achievers.map((a) => (
             <figure
               key={a.name}
