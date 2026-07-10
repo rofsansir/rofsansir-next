@@ -8,10 +8,10 @@ export const heroStats: string[] = [
 ];
 
 export const heroTypewriter: string[] = [
-  "Master O Level Bengali with Rofsan Sir",
-  "Score A* with a Cambridge Examiner",
-  "Loved by 3,000+ English-medium students",
+  "Learn from a CAIE O Level Bengali Examiner",
+  "Trusted by 3,000+ English-medium students",
   "Author of the O Level Bengali Book Series",
+  "Making A* achievable through the right guidance",
 ];
 
 export const tickerItems: string[] = [
@@ -21,6 +21,7 @@ export const tickerItems: string[] = [
   "Cambridge Examiner",
   "Author of the O Level Bengali Book Series",
   "9+ years",
+  "Cambridge Assessment Specialist"
 ];
 
 export const boards: { name: string; logo: string }[] = [
@@ -134,8 +135,8 @@ export const gallery: { src: string; alt: string }[] = [
 
 /** "Meet your teacher" video teaser. (Swap videoId anytime.) */
 export const aboutTeaser = {
-  eyebrow: "Meet Your Teacher",
-  title: "Learn from the examiner's lens",
+  eyebrow: "Examiners perspective",
+  title: "What examiners look for",
   videoId: "tAlxNZrj7xU", // "Why do students miss the A* in O Level Bangla?"
   poster: "/assets/teacher/intro-poster.png",
 };
