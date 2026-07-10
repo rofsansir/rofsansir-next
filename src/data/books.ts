@@ -18,7 +18,7 @@ export const books: Book[] = [
     badge: "Essential",
     badgeTone: "gold",
     subtitle: "A Complete Guide to O Level Bengali",
-    code: "3204/02",
+    code: "Course Book Paper 1",
     summary:
       "A structured guide to CAIE O Level Bengali Paper 02   foundational grammar and core concepts, built for English-medium students.",
     image: "/assets/books/1.png",

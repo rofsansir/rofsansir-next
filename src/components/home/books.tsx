@@ -40,7 +40,7 @@ export function Books() {
             </h3>
             <p className="mt-1 text-xs text-cream/60">{b.subtitle}</p>
             <p className="mt-2 text-[10px] font-semibold uppercase tracking-widest text-marigold-soft">
-              Code · {b.code}
+              {b.code}
             </p>
           </article>
         ))}
