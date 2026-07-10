@@ -1,0 +1,11 @@
+name = "rofsansir-admin"
+main = "src/index.ts"
+compatibility_date = "2026-07-01"
+
+routes = [
+  { pattern = "admin.rofsansir.com", custom_domain = true }
+]
+
+[[r2_buckets]]
+binding = "ASSETS"
+bucket_name = "rofsansir-assets"
