@@ -15,12 +15,16 @@ export function InfiniteTrack({
   className,
   trackClassName,
   edgeFade = true,
+  duplicate = true,
 }: {
   children: React.ReactNode;
   speed?: number;
   className?: string;
   trackClassName?: string;
   edgeFade?: boolean;
+  /** When false, items are rendered once (no seamless-loop duplicate); the
+   * track jumps back to the start instead of overlapping a copy. */
+  duplicate?: boolean;
 }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const offset = useRef(0);
@@ -30,20 +34,23 @@ export function InfiniteTrack({
 
   const items = React.Children.toArray(children);
   const count = items.length;
-  const doubled = [
-    ...items.map((el, i) => (
-      <Fragment key={`a-${i}`}>{el}</Fragment>
-    )),
-    ...items.map((el, i) => (
-      <Fragment key={`b-${i}`}>{el}</Fragment>
-    )),
-  ];
+  const doubled = duplicate
+    ? [
+        ...items.map((el, i) => (
+          <Fragment key={`a-${i}`}>{el}</Fragment>
+        )),
+        ...items.map((el, i) => (
+          <Fragment key={`b-${i}`}>{el}</Fragment>
+        )),
+      ]
+    : items;
 
   useEffect(() => {
     const track = trackRef.current;
     if (!track || count === 0) return;
 
     const unit = () => {
+      if (!duplicate) return track.scrollWidth;
       const child = track.children[count] as HTMLElement | undefined;
       return child ? child.offsetLeft : track.scrollWidth / 2;
     };
@@ -59,7 +66,7 @@ export function InfiniteTrack({
     };
     raf.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf.current);
-  }, [count, speed]);
+  }, [count, speed, duplicate]);
 
   const apply = () => {
     const t = trackRef.current;
@@ -68,8 +75,12 @@ export function InfiniteTrack({
   const wrap = () => {
     const t = trackRef.current;
     if (!t) return;
-    const child = t.children[count] as HTMLElement | undefined;
-    const u = child ? child.offsetLeft : t.scrollWidth / 2;
+    const u = duplicate
+      ? (() => {
+          const child = t.children[count] as HTMLElement | undefined;
+          return child ? child.offsetLeft : t.scrollWidth / 2;
+        })()
+      : t.scrollWidth;
     if (u <= 0) return;
     while (offset.current <= -u) offset.current += u;
     while (offset.current > 0) offset.current -= u;
