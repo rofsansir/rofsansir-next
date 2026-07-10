@@ -3,10 +3,9 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { mainNav } from "@/lib/site";
 import { cn } from "@/lib/cn";
-import { buttonVariants } from "@/components/ui/button";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -55,16 +54,6 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-2">
-          <a
-            href="#admission"
-            className={cn(
-              buttonVariants({ variant: "dark", size: "sm" }),
-              "group hidden sm:inline-flex",
-            )}
-          >
-            Book a Free Class
-            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
@@ -97,13 +86,6 @@ export function Navbar() {
                   {item.label}
                 </Link>
               ))}
-              <a
-                href="#admission"
-                onClick={() => setOpen(false)}
-                className={cn(buttonVariants({ variant: "primary", size: "md" }), "mt-2")}
-              >
-                Book a Free Class
-              </a>
             </div>
           </motion.div>
         )}

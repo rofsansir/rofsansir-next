@@ -59,9 +59,9 @@ export function Hero() {
       className="relative overflow-hidden px-4 pb-12 pt-28 md:pb-20 md:pt-36"
     >
       <BlobField />
-      <Container className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
+      <Container className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-14">
         {/* Left   copy */}
-        <div className="flex flex-col items-start gap-6">
+        <div className="flex min-w-0 flex-col items-start gap-6">
           <span className="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-paper/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-muted shadow-sm backdrop-blur">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping-soft rounded-full bg-marigold" />
@@ -110,8 +110,8 @@ export function Hero() {
             ))}
           </motion.h1>
 
-          <div className="flex min-h-[4.2rem] items-center gap-1 sm:min-h-[2.9rem]">
-            <span className="font-display text-xl font-bold text-marigold-deep sm:text-2xl md:whitespace-nowrap md:text-[1.9rem]">
+          <div className="flex min-h-[4.2rem] items-center gap-1 sm:min-h-[3.9rem] md:min-h-[4.8rem]">
+            <span className="font-display text-xl font-bold text-marigold-deep sm:text-2xl md:text-[1.9rem]">
               {tagline}
               <span className="caret" aria-hidden />
             </span>
