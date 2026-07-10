@@ -61,14 +61,14 @@ export function HallOfFame() {
 
       <div className="mt-10 flex flex-col gap-4 md:gap-6">
         <div className="-mx-4 md:-mx-6">
-          <InfiniteTrack trackClassName="gap-4 md:gap-6" speed={-0.5} duplicate={false}>
+          <InfiniteTrack trackClassName="gap-4 md:gap-6" speed={-0.5}>
             {rowOne.map((a) => (
               <AchieverCard key={a.name} a={a} />
             ))}
           </InfiniteTrack>
         </div>
         <div className="-mx-4 md:-mx-6">
-          <InfiniteTrack trackClassName="gap-4 md:gap-6" speed={0.5} duplicate={false}>
+          <InfiniteTrack trackClassName="gap-4 md:gap-6" speed={0.5}>
             {rowTwo.map((a) => (
               <AchieverCard key={a.name} a={a} />
             ))}

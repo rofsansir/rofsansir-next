@@ -1,6 +1,5 @@
 import { Container, Eyebrow, SectionNumber } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
-import { Button } from "@/components/ui/button";
 import { aboutTeaser } from "@/data/home";
 
 export function AboutTeaser() {
@@ -31,12 +30,6 @@ export function AboutTeaser() {
             />
           </div>
         </Reveal>
-
-        <div className="mt-6 flex justify-center">
-          <Button href="#admission" variant="dark">
-            Book a Free Consultation
-          </Button>
-        </div>
       </Container>
     </section>
   );
