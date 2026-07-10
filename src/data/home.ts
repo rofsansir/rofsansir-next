@@ -37,15 +37,21 @@ export type Achiever = {
   image: string;
 };
 
+/**
+ * Fallback data, used when the R2-hosted manifest (assets/data/hall-of-fame.json)
+ * is unreachable or empty. Image paths point at the `assets/hall-of-fame/`
+ * R2 prefix (see src/lib/remote-content.ts) - not the local `public/assets/students/`
+ * folder, which is a separate set of files used by the hero section.
+ */
 export const achievers: Achiever[] = [
-  { name: "Prioman", meta: "World Heights · 2023", grade: "A*", image: "/assets/students/prioman.jpg" },
-  { name: "Apurva Sahil", meta: "O Level · 2021", grade: "A*", image: "/assets/students/apurva.jpg" },
-  { name: "Maida Naz", meta: "O Level · 2023", grade: "A*", image: "/assets/students/maida.jpg" },
-  { name: "Farhan Ahmad", meta: "99 marks · 2023", grade: "A*", image: "/assets/students/farhan.jpeg" },
-  { name: "Raiyat Karim", meta: "O Level · 2025", grade: "A*", image: "/assets/students/Raiyat.jpg" },
-  { name: "Akib Azwad", meta: "O Level · 2025", grade: "A*", image: "/assets/students/Akib.png" },
-  { name: "Ayoka Paul", meta: "O Level · 2023", grade: "A", image: "/assets/students/ayoka.jpg" },
-  { name: "Suprova Barua", meta: "O Level · 2025", grade: "89%", image: "/assets/students/suprova.png" },
+  { name: "Prioman", meta: "World Heights · 2023", grade: "A*", image: "/assets/hall-of-fame/prioman.jpg" },
+  { name: "Apurva Sahil", meta: "O Level · 2021", grade: "A*", image: "/assets/hall-of-fame/apurva.jpg" },
+  { name: "Maida Naz", meta: "O Level · 2023", grade: "A*", image: "/assets/hall-of-fame/maida.jpg" },
+  { name: "Farhan Ahmad", meta: "99 marks · 2023", grade: "A*", image: "/assets/hall-of-fame/farhan.jpeg" },
+  { name: "Raiyat Karim", meta: "O Level · 2025", grade: "A*", image: "/assets/hall-of-fame/Raiyat.jpg" },
+  { name: "Akib Azwad", meta: "O Level · 2025", grade: "A*", image: "/assets/hall-of-fame/Akib.png" },
+  { name: "Ayoka Paul", meta: "O Level · 2023", grade: "A", image: "/assets/hall-of-fame/ayoka.jpg" },
+  { name: "Suprova Barua", meta: "O Level · 2025", grade: "89%", image: "/assets/hall-of-fame/suprova.png" },
 ];
 
 export type Testimonial = {
@@ -123,14 +129,21 @@ export const testimonials: Testimonial[] = [
   },
 ];
 
-/** Gallery carousel   alternating class banners and classroom shots. */
-export const gallery: { src: string; alt: string }[] = [
-  { src: "/assets/class-banner/ClassVIII.jpg", alt: "Class VIII batch at Rofsan Sir" },
-  { src: "/assets/teacher/2.jpg", alt: "Classroom session with Rofsan Sir" },
-  { src: "/assets/class-banner/ClassIX.jpg", alt: "Class IX batch at Rofsan Sir" },
-  { src: "/assets/teacher/3.jpg", alt: "Rofsan Sir teaching O Level Bengali" },
-  { src: "/assets/class-banner/ClassX.jpg", alt: "Class X batch at Rofsan Sir" },
-  { src: "/assets/teacher/5.jpg", alt: "Exam-focused classroom at Rofsan Sir" },
+export type GalleryItem = { src: string; alt: string };
+
+/**
+ * Fallback data, used when the R2-hosted manifest (assets/data/gallery.json)
+ * is unreachable or empty. Image paths point at the `assets/gallery/` R2
+ * prefix (see src/lib/remote-content.ts) - not the local
+ * `public/assets/class-banner|teacher/` folders those files were copied from.
+ */
+export const gallery: GalleryItem[] = [
+  { src: "/assets/gallery/ClassVIII.jpg", alt: "Class VIII batch at Rofsan Sir" },
+  { src: "/assets/gallery/teacher-2.jpg", alt: "Classroom session with Rofsan Sir" },
+  { src: "/assets/gallery/ClassIX.jpg", alt: "Class IX batch at Rofsan Sir" },
+  { src: "/assets/gallery/teacher-3.jpg", alt: "Rofsan Sir teaching O Level Bengali" },
+  { src: "/assets/gallery/ClassX.jpg", alt: "Class X batch at Rofsan Sir" },
+  { src: "/assets/gallery/teacher-5.jpg", alt: "Exam-focused classroom at Rofsan Sir" },
 ];
 
 /** "Meet your teacher" video teaser. (Swap videoId anytime.) */

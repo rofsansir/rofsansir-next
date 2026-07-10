@@ -5,7 +5,8 @@ import {
   ShimmerText,
 } from "@/components/ui/primitives";
 import { InfiniteTrack } from "@/components/ui/infinite-track";
-import { achievers, type Achiever } from "@/data/home";
+import type { Achiever } from "@/data/home";
+import { getAchievers } from "@/lib/remote-content";
 
 function AchieverCard({ a }: { a: Achiever }) {
   return (
@@ -32,7 +33,8 @@ function AchieverCard({ a }: { a: Achiever }) {
   );
 }
 
-export function HallOfFame() {
+export async function HallOfFame() {
+  const achievers = await getAchievers();
   const mid = Math.ceil(achievers.length / 2);
   const rowOne = achievers.slice(0, mid);
   const rowTwo = achievers.slice(mid);

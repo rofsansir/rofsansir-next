@@ -1,10 +1,12 @@
 import Image from "next/image";
 import { Container, Eyebrow, SectionNumber } from "@/components/ui/primitives";
 import { InfiniteTrack } from "@/components/ui/infinite-track";
-import { gallery } from "@/data/home";
+import { getGalleryItems } from "@/lib/remote-content";
 
 /** Infinite, drag-scrollable gallery. */
-export function Gallery() {
+export async function Gallery() {
+  const gallery = await getGalleryItems();
+
   return (
     <section id="gallery" className="overflow-hidden py-16 md:py-24">
       <Container>
