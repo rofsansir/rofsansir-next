@@ -1,5 +1,4 @@
 import { Hero } from "@/components/home/hero";
-import { TrustStrip } from "@/components/home/trust-strip";
 import { Ticker } from "@/components/home/ticker";
 import { AboutTeaser } from "@/components/home/about-teaser";
 import { HallOfFame } from "@/components/home/hall-of-fame";
@@ -64,7 +63,6 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Hero />
-      <TrustStrip />
       <Ticker />
       <AboutTeaser />
       <HallOfFame />

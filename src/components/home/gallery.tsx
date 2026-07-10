@@ -6,7 +6,7 @@ import { gallery } from "@/data/home";
 /** Infinite, drag-scrollable gallery. */
 export function Gallery() {
   return (
-    <section id="gallery" className="py-16 md:py-24">
+    <section id="gallery" className="overflow-hidden py-16 md:py-24">
       <Container>
         <div className="flex flex-col gap-3">
           <Eyebrow>Snapshots from Class</Eyebrow>
