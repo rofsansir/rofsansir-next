@@ -254,6 +254,8 @@ export default {
       const index = Number(form.get("index"));
       const items = await getManifest<GalleryItem>(env.ASSETS, GALLERY_KEY);
       if (Number.isInteger(index) && index >= 0 && index < items.length) {
+        const deleted = items[index];
+        await env.ASSETS.delete(deleted.src.startsWith("/") ? deleted.src.slice(1) : deleted.src);
         items.splice(index, 1);
         await putManifest(env.ASSETS, GALLERY_KEY, items);
       }
@@ -293,6 +295,8 @@ export default {
       const index = Number(form.get("index"));
       const items = await getManifest<Achiever>(env.ASSETS, HALL_OF_FAME_KEY);
       if (Number.isInteger(index) && index >= 0 && index < items.length) {
+        const deleted = items[index];
+        await env.ASSETS.delete(deleted.image.startsWith("/") ? deleted.image.slice(1) : deleted.image);
         items.splice(index, 1);
         await putManifest(env.ASSETS, HALL_OF_FAME_KEY, items);
       }
