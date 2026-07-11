@@ -44,7 +44,7 @@ function clearSessionCookie(): string {
   return "admin_session=; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=0";
 }
 
-function loginPage(): string {
+function loginPage(showError = false): string {
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -55,6 +55,7 @@ function loginPage(): string {
   body { font-family: system-ui, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; background: #f5f5f5; margin: 0; }
   .login-box { background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); width: 100%; max-width: 340px; }
   h1 { font-size: 1.3rem; margin: 0 0 1.5rem 0; text-align: center; }
+  .error { background: #fee; border: 1px solid #fcc; color: #c00; padding: .75rem; border-radius: 6px; margin-bottom: 1rem; font-size: .9rem; text-align: center; }
   label { display: block; margin-bottom: .3rem; font-weight: 500; font-size: .9rem; }
   input { width: 100%; padding: .5rem; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; box-sizing: border-box; margin-bottom: 1rem; }
   button { width: 100%; padding: .6rem; background: #111; color: white; border: none; border-radius: 6px; font-size: 1rem; cursor: pointer; font-weight: 500; }
@@ -64,6 +65,7 @@ function loginPage(): string {
 <body>
   <div class="login-box">
     <h1>Rofsan Sir Admin</h1>
+    ${showError ? '<div class="error">Invalid username or password</div>' : ""}
     <form method="post" action="/login">
       <label>Username <input type="text" name="username" required autofocus /></label>
       <label>Password <input type="password" name="password" required /></label>
@@ -199,7 +201,7 @@ export default {
         });
       }
 
-      return new Response(loginPage(), {
+      return new Response(loginPage(true), {
         status: 401,
         headers: {
           "content-type": "text/html; charset=utf-8",
