@@ -10,6 +10,8 @@ import {
 
 export interface Env {
   ASSETS: R2Bucket;
+  ADMIN_USERNAME: string;
+  ADMIN_PASSWORD: string;
 }
 
 const CDN_BASE = "https://cdn.rofsansir.com";
@@ -20,6 +22,56 @@ function escapeHtml(s: string): string {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
+}
+
+function getCookie(request: Request, name: string): string | null {
+  const cookie = request.headers.get("cookie");
+  if (!cookie) return null;
+  const match = cookie.split("; ").find((c) => c.startsWith(`${name}=`));
+  return match ? match.split("=")[1] : null;
+}
+
+function isAuthenticated(request: Request): boolean {
+  const session = getCookie(request, "admin_session");
+  return session === "true";
+}
+
+function setSessionCookie(): string {
+  return "admin_session=true; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=2592000";
+}
+
+function clearSessionCookie(): string {
+  return "admin_session=; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=0";
+}
+
+function loginPage(): string {
+  return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rofsan Sir - Admin Login</title>
+<style>
+  body { font-family: system-ui, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; background: #f5f5f5; margin: 0; }
+  .login-box { background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); width: 100%; max-width: 340px; }
+  h1 { font-size: 1.3rem; margin: 0 0 1.5rem 0; text-align: center; }
+  label { display: block; margin-bottom: .3rem; font-weight: 500; font-size: .9rem; }
+  input { width: 100%; padding: .5rem; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; box-sizing: border-box; margin-bottom: 1rem; }
+  button { width: 100%; padding: .6rem; background: #111; color: white; border: none; border-radius: 6px; font-size: 1rem; cursor: pointer; font-weight: 500; }
+  button:hover { background: #333; }
+</style>
+</head>
+<body>
+  <div class="login-box">
+    <h1>Rofsan Sir Admin</h1>
+    <form method="post" action="/login">
+      <label>Username <input type="text" name="username" required autofocus /></label>
+      <label>Password <input type="password" name="password" required /></label>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</body>
+</html>`;
 }
 
 function page(gallery: GalleryItem[], achievers: Achiever[]): string {
@@ -75,6 +127,9 @@ function page(gallery: GalleryItem[], achievers: Achiever[]): string {
 </style>
 </head>
 <body>
+  <div style="text-align: right; margin-bottom: 1.5rem;">
+    <a href="/logout" style="color: #666; text-decoration: none; font-size: .9rem;">Logout</a>
+  </div>
   <h1>Rofsan Sir - Content Admin</h1>
   <p>Edit Gallery and Hall of Fame photos. Changes appear on the site within ~5 minutes.</p>
 
@@ -125,6 +180,47 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
     const { pathname } = url;
+
+    if (pathname === "/login" && request.method === "GET") {
+      return new Response(loginPage(), {
+        headers: { "content-type": "text/html; charset=utf-8" },
+      });
+    }
+
+    if (pathname === "/login" && request.method === "POST") {
+      const form = await request.formData();
+      const username = String(form.get("username") ?? "");
+      const password = String(form.get("password") ?? "");
+
+      if (username === env.ADMIN_USERNAME && password === env.ADMIN_PASSWORD) {
+        return new Response(null, {
+          status: 303,
+          headers: { Location: "/", "Set-Cookie": setSessionCookie() },
+        });
+      }
+
+      return new Response(loginPage(), {
+        status: 401,
+        headers: {
+          "content-type": "text/html; charset=utf-8",
+          "Set-Cookie": clearSessionCookie(),
+        },
+      });
+    }
+
+    if (pathname === "/logout" && request.method === "GET") {
+      return new Response(null, {
+        status: 303,
+        headers: { Location: "/login", "Set-Cookie": clearSessionCookie() },
+      });
+    }
+
+    if (!isAuthenticated(request)) {
+      return new Response(null, {
+        status: 303,
+        headers: { Location: "/login" },
+      });
+    }
 
     if (request.method === "GET" && pathname === "/") {
       const [gallery, achievers] = await Promise.all([
