@@ -1,55 +1,61 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { motion } from "motion/react";
 import { Play } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
 import { cn } from "@/lib/cn";
 import { videoThumb, type Video } from "@/data/videos";
 
-/** Inline YouTube player - clicking a thumbnail swaps the featured embed instead of leaving the site. */
+/**
+ * Inline YouTube player - hidden until a thumbnail is clicked, then animates
+ * in above the grid and autoplays instead of leaving the site.
+ */
 export function VideoPlayer({ videos }: { videos: Video[] }) {
-  const [active, setActive] = useState<Video | undefined>(videos[0]);
-  const [autoplay, setAutoplay] = useState(false);
+  const [active, setActive] = useState<Video | undefined>(undefined);
   const playerRef = useRef<HTMLDivElement>(null);
 
-  function play(v: Video) {
-    setActive(v);
-    setAutoplay(true);
-    playerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
-  if (!active) return null;
+  useEffect(() => {
+    if (active) {
+      playerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [active]);
 
   return (
     <>
-      <div
-        ref={playerRef}
-        className="relative mx-auto max-w-4xl overflow-hidden rounded-[2rem] border-4 border-paper bg-ink shadow-luxe"
-      >
-        <div className="aspect-video w-full">
-          <iframe
-            key={active.id}
-            className="h-full w-full"
-            src={`https://www.youtube-nocookie.com/embed/${active.videoId}?rel=0${autoplay ? "&autoplay=1" : ""}`}
-            title={active.title}
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            referrerPolicy="strict-origin-when-cross-origin"
-          />
-        </div>
-      </div>
+      {active && (
+        <motion.div
+          ref={playerRef}
+          initial={{ opacity: 0, y: -32, scale: 0.96 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          className="relative mx-auto mb-10 max-w-4xl overflow-hidden rounded-[2rem] border-4 border-paper bg-ink shadow-luxe"
+        >
+          <div className="aspect-video w-full">
+            <iframe
+              key={active.id}
+              className="h-full w-full"
+              src={`https://www.youtube-nocookie.com/embed/${active.videoId}?rel=0&autoplay=1`}
+              title={active.title}
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              referrerPolicy="strict-origin-when-cross-origin"
+            />
+          </div>
+        </motion.div>
+      )}
 
-      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {videos.map((v, i) => (
           <Reveal key={v.id} delay={(i % 3) * 0.06}>
             <button
               type="button"
-              onClick={() => play(v)}
+              onClick={() => setActive(v)}
               className={cn(
                 "group block w-full overflow-hidden rounded-[1.5rem] border bg-paper/70 text-left shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-card",
-                active.id === v.id ? "border-marigold" : "border-ink/10",
+                active?.id === v.id ? "border-marigold" : "border-ink/10",
               )}
             >
               <div className="relative aspect-video w-full overflow-hidden bg-ink">
@@ -68,7 +74,7 @@ export function VideoPlayer({ videos }: { videos: Video[] }) {
                 <span className="absolute right-2 top-2 rounded-full bg-ink/80 px-2 py-0.5 text-[10px] font-semibold text-cream backdrop-blur">
                   {v.duration}
                 </span>
-                {active.id === v.id && (
+                {active?.id === v.id && (
                   <span className="absolute left-2 top-2 rounded-full bg-marigold px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-ink">
                     Now playing
                   </span>
