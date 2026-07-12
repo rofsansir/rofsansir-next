@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/ui/page-hero";
-import { Container, SectionHeading, ShimmerText } from "@/components/ui/primitives";
+import { Container } from "@/components/ui/primitives";
 import { VideoPlayer } from "@/components/videos/video-player";
 import { videoThumb } from "@/data/videos";
 import { getVideos } from "@/lib/remote-content";
@@ -47,26 +46,10 @@ export default async function VideoPage() {
         />
       )}
 
-      <PageHero
-        eyebrow="Watch & Learn"
-        title={
-          <>
-            Examiner tip <ShimmerText>videos</ShimmerText>
-          </>
-        }
-        subtitle="Step behind the marking scheme. Watch Rofsan Sir break down papers, strategy and the mistakes that cost grades."
-      />
-
-      <section className="px-4 py-12 md:py-16">
+      <section className="px-4 pb-16 pt-28 md:pt-36">
         <Container>
-          <SectionHeading
-            eyebrow="Watch"
-            title="All examiner video lessons"
-            description="Paper-by-paper strategy, comprehension technique and exam-day tips."
-          />
-          <div className="mt-10">
-            <VideoPlayer videos={videos} />
-          </div>
+          <h1 className="sr-only">Examiner Tip Videos</h1>
+          <VideoPlayer videos={videos} />
         </Container>
       </section>
     </>
