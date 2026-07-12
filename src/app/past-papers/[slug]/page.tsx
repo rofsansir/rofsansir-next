@@ -5,15 +5,12 @@ import { ArrowRight, ChevronRight, Download, FileText } from "lucide-react";
 import { Container, Eyebrow } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
-import {
-  formatBytes,
-  getPaper,
-  pastPapers,
-  relatedByYear,
-} from "@/data/past-papers";
+import { formatBytes, getPaper, relatedByYear } from "@/data/past-papers";
+import { getPastPapers } from "@/lib/remote-content";
 import { site } from "@/lib/site";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const pastPapers = await getPastPapers();
   return pastPapers.map((p) => ({ slug: p.slug }));
 }
 
@@ -23,7 +20,8 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const paper = getPaper(slug);
+  const pastPapers = await getPastPapers();
+  const paper = getPaper(pastPapers, slug);
   if (!paper) return { title: "Not found" };
 
   const title = `${paper.title} (${paper.paperType})`;
@@ -46,10 +44,11 @@ export default async function PastPaperDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const paper = getPaper(slug);
+  const pastPapers = await getPastPapers();
+  const paper = getPaper(pastPapers, slug);
   if (!paper) notFound();
 
-  const related = relatedByYear(paper);
+  const related = relatedByYear(pastPapers, paper);
 
   const jsonLd = {
     "@context": "https://schema.org",

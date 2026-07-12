@@ -16,6 +16,42 @@ export type Achiever = {
 export const GALLERY_KEY = "assets/data/gallery.json";
 export const HALL_OF_FAME_KEY = "assets/data/hall-of-fame.json";
 
+export type VideoItem = {
+  id: string;
+  videoId: string;
+  title: string;
+  duration: string;
+  category: string;
+};
+
+export const VIDEOS_KEY = "assets/data/videos.json";
+
+export type PastPaperItem = {
+  id: number;
+  title: string;
+  slug: string;
+  year: number;
+  session: string | null;
+  paperType: string;
+  fileName: string;
+  filePath: string;
+  fileSize: number;
+  description: string;
+  metaKeywords: string;
+  downloadCount: number;
+  viewCount: number;
+  isActive: number;
+};
+
+export const PAST_PAPERS_KEY = "assets/data/past-papers.json";
+
+export function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 export async function getManifest<T>(bucket: R2Bucket, key: string): Promise<T[]> {
   const obj = await bucket.get(key);
   if (!obj) return [];

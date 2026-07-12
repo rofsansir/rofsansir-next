@@ -12,6 +12,9 @@ import {
   type Achiever,
   type GalleryItem,
 } from "@/data/home";
+import { fallbackVideos, type Video } from "@/data/videos";
+import rawFallbackPastPapers from "@/data/past-papers.json";
+import type { PastPaper } from "@/data/past-papers";
 
 const REVALIDATE_SECONDS = 300;
 
@@ -37,4 +40,21 @@ export async function getAchievers(): Promise<Achiever[]> {
   const remote = await fetchManifest<Achiever[]>("assets/data/hall-of-fame.json");
   const items = Array.isArray(remote) && remote.length > 0 ? remote : fallbackAchievers;
   return items.map((item) => ({ ...item, image: assetUrl(item.image) }));
+}
+
+export async function getVideos(): Promise<Video[]> {
+  const remote = await fetchManifest<Video[]>("assets/data/videos.json");
+  return Array.isArray(remote) && remote.length > 0 ? remote : fallbackVideos;
+}
+
+export async function getPastPapers(): Promise<PastPaper[]> {
+  const remote = await fetchManifest<PastPaper[]>("assets/data/past-papers.json");
+  const raw =
+    Array.isArray(remote) && remote.length > 0
+      ? remote
+      : (rawFallbackPastPapers as PastPaper[]);
+  return raw
+    .filter((p) => p.isActive === 1)
+    .map((p) => ({ ...p, url: assetUrl(p.filePath) }))
+    .sort((a, b) => b.year - a.year || a.paperType.localeCompare(b.paperType));
 }

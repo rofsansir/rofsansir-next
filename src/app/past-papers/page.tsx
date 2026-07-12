@@ -3,7 +3,8 @@ import { FileStack } from "lucide-react";
 import { PageHero } from "@/components/ui/page-hero";
 import { Container, ShimmerText } from "@/components/ui/primitives";
 import { PastPaperBrowser } from "@/components/past-papers/browser";
-import { pastPapers, years } from "@/data/past-papers";
+import { getYears } from "@/data/past-papers";
+import { getPastPapers } from "@/lib/remote-content";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -19,7 +20,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function PastPapersPage() {
+export default async function PastPapersPage() {
+  const pastPapers = await getPastPapers();
+  const years = getYears(pastPapers);
   const minYear = Math.min(...years);
   const maxYear = Math.max(...years);
 
@@ -48,7 +51,7 @@ export default function PastPapersPage() {
             </span>
           </div>
 
-          <PastPaperBrowser papers={pastPapers} />
+          <PastPaperBrowser papers={pastPapers} years={years} />
         </Container>
       </section>
     </>

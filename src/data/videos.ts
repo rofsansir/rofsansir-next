@@ -8,7 +8,11 @@ export type Video = {
   category: string;
 };
 
-export const videos: Video[] = [
+/**
+ * Fallback data, used when the R2-hosted manifest (assets/data/videos.json)
+ * is unreachable or empty - see src/lib/remote-content.ts.
+ */
+export const fallbackVideos: Video[] = [
   {
     id: "1",
     videoId: "n4pKaLL-fyE",

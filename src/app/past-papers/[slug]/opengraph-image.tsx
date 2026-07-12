@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 import { OG_CONTENT_TYPE, OG_SIZE, ogCard } from "@/lib/og";
 import { getPaper } from "@/data/past-papers";
+import { getPastPapers } from "@/lib/remote-content";
 
 export const alt = "O Level Bengali past paper (CAIE 3204)";
 export const size = OG_SIZE;
@@ -12,7 +13,8 @@ export default async function Image({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const paper = getPaper(slug);
+  const pastPapers = await getPastPapers();
+  const paper = getPaper(pastPapers, slug);
   return new ImageResponse(
     ogCard({
       eyebrow: paper ? `CAIE 3204 · ${paper.year}` : "CAIE 3204",

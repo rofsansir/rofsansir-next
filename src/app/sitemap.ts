@@ -2,13 +2,14 @@ import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 import { books } from "@/data/books";
 import { articles } from "@/data/tip-articles";
-import { pastPapers } from "@/data/past-papers";
+import { getPastPapers } from "@/lib/remote-content";
 
 /**
  * Auto sitemap. Static routes + past-paper detail pages (SSG via
  * generateStaticParams). Book/tip detail pages appended as those land.
  */
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const pastPapers = await getPastPapers();
   const now = new Date();
   const staticRoutes = [
     "/",
@@ -16,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/courses",
     "/books",
     "/examiner-tips",
+    "/video",
     "/resources",
     "/faq",
     "/past-papers",

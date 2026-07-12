@@ -1,11 +1,16 @@
 import {
   GALLERY_KEY,
   HALL_OF_FAME_KEY,
+  PAST_PAPERS_KEY,
+  VIDEOS_KEY,
   getManifest,
   putManifest,
   sanitizeFilename,
+  slugify,
   type Achiever,
   type GalleryItem,
+  type PastPaperItem,
+  type VideoItem,
 } from "./manifest";
 
 export interface Env {
@@ -15,6 +20,16 @@ export interface Env {
 }
 
 const CDN_BASE = "https://cdn.rofsansir.com";
+
+const videoThumb = (videoId: string) =>
+  `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+
+function formatBytes(bytes: number): string {
+  if (!bytes) return "";
+  const mb = bytes / (1024 * 1024);
+  if (mb >= 1) return `${mb.toFixed(1)} MB`;
+  return `${Math.round(bytes / 1024)} KB`;
+}
 
 function escapeHtml(s: string): string {
   return s
@@ -76,7 +91,12 @@ function loginPage(showError = false): string {
 </html>`;
 }
 
-function page(gallery: GalleryItem[], achievers: Achiever[]): string {
+function page(
+  gallery: GalleryItem[],
+  achievers: Achiever[],
+  videos: VideoItem[],
+  pastPapers: PastPaperItem[],
+): string {
   const galleryRows = gallery
     .map(
       (g, i) => `
@@ -107,6 +127,55 @@ function page(gallery: GalleryItem[], achievers: Achiever[]): string {
     )
     .join("");
 
+  const videoRows = videos
+    .map(
+      (v, i) => `
+        <div class="row">
+          <img src="${escapeHtml(videoThumb(v.videoId))}" alt="" />
+          <div class="meta"><strong>${escapeHtml(v.title)}</strong> - ${escapeHtml(v.category)} - ${escapeHtml(v.duration)}</div>
+          ${moveButtons("videos", i, videos.length)}
+          <form method="post" action="/api/videos/delete" class="inline">
+            <input type="hidden" name="index" value="${i}" />
+            <button type="submit" class="danger">Delete</button>
+          </form>
+        </div>`,
+    )
+    .join("");
+
+  const papersByYear = new Map<number, PastPaperItem[]>();
+  pastPapers.forEach((p) => {
+    const list = papersByYear.get(p.year) ?? [];
+    list.push(p);
+    papersByYear.set(p.year, list);
+  });
+  const paperYears = [...papersByYear.keys()].sort((a, b) => b - a);
+
+  const paperSections = paperYears
+    .map((year) => {
+      const rows = (papersByYear.get(year) ?? [])
+        .map((p) => {
+          const index = pastPapers.indexOf(p);
+          return `
+        <div class="row">
+          <div class="meta">
+            <strong>${escapeHtml(p.title)}</strong> - ${escapeHtml(p.paperType)}${p.session ? ` - ${escapeHtml(p.session)}` : ""} - ${formatBytes(p.fileSize)}
+            ${p.isActive ? "" : '<span style="color:#b91c1c;font-weight:600;"> (inactive)</span>'}
+          </div>
+          <form method="post" action="/api/past-papers/toggle" class="inline">
+            <input type="hidden" name="index" value="${index}" />
+            <button type="submit">${p.isActive ? "Deactivate" : "Activate"}</button>
+          </form>
+          <form method="post" action="/api/past-papers/delete" class="inline">
+            <input type="hidden" name="index" value="${index}" />
+            <button type="submit" class="danger">Delete</button>
+          </form>
+        </div>`;
+        })
+        .join("");
+      return `<h3>${year}</h3>${rows}`;
+    })
+    .join("");
+
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -117,6 +186,7 @@ function page(gallery: GalleryItem[], achievers: Achiever[]): string {
   body { font-family: system-ui, sans-serif; max-width: 860px; margin: 2rem auto; padding: 0 1rem; color: #222; }
   h1 { font-size: 1.4rem; }
   h2 { margin-top: 2.5rem; border-bottom: 1px solid #ddd; padding-bottom: .5rem; }
+  h3 { margin-top: 1.5rem; font-size: 1rem; color: #555; }
   .row { display: flex; align-items: center; gap: .75rem; padding: .5rem 0; border-bottom: 1px solid #eee; }
   .row img { width: 56px; height: 56px; object-fit: cover; border-radius: 6px; flex-shrink: 0; }
   .meta { flex: 1; font-size: .9rem; }
@@ -124,7 +194,7 @@ function page(gallery: GalleryItem[], achievers: Achiever[]): string {
   button { cursor: pointer; border: 1px solid #ccc; background: #fff; border-radius: 6px; padding: .3rem .6rem; font-size: .85rem; }
   button.danger { color: #b91c1c; border-color: #f3c5c5; }
   form.add { margin-top: 1rem; padding: 1rem; background: #f7f7f7; border-radius: 10px; display: grid; gap: .5rem; max-width: 420px; }
-  form.add input[type="text"], form.add input[type="file"] { padding: .4rem; border: 1px solid #ccc; border-radius: 6px; }
+  form.add input[type="text"], form.add input[type="file"], form.add input[type="number"], form.add select, form.add textarea { padding: .4rem; border: 1px solid #ccc; border-radius: 6px; font: inherit; }
   form.add button { background: #111; color: #fff; border: none; padding: .5rem; }
 </style>
 </head>
@@ -151,6 +221,36 @@ function page(gallery: GalleryItem[], achievers: Achiever[]): string {
     <label>Meta (e.g. "O Level - 2025") <input type="text" name="meta" required /></label>
     <label>Grade (e.g. "A*") <input type="text" name="grade" required /></label>
     <button type="submit">Add to Hall of Fame</button>
+  </form>
+
+  <h2>Videos</h2>
+  ${videoRows || "<p>No videos yet.</p>"}
+  <form class="add" method="post" action="/api/videos/add">
+    <label>YouTube Video ID (e.g. n4pKaLL-fyE) <input type="text" name="videoId" required /></label>
+    <label>Title <input type="text" name="title" required /></label>
+    <label>Duration (e.g. "5:40") <input type="text" name="duration" required /></label>
+    <label>Category (e.g. "Paper 1") <input type="text" name="category" required /></label>
+    <button type="submit">Add Video</button>
+  </form>
+
+  <h2>Past Papers</h2>
+  ${paperSections || "<p>No papers yet.</p>"}
+  <form class="add" method="post" action="/api/past-papers/add" enctype="multipart/form-data">
+    <label>PDF <input type="file" name="file" accept="application/pdf" required /></label>
+    <label>Title <input type="text" name="title" required /></label>
+    <label>Year <input type="number" name="year" required /></label>
+    <label>Session (e.g. "May/June", optional) <input type="text" name="session" /></label>
+    <label>Paper Type
+      <select name="paperType" required>
+        <option>Paper 1</option>
+        <option>Paper 2</option>
+        <option>Mark Scheme</option>
+        <option>General</option>
+      </select>
+    </label>
+    <label>Description <textarea name="description" rows="2" required></textarea></label>
+    <label>Meta keywords <input type="text" name="metaKeywords" /></label>
+    <button type="submit">Add Past Paper</button>
   </form>
 </body>
 </html>`;
@@ -225,11 +325,13 @@ export default {
     }
 
     if (request.method === "GET" && pathname === "/") {
-      const [gallery, achievers] = await Promise.all([
+      const [gallery, achievers, videos, pastPapers] = await Promise.all([
         getManifest<GalleryItem>(env.ASSETS, GALLERY_KEY),
         getManifest<Achiever>(env.ASSETS, HALL_OF_FAME_KEY),
+        getManifest<VideoItem>(env.ASSETS, VIDEOS_KEY),
+        getManifest<PastPaperItem>(env.ASSETS, PAST_PAPERS_KEY),
       ]);
-      return new Response(page(gallery, achievers), {
+      return new Response(page(gallery, achievers, videos, pastPapers), {
         headers: { "content-type": "text/html; charset=utf-8" },
       });
     }
@@ -309,6 +411,107 @@ export default {
       const direction = String(form.get("direction") ?? "");
       const items = await getManifest<Achiever>(env.ASSETS, HALL_OF_FAME_KEY);
       await putManifest(env.ASSETS, HALL_OF_FAME_KEY, move(items, index, direction));
+      return redirectHome();
+    }
+
+    if (request.method === "POST" && pathname === "/api/videos/add") {
+      const form = await request.formData();
+      const videoId = String(form.get("videoId") ?? "").trim();
+      const title = String(form.get("title") ?? "").trim();
+      const duration = String(form.get("duration") ?? "").trim();
+      const category = String(form.get("category") ?? "").trim();
+      if (!videoId || !title || !duration || !category) {
+        return new Response("Missing required field", { status: 400 });
+      }
+      const items = await getManifest<VideoItem>(env.ASSETS, VIDEOS_KEY);
+      const nextId = items.reduce((max, v) => Math.max(max, Number(v.id) || 0), 0) + 1;
+      items.push({ id: String(nextId), videoId, title, duration, category });
+      await putManifest(env.ASSETS, VIDEOS_KEY, items);
+      return redirectHome();
+    }
+
+    if (request.method === "POST" && pathname === "/api/videos/delete") {
+      const form = await request.formData();
+      const index = Number(form.get("index"));
+      const items = await getManifest<VideoItem>(env.ASSETS, VIDEOS_KEY);
+      if (Number.isInteger(index) && index >= 0 && index < items.length) {
+        items.splice(index, 1);
+        await putManifest(env.ASSETS, VIDEOS_KEY, items);
+      }
+      return redirectHome();
+    }
+
+    if (request.method === "POST" && pathname === "/api/videos/move") {
+      const form = await request.formData();
+      const index = Number(form.get("index"));
+      const direction = String(form.get("direction") ?? "");
+      const items = await getManifest<VideoItem>(env.ASSETS, VIDEOS_KEY);
+      await putManifest(env.ASSETS, VIDEOS_KEY, move(items, index, direction));
+      return redirectHome();
+    }
+
+    if (request.method === "POST" && pathname === "/api/past-papers/add") {
+      const form = await request.formData();
+      const file = form.get("file");
+      const title = String(form.get("title") ?? "").trim();
+      const year = Number(form.get("year"));
+      const session = String(form.get("session") ?? "").trim() || null;
+      const paperType = String(form.get("paperType") ?? "").trim();
+      const description = String(form.get("description") ?? "").trim();
+      const metaKeywords = String(form.get("metaKeywords") ?? "").trim();
+      if (!(file instanceof File) || !title || !year || !paperType || !description) {
+        return new Response("Missing required field", { status: 400 });
+      }
+      const items = await getManifest<PastPaperItem>(env.ASSETS, PAST_PAPERS_KEY);
+      const fileName = sanitizeFilename(file.name);
+      const filePath = `assets/past-paper/${year}/${fileName}`;
+      await env.ASSETS.put(filePath, await file.arrayBuffer(), {
+        httpMetadata: { contentType: file.type || "application/pdf" },
+      });
+      const nextId = items.reduce((max, p) => Math.max(max, p.id), 0) + 1;
+      const baseSlug = slugify(`${title}-${year}-${paperType}`);
+      const slug = items.some((p) => p.slug === baseSlug) ? `${baseSlug}-${nextId}` : baseSlug;
+      items.push({
+        id: nextId,
+        title,
+        slug,
+        year,
+        session,
+        paperType,
+        fileName,
+        filePath: `/${filePath}`,
+        fileSize: file.size,
+        description,
+        metaKeywords,
+        downloadCount: 0,
+        viewCount: 0,
+        isActive: 1,
+      });
+      await putManifest(env.ASSETS, PAST_PAPERS_KEY, items);
+      return redirectHome();
+    }
+
+    if (request.method === "POST" && pathname === "/api/past-papers/toggle") {
+      const form = await request.formData();
+      const index = Number(form.get("index"));
+      const items = await getManifest<PastPaperItem>(env.ASSETS, PAST_PAPERS_KEY);
+      if (Number.isInteger(index) && index >= 0 && index < items.length) {
+        items[index].isActive = items[index].isActive ? 0 : 1;
+        await putManifest(env.ASSETS, PAST_PAPERS_KEY, items);
+      }
+      return redirectHome();
+    }
+
+    if (request.method === "POST" && pathname === "/api/past-papers/delete") {
+      const form = await request.formData();
+      const index = Number(form.get("index"));
+      const items = await getManifest<PastPaperItem>(env.ASSETS, PAST_PAPERS_KEY);
+      if (Number.isInteger(index) && index >= 0 && index < items.length) {
+        const deleted = items[index];
+        await env.ASSETS.delete(deleted.filePath.startsWith("/") ? deleted.filePath.slice(1) : deleted.filePath);
+        items.splice(index, 1);
+        await putManifest(env.ASSETS, PAST_PAPERS_KEY, items);
+      }
       return redirectHome();
     }
 

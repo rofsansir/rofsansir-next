@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Download, FileText, Search } from "lucide-react";
 import { cn } from "@/lib/cn";
-import { formatBytes, paperTypes, type PastPaper, years } from "@/data/past-papers";
+import { formatBytes, paperTypes, type PastPaper } from "@/data/past-papers";
 
 const typeTone: Record<string, string> = {
   "Paper 1": "bg-marigold/15 text-marigold-deep",
@@ -13,7 +13,13 @@ const typeTone: Record<string, string> = {
   General: "bg-ink/5 text-muted",
 };
 
-export function PastPaperBrowser({ papers }: { papers: PastPaper[] }) {
+export function PastPaperBrowser({
+  papers,
+  years,
+}: {
+  papers: PastPaper[];
+  years: number[];
+}) {
   const [year, setYear] = useState<number | "all">("all");
   const [type, setType] = useState<string>("all");
   const [q, setQ] = useState("");
