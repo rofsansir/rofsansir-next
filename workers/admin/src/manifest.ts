@@ -45,6 +45,20 @@ export type PastPaperItem = {
 
 export const PAST_PAPERS_KEY = "assets/data/past-papers.json";
 
+export type TipArticle = {
+  id: number;
+  slug: string;
+  title: string;
+  ogTitle: string;
+  subtitle: string;
+  category: string;
+  contentHtml: string;
+  thumb: string;
+  isActive: number;
+};
+
+export const TIPS_KEY = "assets/data/tips.json";
+
 export function slugify(text: string): string {
   return text
     .toLowerCase()

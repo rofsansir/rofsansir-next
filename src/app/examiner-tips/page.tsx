@@ -6,7 +6,7 @@ import { PageHero } from "@/components/ui/page-hero";
 import { Container, SectionHeading, ShimmerText } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
-import { articles } from "@/data/tip-articles";
+import { getTipArticles } from "@/lib/remote-content";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -22,7 +22,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ExaminerTipsPage() {
+export default async function ExaminerTipsPage() {
+  const articles = await getTipArticles();
+
   return (
     <>
       <PageHero

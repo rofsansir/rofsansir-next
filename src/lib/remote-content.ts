@@ -15,6 +15,8 @@ import {
 import { fallbackVideos, type Video } from "@/data/videos";
 import rawFallbackPastPapers from "@/data/past-papers.json";
 import type { PastPaper } from "@/data/past-papers";
+import { fallbackTipArticles, type TipArticle } from "@/data/tip-articles";
+import { estimateReadTime } from "@/lib/text";
 
 const REVALIDATE_SECONDS = 300;
 
@@ -57,4 +59,12 @@ export async function getPastPapers(): Promise<PastPaper[]> {
     .filter((p) => p.isActive === 1)
     .map((p) => ({ ...p, url: assetUrl(p.filePath) }))
     .sort((a, b) => b.year - a.year || a.paperType.localeCompare(b.paperType));
+}
+
+export async function getTipArticles(): Promise<(TipArticle & { readTime: string })[]> {
+  const remote = await fetchManifest<TipArticle[]>("assets/data/tips.json");
+  const raw = Array.isArray(remote) && remote.length > 0 ? remote : fallbackTipArticles;
+  return raw
+    .filter((a) => a.isActive === 1)
+    .map((a) => ({ ...a, thumb: assetUrl(a.thumb), readTime: estimateReadTime(a.contentHtml) }));
 }

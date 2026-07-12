@@ -1,8 +1,7 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 import { books } from "@/data/books";
-import { articles } from "@/data/tip-articles";
-import { getPastPapers } from "@/lib/remote-content";
+import { getPastPapers, getTipArticles } from "@/lib/remote-content";
 
 /**
  * Auto sitemap. Static routes + past-paper detail pages (SSG via
@@ -10,6 +9,7 @@ import { getPastPapers } from "@/lib/remote-content";
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const pastPapers = await getPastPapers();
+  const articles = await getTipArticles();
   const now = new Date();
   const staticRoutes = [
     "/",

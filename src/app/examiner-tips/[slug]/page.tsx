@@ -6,10 +6,14 @@ import { ArrowRight, ChevronRight, Clock } from "lucide-react";
 import { Container, Eyebrow } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
-import { articles, getArticle, relatedArticles } from "@/data/tip-articles";
+import { getArticle, relatedArticles } from "@/data/tip-articles";
+import { getTipArticles } from "@/lib/remote-content";
+import { sanitizeHtml } from "@/lib/sanitize-html";
+import { stripHtml } from "@/lib/text";
 import { site } from "@/lib/site";
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const articles = await getTipArticles();
   return articles.map((a) => ({ slug: a.slug }));
 }
 
@@ -19,10 +23,11 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const article = getArticle(slug);
+  const articles = await getTipArticles();
+  const article = getArticle(articles, slug);
   if (!article) return { title: "Not found" };
   const description =
-    article.subtitle || article.content[0]?.slice(0, 155) || article.title;
+    article.subtitle || stripHtml(article.contentHtml).slice(0, 155) || article.title;
   return {
     title: article.title,
     description,
@@ -42,10 +47,11 @@ export default async function TipArticlePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const article = getArticle(slug);
+  const articles = await getTipArticles();
+  const article = getArticle(articles, slug);
   if (!article) notFound();
 
-  const related = relatedArticles(article);
+  const related = relatedArticles(articles, article);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -134,16 +140,10 @@ export default async function TipArticlePage({
 
       <section className="px-4 pb-14 md:pb-20">
         <Container className="max-w-3xl">
-          <div className="flex flex-col gap-5">
-            {article.content.map((p, i) => (
-              <p
-                key={i}
-                className="text-[1.02rem] leading-[1.85] text-ink/85"
-              >
-                {p}
-              </p>
-            ))}
-          </div>
+          <div
+            className="tips-content flex flex-col gap-5 text-[1.02rem] leading-[1.85] text-ink/85"
+            dangerouslySetInnerHTML={{ __html: sanitizeHtml(article.contentHtml) }}
+          />
 
           <div className="mt-10 rounded-[1.5rem] border border-ink/10 bg-paper/70 p-6 text-center">
             <p className="font-display text-lg font-bold text-ink">

@@ -2,6 +2,7 @@ import {
   GALLERY_KEY,
   HALL_OF_FAME_KEY,
   PAST_PAPERS_KEY,
+  TIPS_KEY,
   VIDEOS_KEY,
   getManifest,
   putManifest,
@@ -10,8 +11,10 @@ import {
   type Achiever,
   type GalleryItem,
   type PastPaperItem,
+  type TipArticle,
   type VideoItem,
 } from "./manifest";
+import { sanitizeHtml } from "./sanitize";
 
 export interface Env {
   ASSETS: R2Bucket;
@@ -91,11 +94,82 @@ function loginPage(showError = false): string {
 </html>`;
 }
 
+/** Shared styles for the rich-text (contenteditable) editor used by tips. */
+function richTextStyles(): string {
+  return `
+  .rte { margin-bottom: 1rem; }
+  .rte-toolbar { display: flex; flex-wrap: wrap; gap: .25rem; margin-bottom: .4rem; }
+  .rte-toolbar button { padding: .3rem .55rem; font-size: .85rem; }
+  .rte-editor { min-height: 180px; border: 1px solid #ccc; border-radius: 6px; padding: .6rem .7rem; font: inherit; line-height: 1.6; background: #fff; }
+  .rte-editor:focus { outline: 2px solid #111; outline-offset: 1px; }
+  .rte-editor ul, .rte-editor ol { padding-left: 1.4rem; }
+  `;
+}
+
+/** Wires up every `.rte` block: toolbar buttons + syncing innerHTML into the hidden textarea that actually submits. */
+function richTextScript(): string {
+  return `
+  document.querySelectorAll(".rte").forEach(function (rte) {
+    var editor = rte.querySelector(".rte-editor");
+    var hidden = rte.querySelector(".rte-hidden");
+    hidden.value = editor.innerHTML;
+    editor.addEventListener("input", function () {
+      hidden.value = editor.innerHTML;
+    });
+    rte.querySelectorAll(".rte-toolbar button").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        editor.focus();
+        var cmd = btn.getAttribute("data-cmd");
+        var value = btn.getAttribute("data-value") || undefined;
+        if (cmd === "createLink") {
+          var url = window.prompt("Link URL (https://...)");
+          if (!url) return;
+          value = url;
+        }
+        document.execCommand(cmd, false, value);
+        hidden.value = editor.innerHTML;
+      });
+    });
+    var form = rte.closest("form");
+    if (form) {
+      form.addEventListener("submit", function () {
+        hidden.value = editor.innerHTML;
+      });
+    }
+  });
+  `;
+}
+
+/** Rich-text editor markup for a `contentHtml` field, pre-filled with \`initialHtml\` when editing. */
+function richTextEditor(initialHtml = ""): string {
+  return `
+    <div class="rte">
+      <div class="rte-toolbar">
+        <button type="button" data-cmd="bold"><b>B</b></button>
+        <button type="button" data-cmd="italic"><i>I</i></button>
+        <button type="button" data-cmd="underline"><u>U</u></button>
+        <button type="button" data-cmd="formatBlock" data-value="H2">H2</button>
+        <button type="button" data-cmd="formatBlock" data-value="H3">H3</button>
+        <button type="button" data-cmd="formatBlock" data-value="P">¶</button>
+        <button type="button" data-cmd="insertUnorderedList">&bull; List</button>
+        <button type="button" data-cmd="insertOrderedList">1. List</button>
+        <button type="button" data-cmd="createLink">Link</button>
+      </div>
+      <div class="rte-editor" contenteditable="true">${initialHtml}</div>
+      <textarea name="contentHtml" class="rte-hidden" required style="display:none"></textarea>
+    </div>`;
+}
+
+function tipThumb(t: TipArticle): string {
+  return `${CDN_BASE}${t.thumb}`;
+}
+
 function page(
   gallery: GalleryItem[],
   achievers: Achiever[],
   videos: VideoItem[],
   pastPapers: PastPaperItem[],
+  tips: TipArticle[],
 ): string {
   const galleryRows = gallery
     .map(
@@ -176,6 +250,25 @@ function page(
     })
     .join("");
 
+  const tipRows = tips
+    .map(
+      (t, i) => `
+        <div class="row">
+          <img src="${tipThumb(t)}" alt="" />
+          <div class="meta">
+            <strong>${escapeHtml(t.title)}</strong> - ${escapeHtml(t.category)}
+            ${t.isActive ? "" : '<span style="color:#b91c1c;font-weight:600;"> (inactive)</span>'}
+          </div>
+          ${moveButtons("tips", i, tips.length)}
+          <a href="/api/tips/edit?index=${i}"><button type="button">Edit</button></a>
+          <form method="post" action="/api/tips/delete" class="inline">
+            <input type="hidden" name="index" value="${i}" />
+            <button type="submit" class="danger">Delete</button>
+          </form>
+        </div>`,
+    )
+    .join("");
+
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -194,8 +287,10 @@ function page(
   button { cursor: pointer; border: 1px solid #ccc; background: #fff; border-radius: 6px; padding: .3rem .6rem; font-size: .85rem; }
   button.danger { color: #b91c1c; border-color: #f3c5c5; }
   form.add { margin-top: 1rem; padding: 1rem; background: #f7f7f7; border-radius: 10px; display: grid; gap: .5rem; max-width: 420px; }
+  form.add.wide { max-width: 640px; }
   form.add input[type="text"], form.add input[type="file"], form.add input[type="number"], form.add select, form.add textarea { padding: .4rem; border: 1px solid #ccc; border-radius: 6px; font: inherit; }
   form.add button { background: #111; color: #fff; border: none; padding: .5rem; }
+  ${richTextStyles()}
 </style>
 </head>
 <body>
@@ -252,7 +347,22 @@ function page(
     <label>Meta keywords <input type="text" name="metaKeywords" /></label>
     <button type="submit">Add Past Paper</button>
   </form>
+
+  <h2>Examiner Tips</h2>
+  ${tipRows || "<p>No tips yet.</p>"}
+  <form class="add wide" method="post" action="/api/tips/add" enctype="multipart/form-data">
+    <label>Thumbnail <input type="file" name="file" accept="image/*" required /></label>
+    <label>Title <input type="text" name="title" required /></label>
+    <label>English title for social preview (only needed if the title above is Bengali) <input type="text" name="ogTitle" /></label>
+    <label>Subtitle <input type="text" name="subtitle" required /></label>
+    <label>Category (e.g. "Students", "Parents", "Paper 1") <input type="text" name="category" required /></label>
+    <label>Content
+      ${richTextEditor()}
+    </label>
+    <button type="submit">Add Tip</button>
+  </form>
 </body>
+<script>${richTextScript()}</script>
 </html>`;
 }
 
@@ -276,6 +386,45 @@ function move<T>(items: T[], index: number, direction: string): T[] {
   const copy = items.slice();
   [copy[index], copy[target]] = [copy[target], copy[index]];
   return copy;
+}
+
+function editTipPage(tip: TipArticle, index: number): string {
+  return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Edit Tip - Rofsan Sir Admin</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 700px; margin: 2rem auto; padding: 0 1rem; color: #222; }
+  h1 { font-size: 1.4rem; }
+  form { margin-top: 1rem; padding: 1rem; background: #f7f7f7; border-radius: 10px; display: grid; gap: .5rem; }
+  form input[type="text"], form input[type="file"], form textarea { padding: .4rem; border: 1px solid #ccc; border-radius: 6px; font: inherit; }
+  button { cursor: pointer; border: none; background: #111; color: #fff; border-radius: 6px; padding: .5rem; font-size: 1rem; }
+  a { color: #666; font-size: .9rem; }
+  ${richTextStyles()}
+</style>
+</head>
+<body>
+  <p><a href="/">&larr; Back</a></p>
+  <h1>Edit Tip</h1>
+  <form method="post" action="/api/tips/edit" enctype="multipart/form-data">
+    <input type="hidden" name="index" value="${index}" />
+    <label>Thumbnail (leave empty to keep current) <img src="${tipThumb(tip)}" alt="" style="height:40px;border-radius:6px;vertical-align:middle;margin-left:.5rem;" /><br />
+      <input type="file" name="file" accept="image/*" />
+    </label>
+    <label>Title <input type="text" name="title" value="${escapeHtml(tip.title)}" required /></label>
+    <label>English title for social preview (only needed if the title above is Bengali) <input type="text" name="ogTitle" value="${escapeHtml(tip.ogTitle)}" /></label>
+    <label>Subtitle <input type="text" name="subtitle" value="${escapeHtml(tip.subtitle)}" required /></label>
+    <label>Category <input type="text" name="category" value="${escapeHtml(tip.category)}" required /></label>
+    <label>Content
+      ${richTextEditor(tip.contentHtml)}
+    </label>
+    <button type="submit">Save Changes</button>
+  </form>
+</body>
+<script>${richTextScript()}</script>
+</html>`;
 }
 
 export default {
@@ -325,13 +474,14 @@ export default {
     }
 
     if (request.method === "GET" && pathname === "/") {
-      const [gallery, achievers, videos, pastPapers] = await Promise.all([
+      const [gallery, achievers, videos, pastPapers, tips] = await Promise.all([
         getManifest<GalleryItem>(env.ASSETS, GALLERY_KEY),
         getManifest<Achiever>(env.ASSETS, HALL_OF_FAME_KEY),
         getManifest<VideoItem>(env.ASSETS, VIDEOS_KEY),
         getManifest<PastPaperItem>(env.ASSETS, PAST_PAPERS_KEY),
+        getManifest<TipArticle>(env.ASSETS, TIPS_KEY),
       ]);
-      return new Response(page(gallery, achievers, videos, pastPapers), {
+      return new Response(page(gallery, achievers, videos, pastPapers, tips), {
         headers: { "content-type": "text/html; charset=utf-8" },
       });
     }
@@ -512,6 +662,103 @@ export default {
         items.splice(index, 1);
         await putManifest(env.ASSETS, PAST_PAPERS_KEY, items);
       }
+      return redirectHome();
+    }
+
+    if (request.method === "GET" && pathname === "/api/tips/edit") {
+      const index = Number(url.searchParams.get("index"));
+      const items = await getManifest<TipArticle>(env.ASSETS, TIPS_KEY);
+      if (!Number.isInteger(index) || index < 0 || index >= items.length) return redirectHome();
+      return new Response(editTipPage(items[index], index), {
+        headers: { "content-type": "text/html; charset=utf-8" },
+      });
+    }
+
+    if (request.method === "POST" && pathname === "/api/tips/add") {
+      const form = await request.formData();
+      const file = form.get("file");
+      const title = String(form.get("title") ?? "").trim();
+      const ogTitle = String(form.get("ogTitle") ?? "").trim();
+      const subtitle = String(form.get("subtitle") ?? "").trim();
+      const category = String(form.get("category") ?? "").trim();
+      const contentHtml = await sanitizeHtml(String(form.get("contentHtml") ?? ""));
+      if (!(file instanceof File) || !title || !subtitle || !category) {
+        return new Response("Missing required field", { status: 400 });
+      }
+      const items = await getManifest<TipArticle>(env.ASSETS, TIPS_KEY);
+      const key = `assets/tips/${sanitizeFilename(file.name)}`;
+      await env.ASSETS.put(key, await file.arrayBuffer(), {
+        httpMetadata: { contentType: file.type || "application/octet-stream" },
+      });
+      const nextId = items.reduce((max, t) => Math.max(max, t.id), 0) + 1;
+      const baseSlug = slugify(title);
+      const slug = items.some((t) => t.slug === baseSlug) ? `${baseSlug}-${nextId}` : baseSlug;
+      items.push({
+        id: nextId,
+        slug,
+        title,
+        ogTitle: ogTitle || title,
+        subtitle,
+        category,
+        contentHtml,
+        thumb: `/${key}`,
+        isActive: 1,
+      });
+      await putManifest(env.ASSETS, TIPS_KEY, items);
+      return redirectHome();
+    }
+
+    if (request.method === "POST" && pathname === "/api/tips/edit") {
+      const form = await request.formData();
+      const index = Number(form.get("index"));
+      const items = await getManifest<TipArticle>(env.ASSETS, TIPS_KEY);
+      if (!Number.isInteger(index) || index < 0 || index >= items.length) return redirectHome();
+
+      const file = form.get("file");
+      const title = String(form.get("title") ?? "").trim();
+      const ogTitle = String(form.get("ogTitle") ?? "").trim();
+      const subtitle = String(form.get("subtitle") ?? "").trim();
+      const category = String(form.get("category") ?? "").trim();
+      const contentHtml = await sanitizeHtml(String(form.get("contentHtml") ?? ""));
+      if (!title || !subtitle || !category) {
+        return new Response("Missing required field", { status: 400 });
+      }
+
+      const existing = items[index];
+      let thumb = existing.thumb;
+      if (file instanceof File && file.size > 0) {
+        const key = `assets/tips/${sanitizeFilename(file.name)}`;
+        await env.ASSETS.put(key, await file.arrayBuffer(), {
+          httpMetadata: { contentType: file.type || "application/octet-stream" },
+        });
+        thumb = `/${key}`;
+      }
+
+      // slug is never regenerated on edit - it's the article's public URL.
+      items[index] = { ...existing, title, ogTitle: ogTitle || title, subtitle, category, contentHtml, thumb };
+      await putManifest(env.ASSETS, TIPS_KEY, items);
+      return redirectHome();
+    }
+
+    if (request.method === "POST" && pathname === "/api/tips/delete") {
+      const form = await request.formData();
+      const index = Number(form.get("index"));
+      const items = await getManifest<TipArticle>(env.ASSETS, TIPS_KEY);
+      if (Number.isInteger(index) && index >= 0 && index < items.length) {
+        const deleted = items[index];
+        await env.ASSETS.delete(deleted.thumb.startsWith("/") ? deleted.thumb.slice(1) : deleted.thumb);
+        items.splice(index, 1);
+        await putManifest(env.ASSETS, TIPS_KEY, items);
+      }
+      return redirectHome();
+    }
+
+    if (request.method === "POST" && pathname === "/api/tips/move") {
+      const form = await request.formData();
+      const index = Number(form.get("index"));
+      const direction = String(form.get("direction") ?? "");
+      const items = await getManifest<TipArticle>(env.ASSETS, TIPS_KEY);
+      await putManifest(env.ASSETS, TIPS_KEY, move(items, index, direction));
       return redirectHome();
     }
 
