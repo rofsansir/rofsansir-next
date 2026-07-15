@@ -1,0 +1,63 @@
+# Pinned so the Compose project identity doesn't depend on DEPLOY_ROOT's
+# directory name (avoids container-name conflicts if the deploy path ever moves).
+name: rofsansir-next
+
+services:
+  rofsansir-next:
+    image: node:20.18-alpine
+    container_name: rofsansir-next
+    restart: unless-stopped
+    working_dir: /app
+    command: ["node", "server.js"]
+    environment:
+      NODE_ENV: production
+      HOSTNAME: "0.0.0.0"
+      PORT: 3000
+      # Server-side runtime env vars go here.
+      # NOTE: NEXT_PUBLIC_* vars do NOT belong here — they must be baked in
+      # at build time (see .gitlab-ci.yml) because Next.js inlines them into
+      # the client bundle during `next build`. Setting them here only affects
+      # server-side code, not anything shipped to the browser.
+    volumes:
+      # Not :ro - Next.js standalone writes prerender-cache updates into
+      # .next/server at runtime; read-only here throws EROFS on every request.
+      - /opt/revolopinstitute/rofsansir-next/current:/app
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 128M
+    networks:
+      - shared_network
+    labels:
+      - "traefik.enable=true"
+
+      # HTTP Router (redirects to HTTPS)
+      - "traefik.http.routers.rofsansir-next-http.rule=Host(`test.rofsansir.com`)"
+      - "traefik.http.routers.rofsansir-next-http.entrypoints=web"
+      - "traefik.http.routers.rofsansir-next-http.service=rofsansir-next"
+      - "traefik.http.routers.rofsansir-next-http.middlewares=rofsansir-next-https-redirect"
+
+      # Redirect middleware
+      - "traefik.http.middlewares.rofsansir-next-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.rofsansir-next-https-redirect.redirectscheme.permanent=true"
+
+      # HTTPS Router
+      - "traefik.http.routers.rofsansir-next.rule=Host(`test.rofsansir.com`)"
+      - "traefik.http.routers.rofsansir-next.entrypoints=websecure"
+      - "traefik.http.routers.rofsansir-next.tls=true"
+      - "traefik.http.routers.rofsansir-next.tls.certresolver=cloudflare"
+      - "traefik.http.routers.rofsansir-next.service=rofsansir-next"
+
+      # Service
+      - "traefik.http.services.rofsansir-next.loadbalancer.server.port=3000"
+
+networks:
+  shared_network:
+    external: true

@@ -1,0 +1,94 @@
+# GitLab CI/CD for rofsansir-next
+# Next.js standalone build with Docker Compose deployment
+# Uses a releases/ + current symlink pattern for zero-surprise rollback.
+
+variables:
+  DEPLOY_ROOT: "/opt/revolopinstitute/rofsansir-next"
+  NEXT_TELEMETRY_DISABLED: "1"
+  # Public runtime config baked into the client bundle at build time.
+  # Override per-environment in GitLab CI/CD variables if needed.
+  NEXT_PUBLIC_DYNAMIC_FORMS_API: "https://api.rofsansir.com"
+  NEXT_PUBLIC_R2_BASE: "https://cdn.rofsansir.com"
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  image: node:20.18-alpine
+  tags:
+    - my-runner
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - .npm/
+  before_script:
+    - npm ci --cache .npm --prefer-offline
+  script:
+    - npm run build
+    - mkdir -p .next/standalone/.next/static
+    - cp -r .next/static/* .next/standalone/.next/static/
+    - cp -r public .next/standalone/
+    - cp docker-compose.yml .next/standalone/
+    - tar -czf deploy.tar.gz -C .next/standalone .
+    - du -sh deploy.tar.gz
+  artifacts:
+    paths:
+      - deploy.tar.gz
+    expire_in: 1 hour
+  only:
+    - main
+    - develop
+
+deploy:
+  stage: deploy
+  tags:
+    - my-runner
+  image: alpine:latest
+  dependencies:
+    - build
+  variables:
+    # This job only needs the build artifact + SSH secrets, not the source
+    # tree, so skip the checkout entirely (avoids a fresh git clone/fetch
+    # on every deploy run).
+    GIT_STRATEGY: none
+  before_script:
+    - apk add --no-cache openssh-client coreutils
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | base64 -d | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh && chmod 700 ~/.ssh
+    - |
+      if [ -n "$SSH_PORT" ] && [ "$SSH_PORT" != "22" ]; then
+        ssh-keyscan -p $SSH_PORT -H $SSH_HOST >> ~/.ssh/known_hosts
+      else
+        ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
+      fi
+    - chmod 644 ~/.ssh/known_hosts
+    - |
+      if [ -n "$SSH_PORT" ] && [ "$SSH_PORT" != "22" ]; then
+        export SSH_CMD="ssh -p $SSH_PORT ${SSH_USER}@${SSH_HOST}"
+        export SCP_CMD="scp -P $SSH_PORT"
+      else
+        export SSH_CMD="ssh ${SSH_USER}@${SSH_HOST}"
+        export SCP_CMD="scp"
+      fi
+  script:
+    - RELEASE="${CI_COMMIT_SHORT_SHA}-$(date +%s)"
+    - RELEASE_PATH="${DEPLOY_ROOT}/releases/${RELEASE}"
+    - $SCP_CMD deploy.tar.gz ${SSH_USER}@${SSH_HOST}:/tmp/deploy-${RELEASE}.tar.gz
+    - $SSH_CMD "mkdir -p ${RELEASE_PATH} && tar -xzf /tmp/deploy-${RELEASE}.tar.gz -C ${RELEASE_PATH} && rm /tmp/deploy-${RELEASE}.tar.gz"
+    - $SSH_CMD "cp ${RELEASE_PATH}/docker-compose.yml ${DEPLOY_ROOT}/docker-compose.yml"
+    - $SSH_CMD "ln -sfn ${RELEASE_PATH} ${DEPLOY_ROOT}/current"
+    # force-recreate so the new release (served via the `current` symlink
+    # bind-mount) is actually picked up — `up -d` alone leaves the existing
+    # container running, so a changed symlink is ignored (stale code served).
+    - $SSH_CMD "cd ${DEPLOY_ROOT} && docker compose up -d --force-recreate --remove-orphans rofsansir-next"
+    - $SSH_CMD "cd ${DEPLOY_ROOT}/releases && ls -1dt */ | tail -n +6 | xargs -r rm -rf"
+  environment:
+    name: test
+    url: https://test.rofsansir.com
+  only:
+    - main
