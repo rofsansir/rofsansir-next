@@ -1,9 +1,5 @@
 import Image from "next/image";
-import {
-  Container,
-  SectionHeading,
-  ShimmerText,
-} from "@/components/ui/primitives";
+import { Container, SectionHeading } from "@/components/ui/primitives";
 import { InfiniteTrack } from "@/components/ui/infinite-track";
 import type { Achiever } from "@/data/home";
 import { getAchievers } from "@/lib/remote-content";
@@ -51,12 +47,7 @@ export async function HallOfFame() {
           dark
           eyebrow="Hall of Fame"
           numeral="02"
-          title={
-            <>
-              Our <ShimmerText>A&#42;</ShimmerText> achievers
-            </>
-          }
-          description="Real students, real results. The faces behind the grades that make us proud."
+          title="Real students. Real journeys. Real results"
         />
 
       </Container>
