@@ -24,7 +24,7 @@ export function Footer() {
         <img
           src="/assets/brand-logo-white.svg"
           alt="Rofsan Sir"
-          className="h-14 w-auto"
+          className="h-20 w-auto md:h-24"
         />
 
         <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
