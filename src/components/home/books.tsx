@@ -9,7 +9,7 @@ export function Books() {
     <section id="books" className="noise relative overflow-hidden bg-plum text-cream">
       <Container className="py-16 md:py-24">
         <div className="flex flex-col gap-3">
-          <Eyebrow dark>Author</Eyebrow>
+          <Eyebrow dark>Author of the</Eyebrow>
           <div className="flex items-center gap-4">
             <SectionNumber>05</SectionNumber>
             <h2 className="text-2xl font-extrabold tracking-tight md:text-5xl">
