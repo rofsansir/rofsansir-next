@@ -11,7 +11,7 @@ export async function Gallery() {
     <section id="gallery" className="overflow-hidden py-16 md:py-24">
       <Container>
         <div className="flex flex-col gap-3">
-          <Eyebrow>Snapshots from Class</Eyebrow>
+          <Eyebrow>Snapshots</Eyebrow>
           <div className="flex items-center gap-4">
             <SectionNumber>03</SectionNumber>
             <h2 className="text-2xl font-extrabold tracking-tight md:text-5xl">
