@@ -13,7 +13,7 @@ export function Books() {
           <div className="flex items-center gap-4">
             <SectionNumber>05</SectionNumber>
             <h2 className="text-2xl font-extrabold tracking-tight md:text-5xl">
-              The O Level Bengali bookshelf
+              The O Level Bengali books
             </h2>
           </div>
         </div>
