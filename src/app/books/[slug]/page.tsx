@@ -6,7 +6,6 @@ import { ArrowRight, BookOpen, ChevronRight, CheckCircle2 } from "lucide-react";
 import { Container, Eyebrow, ShimmerText } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/cn";
 import { books } from "@/data/books";
 import { getBookDetail } from "@/data/book-detail";
 import { site } from "@/lib/site";
@@ -106,18 +105,6 @@ export default async function BookDetailPage({
                 priority
                 className="object-contain p-4"
               />
-              {book.badge && (
-                <span
-                  className={cn(
-                    "absolute left-4 top-4 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider",
-                    book.badgeTone === "emerald"
-                      ? "bg-emerald-300 text-emerald-950"
-                      : "bg-marigold text-ink",
-                  )}
-                >
-                  {book.badge}
-                </span>
-              )}
             </div>
           </Reveal>
 

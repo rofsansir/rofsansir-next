@@ -2,9 +2,6 @@
 export type Book = {
   slug: string;
   title: string;
-  badge: string;
-  /** "gold" uses the marigold badge; "emerald" for the "New" release. */
-  badgeTone: "gold" | "emerald";
   subtitle: string;
   code: string;
   summary: string;
@@ -15,8 +12,6 @@ export const books: Book[] = [
   {
     slug: "o-level-bengali-basic-plus",
     title: "O Level Bengali Basic Plus",
-    badge: "Essential",
-    badgeTone: "gold",
     subtitle: "A Complete Guide to O Level Bengali",
     code: "Course Book Paper 1",
     summary:
@@ -26,8 +21,6 @@ export const books: Book[] = [
   {
     slug: "o-level-bengali-composition-plus",
     title: "O Level Bengali Composition Plus",
-    badge: "",
-    badgeTone: "gold",
     subtitle: "A Complete Guide to Composition Writing",
     code: "3204/01",
     summary:
@@ -37,8 +30,6 @@ export const books: Book[] = [
   {
     slug: "o-level-bengali-practice-plus",
     title: "O Level Bengali Practice Plus",
-    badge: "Exam Prep",
-    badgeTone: "gold",
     subtitle: "Intensive Preparation for CAIE 3204",
     code: "3204",
     summary:
@@ -48,8 +39,6 @@ export const books: Book[] = [
   {
     slug: "o-level-bengali-revision-plus",
     title: "O Level Bengali Revision Plus",
-    badge: "",
-    badgeTone: "gold",
     subtitle: "Topic-wise Past Paper Practice",
     code: "3204",
     summary:
@@ -59,8 +48,6 @@ export const books: Book[] = [
   {
     slug: "o-level-bengali-foundation-plus",
     title: "O Level Bengali Foundation Plus",
-    badge: "New",
-    badgeTone: "emerald",
     subtitle: "Building Strong Basics in Bengali",
     code: "Class VIII",
     summary:

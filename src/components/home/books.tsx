@@ -2,7 +2,6 @@ import Image from "next/image";
 import { Container, Eyebrow, SectionNumber } from "@/components/ui/primitives";
 import { InfiniteTrack } from "@/components/ui/infinite-track";
 import { books } from "@/data/books";
-import { cn } from "@/lib/cn";
 
 /** Infinite, drag-scrollable bookshelf. */
 export function Books() {
@@ -35,18 +34,6 @@ export function Books() {
                 draggable={false}
                 className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
               />
-              {b.badge && (
-                <span
-                  className={cn(
-                    "absolute left-3 top-3 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider",
-                    b.badgeTone === "emerald"
-                      ? "bg-emerald-300 text-emerald-950"
-                      : "bg-marigold text-ink",
-                  )}
-                >
-                  {b.badge}
-                </span>
-              )}
             </div>
           </article>
         ))}
