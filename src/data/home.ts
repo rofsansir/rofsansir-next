@@ -150,6 +150,6 @@ export const gallery: GalleryItem[] = [
 export const aboutTeaser = {
   eyebrow: "Examiners perspective",
   title: "What examiners look for",
-  videoId: "tAlxNZrj7xU", // "Why do students miss the A* in O Level Bangla?"
+  videoId: "Iv5xhoq6cAk",
   poster: "/assets/teacher/intro-poster.png",
 };
