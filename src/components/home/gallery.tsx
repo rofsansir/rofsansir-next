@@ -39,6 +39,12 @@ export async function Gallery() {
               draggable={false}
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent" />
+            <figcaption className="absolute inset-x-0 bottom-0 p-4 md:p-5">
+              <p className="font-display text-sm font-bold text-cream md:text-base">
+                {g.title}
+              </p>
+            </figcaption>
           </figure>
         ))}
       </InfiniteTrack>

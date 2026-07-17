@@ -79,6 +79,7 @@ export async function getGalleryItems(): Promise<GalleryItem[]> {
     return entries.map((e) => ({
       src: resolveDynamicFormAsset(e.values.photo),
       alt: e.values.title,
+      title: e.values.title,
     }));
   }
   return fallbackGallery.map((item) => ({ ...item, src: assetUrl(item.src) }));

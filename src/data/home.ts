@@ -129,7 +129,7 @@ export const testimonials: Testimonial[] = [
   },
 ];
 
-export type GalleryItem = { src: string; alt: string };
+export type GalleryItem = { src: string; alt: string; title: string };
 
 /**
  * Fallback data, used when the R2-hosted manifest (assets/data/gallery.json)
@@ -138,12 +138,12 @@ export type GalleryItem = { src: string; alt: string };
  * `public/assets/class-banner|teacher/` folders those files were copied from.
  */
 export const gallery: GalleryItem[] = [
-  { src: "/assets/gallery/ClassVIII.jpg", alt: "Class VIII batch at Rofsan Sir" },
-  { src: "/assets/gallery/teacher-2.jpg", alt: "Classroom session with Rofsan Sir" },
-  { src: "/assets/gallery/ClassIX.jpg", alt: "Class IX batch at Rofsan Sir" },
-  { src: "/assets/gallery/teacher-3.jpg", alt: "Rofsan Sir teaching O Level Bengali" },
-  { src: "/assets/gallery/ClassX.jpg", alt: "Class X batch at Rofsan Sir" },
-  { src: "/assets/gallery/teacher-5.jpg", alt: "Exam-focused classroom at Rofsan Sir" },
+  { src: "/assets/gallery/ClassVIII.jpg", alt: "Class VIII batch at Rofsan Sir", title: "Class VIII batch" },
+  { src: "/assets/gallery/teacher-2.jpg", alt: "Classroom session with Rofsan Sir", title: "Classroom session" },
+  { src: "/assets/gallery/ClassIX.jpg", alt: "Class IX batch at Rofsan Sir", title: "Class IX batch" },
+  { src: "/assets/gallery/teacher-3.jpg", alt: "Rofsan Sir teaching O Level Bengali", title: "Teaching O Level Bengali" },
+  { src: "/assets/gallery/ClassX.jpg", alt: "Class X batch at Rofsan Sir", title: "Class X batch" },
+  { src: "/assets/gallery/teacher-5.jpg", alt: "Exam-focused classroom at Rofsan Sir", title: "Exam-focused classroom" },
 ];
 
 /** "Meet your teacher" video teaser. (Swap videoId anytime.) */
