@@ -66,7 +66,7 @@ export function SectionHeading({
     >
       <Eyebrow dark={dark}>{eyebrow}</Eyebrow>
       <div className="flex items-start gap-4">
-        {numeral && <SectionNumber>{numeral}</SectionNumber>}
+        {numeral && <SectionNumber dark={dark}>{numeral}</SectionNumber>}
         <h2
           className={cn(
             "text-balance text-2xl font-extrabold leading-tight tracking-tight md:text-5xl",
@@ -95,15 +95,18 @@ export function SectionHeading({
 export function SectionNumber({
   children,
   className,
+  dark = false,
 }: {
   children: React.ReactNode;
   className?: string;
+  dark?: boolean;
 }) {
   return (
     <span
       aria-hidden
       className={cn(
-        "select-none font-display text-5xl font-extrabold leading-none text-outline md:text-7xl",
+        "select-none font-display text-5xl font-extrabold leading-none md:text-7xl",
+        dark ? "text-outline-dark" : "text-outline",
         className,
       )}
     >

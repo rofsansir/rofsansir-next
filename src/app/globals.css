@@ -183,6 +183,11 @@ h5 {
   -webkit-text-stroke: 2px rgba(34, 26, 21, 0.16);
 }
 
+.text-outline-dark {
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(243, 237, 225, 0.18);
+}
+
 /* Carousel edge fade */
 .edge-fade {
   -webkit-mask-image: linear-gradient(

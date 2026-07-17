@@ -11,7 +11,7 @@ export function Books() {
         <div className="flex flex-col gap-3">
           <Eyebrow dark>Author of the</Eyebrow>
           <div className="flex items-center gap-4">
-            <SectionNumber>05</SectionNumber>
+            <SectionNumber dark>05</SectionNumber>
             <h2 className="text-2xl font-extrabold tracking-tight md:text-5xl">
               The O Level Bengali Book Series
             </h2>
