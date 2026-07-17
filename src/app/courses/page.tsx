@@ -64,13 +64,7 @@ export default function CoursesPage() {
           </>
         }
         subtitle="Examiner-led O Level Bengali for Cambridge CAIE & Pearson Edexcel (3204). Class VIII, IX and X, online or at our Lalmatia, Dhaka campus."
-      >
-        <div className="flex flex-wrap gap-3 pt-2">
-          <Button href={site.contact.whatsapp} external size="lg">
-            Book a Free Consultation
-          </Button>
-        </div>
-      </PageHero>
+      />
 
       {/* Programs */}
       <section id="programs" className="px-4 py-16 md:py-24">
