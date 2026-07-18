@@ -23,16 +23,16 @@ export function Books() {
         {books.map((b) => (
           <article
             key={b.slug}
-            className="group relative w-64 shrink-0 overflow-hidden rounded-3xl border border-cream/10 bg-cream/5 p-4 ring-1 ring-cream/10 backdrop-blur"
+            className="group relative w-64 shrink-0 overflow-hidden rounded-3xl border border-ink/10 bg-cream p-5 shadow-luxe"
           >
-            <div className="relative mx-auto aspect-[3/4] w-full overflow-hidden rounded-2xl bg-cream shadow-luxe">
+            <div className="relative mx-auto aspect-[3/4] w-full">
               <Image
                 src={b.image}
                 alt={b.title}
                 fill
                 sizes="224px"
                 draggable={false}
-                className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
+                className="object-contain transition-transform duration-500 group-hover:scale-105"
               />
               <span className="absolute bottom-3 left-3 rounded-full bg-ink/75 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-cream backdrop-blur">
                 {b.classLevel}
