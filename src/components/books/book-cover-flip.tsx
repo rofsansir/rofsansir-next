@@ -43,7 +43,7 @@ export function BookCoverFlip({ book }: { book: Book }) {
             sizes="224px"
             priority
             draggable={false}
-            className="object-contain transition-transform duration-500 group-hover:scale-105"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
         </div>
         <span className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-ink/70 text-cream opacity-80">
@@ -86,7 +86,7 @@ export function BookCoverFlip({ book }: { book: Book }) {
                       alt={`${book.title} front cover, full size`}
                       fill
                       sizes="(max-width: 640px) 90vw, 448px"
-                      className="object-contain"
+                      className="object-cover"
                     />
                   </div>
                 </div>
@@ -97,7 +97,7 @@ export function BookCoverFlip({ book }: { book: Book }) {
                       alt={`${book.title} back cover, full size`}
                       fill
                       sizes="(max-width: 640px) 90vw, 448px"
-                      className="object-contain"
+                      className="object-cover"
                     />
                   </div>
                 </div>

@@ -73,7 +73,7 @@ export default function BooksPage() {
                         alt={b.title}
                         fill
                         sizes="176px"
-                        className="object-contain transition-transform duration-500 group-hover:scale-105"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     </div>
                   </div>

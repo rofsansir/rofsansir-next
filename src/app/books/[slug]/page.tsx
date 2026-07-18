@@ -184,7 +184,7 @@ export default async function BookDetailPage({
                       alt={b.title}
                       fill
                       sizes="112px"
-                      className="object-contain"
+                      className="object-cover"
                     />
                   </div>
                 </div>
