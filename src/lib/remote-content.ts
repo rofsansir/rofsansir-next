@@ -6,19 +6,17 @@
  * admin-managed forms) - edit them via the revolopinstitute-admin dashboard,
  * no code deploy needed. Past papers' PDFs stay in the existing R2 bucket
  * (referenced by storage key, not re-uploaded) since they were already
- * hosted there. Tips still read the older R2-hosted JSON manifest - see
- * src/data/*.ts for the fallback content used when a source is unreachable
- * or empty.
+ * hosted there. Tips still read the older R2-hosted JSON manifest and keep
+ * a fallback (see getTipArticles) - it isn't dynamic-form-backed.
+ *
+ * Gallery, Hall of Fame, Videos, and Past Papers show nothing rather than
+ * substituting old static content when the live source is unreachable or
+ * has no published entries - showing stale placeholder photos/names/papers
+ * as if they were real would be misleading.
  */
 import { assetUrl } from "@/lib/assets";
-import {
-  achievers as fallbackAchievers,
-  gallery as fallbackGallery,
-  type Achiever,
-  type GalleryItem,
-} from "@/data/home";
-import { fallbackVideos, type Video } from "@/data/videos";
-import rawFallbackPastPapers from "@/data/past-papers.json";
+import type { Achiever, GalleryItem } from "@/data/home";
+import type { Video } from "@/data/videos";
 import type { PastPaper } from "@/data/past-papers";
 import { fallbackTipArticles, type TipArticle } from "@/data/tip-articles";
 import { estimateReadTime } from "@/lib/text";
@@ -75,14 +73,12 @@ export async function getGalleryItems(): Promise<GalleryItem[]> {
   const entries = await fetchDynamicFormValues<{ photo: string; title: string }>(
     "gallery",
   );
-  if (entries && entries.length > 0) {
-    return entries.map((e) => ({
-      src: resolveDynamicFormAsset(e.values.photo),
-      alt: e.values.title,
-      title: e.values.title,
-    }));
-  }
-  return fallbackGallery.map((item) => ({ ...item, src: assetUrl(item.src) }));
+  if (!entries) return [];
+  return entries.map((e) => ({
+    src: resolveDynamicFormAsset(e.values.photo),
+    alt: e.values.title,
+    title: e.values.title,
+  }));
 }
 
 export async function getAchievers(): Promise<Achiever[]> {
@@ -92,15 +88,13 @@ export async function getAchievers(): Promise<Achiever[]> {
     meta: string;
     image: string;
   }>("hall-of-fame");
-  if (entries && entries.length > 0) {
-    return entries.map((e) => ({
-      name: e.values.name,
-      grade: e.values.grade,
-      meta: e.values.meta,
-      image: resolveDynamicFormAsset(e.values.image),
-    }));
-  }
-  return fallbackAchievers.map((item) => ({ ...item, image: assetUrl(item.image) }));
+  if (!entries) return [];
+  return entries.map((e) => ({
+    name: e.values.name,
+    grade: e.values.grade,
+    meta: e.values.meta,
+    image: resolveDynamicFormAsset(e.values.image),
+  }));
 }
 
 export async function getVideos(): Promise<Video[]> {
@@ -110,10 +104,8 @@ export async function getVideos(): Promise<Video[]> {
     duration: string;
     category: string;
   }>("videos");
-  if (entries && entries.length > 0) {
-    return entries.map((e, i) => ({ id: String(i + 1), ...e.values }));
-  }
-  return fallbackVideos;
+  if (!entries) return [];
+  return entries.map((e, i) => ({ id: String(i + 1), ...e.values }));
 }
 
 export async function getPastPapers(): Promise<PastPaper[]> {
@@ -127,33 +119,26 @@ export async function getPastPapers(): Promise<PastPaper[]> {
     fileSize: number;
     file: string;
   }>("past-papers");
+  if (!entries) return [];
 
-  if (entries && entries.length > 0) {
-    return entries
-      .map((e, i) => ({
-        id: i,
-        title: e.values.title,
-        slug: e.values.slug,
-        year: e.values.year,
-        session: e.values.session || null,
-        paperType: e.values.paperType,
-        fileName: e.values.file.split("/").pop() ?? "",
-        filePath: e.values.file,
-        url: resolveDynamicFormAsset(e.values.file),
-        fileSize: e.values.fileSize,
-        description: e.values.description,
-        metaKeywords: "",
-        downloadCount: 0,
-        viewCount: 0,
-        isActive: 1,
-      }))
-      .sort((a, b) => b.year - a.year || a.paperType.localeCompare(b.paperType));
-  }
-
-  const raw = rawFallbackPastPapers as PastPaper[];
-  return raw
-    .filter((p) => p.isActive === 1)
-    .map((p) => ({ ...p, url: assetUrl(p.filePath) }))
+  return entries
+    .map((e, i) => ({
+      id: i,
+      title: e.values.title,
+      slug: e.values.slug,
+      year: e.values.year,
+      session: e.values.session || null,
+      paperType: e.values.paperType,
+      fileName: e.values.file.split("/").pop() ?? "",
+      filePath: e.values.file,
+      url: resolveDynamicFormAsset(e.values.file),
+      fileSize: e.values.fileSize,
+      description: e.values.description,
+      metaKeywords: "",
+      downloadCount: 0,
+      viewCount: 0,
+      isActive: 1,
+    }))
     .sort((a, b) => b.year - a.year || a.paperType.localeCompare(b.paperType));
 }
 
