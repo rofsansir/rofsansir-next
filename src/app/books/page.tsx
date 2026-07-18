@@ -81,7 +81,7 @@ export default function BooksPage() {
                   <div className="mt-5 flex flex-1 flex-col">
                     <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-marigold-deep">
                       <BookOpen className="h-3.5 w-3.5" />
-                      Code · {b.code}
+                      {b.code}
                     </div>
                     <h2 className="mt-2 font-display text-lg font-bold leading-snug text-ink">
                       {b.title}

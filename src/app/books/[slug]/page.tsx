@@ -102,7 +102,7 @@ export default async function BookDetailPage({
 
           {/* Copy */}
           <div className="flex flex-col gap-4">
-            <Eyebrow>Code · {book.code}</Eyebrow>
+            <Eyebrow>{book.code}</Eyebrow>
             <h1 className="text-balance text-3xl font-extrabold leading-tight tracking-tight md:text-4xl">
               {book.title}
             </h1>
