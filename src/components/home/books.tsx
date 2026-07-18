@@ -34,6 +34,9 @@ export function Books() {
                 draggable={false}
                 className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
               />
+              <span className="absolute bottom-3 left-3 rounded-full bg-ink/75 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-cream backdrop-blur">
+                {b.classLevel}
+              </span>
             </div>
           </article>
         ))}
