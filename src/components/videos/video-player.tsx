@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { motion } from "motion/react";
 import { Play } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
+import { YouTubeThumbnail } from "@/components/ui/youtube-thumbnail";
 import { cn } from "@/lib/cn";
-import { videoThumb, type Video } from "@/data/videos";
+import type { Video } from "@/data/videos";
 
 /**
  * Inline YouTube player - hidden until a thumbnail is clicked, then animates
@@ -59,8 +59,8 @@ export function VideoPlayer({ videos }: { videos: Video[] }) {
               )}
             >
               <div className="relative aspect-video w-full overflow-hidden bg-ink">
-                <Image
-                  src={videoThumb(v.videoId)}
+                <YouTubeThumbnail
+                  videoId={v.videoId}
                   alt={v.title}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 30vw"

@@ -114,10 +114,12 @@ export const testimonials: Testimonial[] = [
 
 export type GalleryItem = { src: string; alt: string; title: string };
 
-/** "Meet your teacher" video teaser. (Swap videoId anytime.) */
+/**
+ * "Meet your teacher" video teaser. (Swap videoId anytime.) Poster is YouTube's own
+ * auto-generated thumbnail (see YouTubeThumbnail) - no image to keep in sync here.
+ */
 export const aboutTeaser = {
   eyebrow: "Examiners perspective",
   title: "What examiners look for",
   videoId: "Iv5xhoq6cAk",
-  poster: "/assets/teacher/intro-poster.png",
 };

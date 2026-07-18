@@ -1,17 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { Play } from "lucide-react";
 import { Container, Eyebrow, SectionNumber } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
+import { YouTubeThumbnail } from "@/components/ui/youtube-thumbnail";
 import { aboutTeaser } from "@/data/home";
 
 /**
- * Custom poster + click-to-play, same pattern as components/videos/video-player.tsx -
- * a raw always-embedded iframe shows YouTube's own paused-state thumbnail (logo,
- * suggested-video overlay, "Watch on YouTube" chrome) before the visitor does anything;
- * deferring the iframe until clicked keeps that off the page entirely.
+ * YouTube auto-thumbnail + click-to-play, same pattern as
+ * components/videos/video-player.tsx - a raw always-embedded iframe shows YouTube's
+ * own paused-state thumbnail (logo, suggested-video overlay, "Watch on YouTube"
+ * chrome) before the visitor does anything; deferring the iframe until clicked keeps
+ * that off the page entirely.
  */
 export function AboutTeaser() {
   const [playing, setPlaying] = useState(false);
@@ -48,8 +49,8 @@ export function AboutTeaser() {
                 className="group relative block h-full w-full"
                 aria-label={`Play: ${aboutTeaser.title}`}
               >
-                <Image
-                  src={aboutTeaser.poster}
+                <YouTubeThumbnail
+                  videoId={aboutTeaser.videoId}
                   alt={aboutTeaser.title}
                   fill
                   sizes="(max-width: 768px) 100vw, 56rem"
