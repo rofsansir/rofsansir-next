@@ -8,6 +8,7 @@ export type Book = {
   classLevel: string;
   summary: string;
   image: string;
+  backImage: string;
 };
 
 export const books: Book[] = [
@@ -19,7 +20,8 @@ export const books: Book[] = [
     classLevel: "Class IX-X",
     summary:
       "A structured guide to CAIE O Level Bengali Paper 02   foundational grammar and core concepts, built for English-medium students.",
-    image: "/assets/books/1.png",
+    image: "/assets/books/o-level-bengali-basic-plus.jpg",
+    backImage: "/assets/books/o-level-bengali-basic-plus-back.jpg",
   },
   {
     slug: "o-level-bengali-composition-plus",
@@ -29,7 +31,8 @@ export const books: Book[] = [
     classLevel: "Class IX-X",
     summary:
       "An exam-focused guide to Paper 01   Letter, Report, Dialogue, Speech and Composition writing with marking-scheme insight.",
-    image: "/assets/books/2.png",
+    image: "/assets/books/o-level-bengali-composition-plus.jpg",
+    backImage: "/assets/books/o-level-bengali-composition-plus-back.jpg",
   },
   {
     slug: "o-level-bengali-practice-plus",
@@ -39,7 +42,8 @@ export const books: Book[] = [
     classLevel: "Class X",
     summary:
       "Intensive, exam-focused practice across both Paper 01 and Paper 02 for complete CAIE preparation.",
-    image: "/assets/books/3.png",
+    image: "/assets/books/o-level-bengali-practice-plus.jpg",
+    backImage: "/assets/books/o-level-bengali-practice-plus-back.jpg",
   },
   {
     slug: "o-level-bengali-revision-plus",
@@ -49,7 +53,8 @@ export const books: Book[] = [
     classLevel: "Class X",
     summary:
       "Topic-wise past-paper practice for CAIE O Level Bengali 3204 with detailed solutions.",
-    image: "/assets/books/4.png",
+    image: "/assets/books/o-level-bengali-revision-plus.jpg",
+    backImage: "/assets/books/o-level-bengali-revision-plus-back.jpg",
   },
   {
     slug: "o-level-bengali-foundation-plus",
@@ -59,6 +64,7 @@ export const books: Book[] = [
     classLevel: "Class VIII",
     summary:
       "A step-by-step integrated approach to building strong Bengali basics for beginners and Class VIII starters.",
-    image: "/assets/books/5.png",
+    image: "/assets/books/o-level-bengali-foundation-plus.jpg",
+    backImage: "/assets/books/o-level-bengali-foundation-plus-back.jpg",
   },
 ];

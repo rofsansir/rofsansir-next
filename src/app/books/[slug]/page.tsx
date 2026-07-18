@@ -6,6 +6,7 @@ import { ArrowRight, BookOpen, ChevronRight, CheckCircle2 } from "lucide-react";
 import { Container, Eyebrow, ShimmerText } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
+import { BookCoverFlip } from "@/components/books/book-cover-flip";
 import { books } from "@/data/books";
 import { getBookDetail } from "@/data/book-detail";
 import { site } from "@/lib/site";
@@ -96,16 +97,7 @@ export default async function BookDetailPage({
         <Container className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           {/* Cover */}
           <Reveal>
-            <div className="relative mx-auto aspect-[3/4] w-56 overflow-hidden rounded-[1.75rem] bg-cream shadow-luxe">
-              <Image
-                src={book.image}
-                alt={book.title}
-                fill
-                sizes="224px"
-                priority
-                className="object-contain p-4"
-              />
-            </div>
+            <BookCoverFlip book={book} />
           </Reveal>
 
           {/* Copy */}

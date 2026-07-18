@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { Container, Eyebrow, SectionNumber } from "@/components/ui/primitives";
 import { InfiniteTrack } from "@/components/ui/infinite-track";
 import { books } from "@/data/books";
@@ -21,9 +23,10 @@ export function Books() {
 
       <InfiniteTrack className="py-6" trackClassName="gap-6" speed={0.4}>
         {books.map((b) => (
-          <article
+          <Link
             key={b.slug}
-            className="group relative w-64 shrink-0 overflow-hidden rounded-3xl border border-ink/10 bg-cream p-5 shadow-luxe"
+            href={`/books/${b.slug}`}
+            className="group relative block w-64 shrink-0 overflow-hidden rounded-3xl border border-ink/10 bg-cream p-5 shadow-luxe"
           >
             <div className="relative mx-auto aspect-[3/4] w-full">
               <Image
@@ -37,8 +40,11 @@ export function Books() {
               <span className="absolute bottom-3 left-3 rounded-full bg-ink/75 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-cream backdrop-blur">
                 {b.classLevel}
               </span>
+              <span className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full bg-ink/60 text-cream opacity-70 transition-opacity group-hover:opacity-100">
+                <ArrowUpRight className="h-4 w-4" />
+              </span>
             </div>
-          </article>
+          </Link>
         ))}
       </InfiniteTrack>
 

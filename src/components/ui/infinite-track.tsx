@@ -25,8 +25,11 @@ export function InfiniteTrack({
   const trackRef = useRef<HTMLDivElement>(null);
   const offset = useRef(0);
   const dragging = useRef(false);
+  const wasDragging = useRef(false);
+  const dragStart = useRef<{ x: number; pointerId: number } | null>(null);
   const lastX = useRef(0);
   const raf = useRef<ReturnType<typeof requestAnimationFrame>>(0);
+  const DRAG_THRESHOLD = 6;
 
   const items = React.Children.toArray(children);
   const count = items.length;
@@ -75,18 +78,25 @@ export function InfiniteTrack({
     while (offset.current > 0) offset.current -= u;
   };
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    dragging.current = true;
-    lastX.current = e.clientX;
-    e.currentTarget.setPointerCapture(e.pointerId);
+    dragStart.current = { x: e.clientX, pointerId: e.pointerId };
   };
   const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!dragging.current) return;
+    const start = dragStart.current;
+    if (!start || e.pointerId !== start.pointerId) return;
+    if (!dragging.current) {
+      if (Math.abs(e.clientX - start.x) < DRAG_THRESHOLD) return;
+      dragging.current = true;
+      wasDragging.current = true;
+      lastX.current = e.clientX;
+      e.currentTarget.setPointerCapture(e.pointerId);
+    }
     offset.current += e.clientX - lastX.current;
     lastX.current = e.clientX;
     wrap();
     apply();
   };
   const endDrag = (e: React.PointerEvent<HTMLDivElement>) => {
+    dragStart.current = null;
     if (!dragging.current) return;
     dragging.current = false;
     try {
@@ -94,6 +104,12 @@ export function InfiniteTrack({
     } catch {
       /* ignore */
     }
+  };
+  const onClickCapture = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!wasDragging.current) return;
+    wasDragging.current = false;
+    e.preventDefault();
+    e.stopPropagation();
   };
 
   return (
@@ -107,6 +123,7 @@ export function InfiniteTrack({
       onPointerMove={onPointerMove}
       onPointerUp={endDrag}
       onPointerCancel={endDrag}
+      onClickCapture={onClickCapture}
     >
       <div
         ref={trackRef}
