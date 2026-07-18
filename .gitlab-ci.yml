@@ -86,7 +86,11 @@ deploy:
     # bind-mount) is actually picked up — `up -d` alone leaves the existing
     # container running, so a changed symlink is ignored (stale code served).
     - $SSH_CMD "cd ${DEPLOY_ROOT} && docker compose up -d --force-recreate --remove-orphans rofsansir-next"
-    - $SSH_CMD "cd ${DEPLOY_ROOT}/releases && ls -1dt */ | tail -n +6 | xargs -r rm -rf"
+    # Best-effort: old releases can contain root-owned runtime cache files
+    # (written by the container) that this non-root deploy user can't
+    # remove. That's just disk housekeeping, not a deploy failure, so don't
+    # let it fail the job - `|| true` keeps it non-fatal.
+    - $SSH_CMD "cd ${DEPLOY_ROOT}/releases && ls -1dt */ | tail -n +6 | xargs -r rm -rf" || true
   environment:
     name: test
     url: https://test.rofsansir.com

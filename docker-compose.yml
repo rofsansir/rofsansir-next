@@ -22,6 +22,12 @@ services:
       # Not :ro - Next.js standalone writes prerender-cache updates into
       # .next/server at runtime; read-only here throws EROFS on every request.
       - /opt/revolopinstitute/rofsansir-next/current:/app
+      # Separate named volume for the image/fetch cache - the container runs
+      # as root, so runtime writes here would otherwise land on the host
+      # inside the (deploy-user-owned) release dir and break `rm -rf` during
+      # old-release pruning. Also means image cache survives across deploys
+      # instead of starting cold every release.
+      - next-cache:/app/.next/cache
     logging:
       driver: json-file
       options:
@@ -61,3 +67,6 @@ services:
 networks:
   shared_network:
     external: true
+
+volumes:
+  next-cache:
