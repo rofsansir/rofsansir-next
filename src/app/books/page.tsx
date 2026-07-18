@@ -66,14 +66,16 @@ export default function BooksPage() {
                   href={`/books/${b.slug}`}
                   className="group flex h-full flex-col rounded-[1.75rem] border border-ink/10 bg-paper/70 p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-marigold/40 hover:shadow-card"
                 >
-                  <div className="relative mx-auto aspect-[3/4] w-44 overflow-hidden rounded-2xl bg-cream shadow-luxe">
-                    <Image
-                      src={b.image}
-                      alt={b.title}
-                      fill
-                      sizes="176px"
-                      className="object-contain p-3 transition-transform duration-500 group-hover:scale-105"
-                    />
+                  <div className="relative mx-auto aspect-[3/4] w-44 overflow-hidden rounded-2xl bg-cream p-3 shadow-luxe">
+                    <div className="relative h-full w-full">
+                      <Image
+                        src={b.image}
+                        alt={b.title}
+                        fill
+                        sizes="176px"
+                        className="object-contain transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
                   </div>
 
                   <div className="mt-5 flex flex-1 flex-col">

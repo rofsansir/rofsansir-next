@@ -177,14 +177,16 @@ export default async function BookDetailPage({
                 href={`/books/${b.slug}`}
                 className="group flex flex-col rounded-2xl border border-ink/10 bg-paper/70 p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-card"
               >
-                <div className="relative mx-auto aspect-[3/4] w-28 overflow-hidden rounded-xl bg-cream">
-                  <Image
-                    src={b.image}
-                    alt={b.title}
-                    fill
-                    sizes="112px"
-                    className="object-contain p-2"
-                  />
+                <div className="relative mx-auto aspect-[3/4] w-28 overflow-hidden rounded-xl bg-cream p-2">
+                  <div className="relative h-full w-full">
+                    <Image
+                      src={b.image}
+                      alt={b.title}
+                      fill
+                      sizes="112px"
+                      className="object-contain"
+                    />
+                  </div>
                 </div>
                 <h3 className="mt-3 text-center text-sm font-semibold leading-snug text-ink">
                   {b.title}

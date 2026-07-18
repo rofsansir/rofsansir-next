@@ -33,17 +33,19 @@ export function BookCoverFlip({ book }: { book: Book }) {
           setOpen(true);
         }}
         aria-label={`View the cover of ${book.title} in full size`}
-        className="relative block aspect-[3/4] w-56 cursor-pointer overflow-hidden rounded-[1.75rem] bg-cream shadow-luxe"
+        className="group relative block w-56 cursor-pointer overflow-hidden rounded-[1.75rem] border border-ink/10 bg-cream p-4 shadow-luxe"
       >
-        <Image
-          src={book.image}
-          alt={`${book.title} front cover`}
-          fill
-          sizes="224px"
-          priority
-          draggable={false}
-          className="object-contain p-4 transition-transform duration-500 hover:scale-105"
-        />
+        <div className="relative aspect-[3/4] w-full">
+          <Image
+            src={book.image}
+            alt={`${book.title} front cover`}
+            fill
+            sizes="224px"
+            priority
+            draggable={false}
+            className="object-contain transition-transform duration-500 group-hover:scale-105"
+          />
+        </div>
         <span className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-ink/70 text-cream opacity-80">
           <Maximize2 className="h-3.5 w-3.5" />
         </span>
@@ -77,23 +79,27 @@ export function BookCoverFlip({ book }: { book: Book }) {
                 animate={{ rotateY: flipped ? 180 : 0 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               >
-                <div className="absolute inset-0 overflow-hidden rounded-[1.75rem] bg-cream shadow-luxe [backface-visibility:hidden]">
-                  <Image
-                    src={book.image}
-                    alt={`${book.title} front cover, full size`}
-                    fill
-                    sizes="(max-width: 640px) 90vw, 448px"
-                    className="object-contain p-4"
-                  />
+                <div className="absolute inset-0 overflow-hidden rounded-[1.75rem] border border-ink/10 bg-cream p-4 shadow-luxe [backface-visibility:hidden]">
+                  <div className="relative h-full w-full">
+                    <Image
+                      src={book.image}
+                      alt={`${book.title} front cover, full size`}
+                      fill
+                      sizes="(max-width: 640px) 90vw, 448px"
+                      className="object-contain"
+                    />
+                  </div>
                 </div>
-                <div className="absolute inset-0 overflow-hidden rounded-[1.75rem] bg-cream shadow-luxe [backface-visibility:hidden] [transform:rotateY(180deg)]">
-                  <Image
-                    src={book.backImage}
-                    alt={`${book.title} back cover, full size`}
-                    fill
-                    sizes="(max-width: 640px) 90vw, 448px"
-                    className="object-contain p-4"
-                  />
+                <div className="absolute inset-0 overflow-hidden rounded-[1.75rem] border border-ink/10 bg-cream p-4 shadow-luxe [backface-visibility:hidden] [transform:rotateY(180deg)]">
+                  <div className="relative h-full w-full">
+                    <Image
+                      src={book.backImage}
+                      alt={`${book.title} back cover, full size`}
+                      fill
+                      sizes="(max-width: 640px) 90vw, 448px"
+                      className="object-contain"
+                    />
+                  </div>
                 </div>
               </motion.div>
 
