@@ -205,7 +205,7 @@ export default function AboutPage() {
           <SectionHeading
             title="Educational background"
             align="center"
-            className="mx-auto mt-16 items-center md:mt-24"
+            className="mx-auto mt-14 items-center md:mt-20"
           />
           <div className="mx-auto mt-10 grid max-w-2xl gap-4 sm:grid-cols-2">
             {education.map(({ Icon, title, subtitle }, i) => (
