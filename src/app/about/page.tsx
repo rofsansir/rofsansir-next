@@ -98,7 +98,6 @@ const certificates: Certificate[] = [
     height: 1200,
     title: "Cambridge Approved Examiner of Bengali 3204",
     issuer: "Cambridge Assessment International Education",
-    date: "Oct 2023",
     featured: true,
   },
   {
@@ -107,7 +106,6 @@ const certificates: Certificate[] = [
     height: 871,
     title: "Bangla Olympiad Coordinator's Certificate",
     issuer: "Oxford International School",
-    date: "Feb 2023",
   },
   {
     src: "/assets/about/oxford-international-efficiency-award.jpg",
@@ -115,7 +113,6 @@ const certificates: Certificate[] = [
     height: 886,
     title: "High-Efficiency Award",
     issuer: "Oxford International School",
-    date: "2020-2021",
   },
 ];
 
@@ -166,7 +163,7 @@ export default function AboutPage() {
 
       <AboutHero />
 
-      {/* Teaching Experience */}
+      {/* Background: Teaching Experience + Educational Background */}
       <section className="px-4 py-16 md:py-24">
         <Container>
           <SectionHeading
@@ -204,17 +201,11 @@ export default function AboutPage() {
                 ))}
             </div>
           </div>
-        </Container>
-      </section>
 
-      {/* Educational Background */}
-      <section className="bg-paper/60 px-4 py-16 md:py-24">
-        <Container>
           <SectionHeading
-            eyebrow="Background"
             title="Educational background"
             align="center"
-            className="mx-auto items-center"
+            className="mx-auto mt-16 items-center md:mt-24"
           />
           <div className="mx-auto mt-10 grid max-w-2xl gap-4 sm:grid-cols-2">
             {education.map(({ Icon, title, subtitle }, i) => (

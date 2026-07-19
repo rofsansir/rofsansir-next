@@ -64,7 +64,7 @@ export function SectionHeading({
         className,
       )}
     >
-      <Eyebrow dark={dark}>{eyebrow}</Eyebrow>
+      {eyebrow && <Eyebrow dark={dark}>{eyebrow}</Eyebrow>}
       <div className="flex items-start gap-4">
         {numeral && <SectionNumber dark={dark}>{numeral}</SectionNumber>}
         <h2

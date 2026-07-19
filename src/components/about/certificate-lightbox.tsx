@@ -11,7 +11,6 @@ export type Certificate = {
   height: number;
   title: string;
   issuer: string;
-  date: string;
   /** Pulled out into its own spotlight card above the grid. */
   featured?: boolean;
 };
@@ -73,9 +72,7 @@ export function CertificateGallery({ certificates }: { certificates: Certificate
             <p className="mt-3 font-display text-lg font-bold leading-snug text-ink">
               {featured.title}
             </p>
-            <p className="mt-1 text-sm text-muted">
-              {featured.issuer} · {featured.date}
-            </p>
+            <p className="mt-1 text-sm text-muted">{featured.issuer}</p>
           </div>
         </button>
       )}
@@ -107,9 +104,7 @@ export function CertificateGallery({ certificates }: { certificates: Certificate
                 <p className="font-display text-sm font-bold leading-snug text-ink">
                   {c.title}
                 </p>
-                <p className="mt-0.5 text-xs text-muted">
-                  {c.issuer} · {c.date}
-                </p>
+                <p className="mt-0.5 text-xs text-muted">{c.issuer}</p>
               </div>
             </button>
           );
@@ -155,7 +150,7 @@ export function CertificateGallery({ certificates }: { certificates: Certificate
                   {open.title}
                 </p>
                 <p className="mt-0.5 text-xs text-cream/70 sm:text-sm">
-                  {open.issuer} · {open.date}
+                  {open.issuer}
                 </p>
               </div>
             </motion.div>
