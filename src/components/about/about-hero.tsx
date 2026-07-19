@@ -78,7 +78,7 @@ export function AboutHero() {
 
           <motion.p
             variants={fadeUp}
-            className="min-h-[6.5rem] max-w-xl text-base leading-relaxed text-muted md:min-h-[7rem] md:text-lg"
+            className="max-w-xl text-base leading-relaxed text-muted md:text-lg"
           >
             {typedBio}
             {!bioDone && <span className="caret" aria-hidden />}
@@ -112,15 +112,21 @@ export function AboutHero() {
           </motion.div>
         </motion.div>
 
-        {/* Portrait - shown first on mobile (photo builds trust before the
-            text loads) so nothing below it (the typewriter bio, the stat
-            cards that grow in after typing finishes) can ever push it
-            around once the stacked mobile layout puts it in normal flow. */}
+        {/* Portrait. layout lets it smoothly slide into its new position
+            (instead of snapping) whenever the bio's height grows on a
+            line-wrap or the stat cards mount below it, since on mobile
+            this sits underneath the text column in normal flow. */}
         <motion.div
+          layout
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-          className="relative order-first mx-auto w-full max-w-sm lg:order-none lg:max-w-md"
+          transition={{
+            duration: 0.6,
+            ease: [0.22, 1, 0.36, 1],
+            delay: 0.15,
+            layout: { duration: 0.25, ease: [0.22, 1, 0.36, 1] },
+          }}
+          className="relative mx-auto w-full max-w-sm lg:max-w-md"
         >
           <Starburst className="absolute -right-6 -top-6 h-20 w-20 text-marigold/30" />
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2.4rem] border-4 border-paper shadow-luxe">
