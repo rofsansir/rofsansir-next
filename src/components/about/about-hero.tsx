@@ -2,15 +2,18 @@
 
 import Image from "next/image";
 import { motion, type Variants } from "motion/react";
-import { ShieldCheck } from "lucide-react";
 import { Container, ShimmerText, Starburst } from "@/components/ui/primitives";
 import { BlobField } from "@/components/ui/blob-field";
 import { useCountUp } from "@/hooks/use-count-up";
+import { useTypewriterOnce } from "@/hooks/use-typewriter-once";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 16 },
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
 };
+
+const bio =
+  "With 9+ years of classroom experience teaching English-medium students, he has helped thousands build confidence in Bengali and achieve consistent examination success through a structured, exam-focused approach.";
 
 const stats = [
   { target: 9, suffix: "+", label: "Years teaching" },
@@ -43,6 +46,8 @@ function StatCard({
 }
 
 export function AboutHero() {
+  const typedBio = useTypewriterOnce(bio);
+
   return (
     <section className="relative overflow-hidden px-4 pb-12 pt-28 md:pb-20 md:pt-36">
       <BlobField />
@@ -53,36 +58,19 @@ export function AboutHero() {
           variants={{ show: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } } }}
           className="flex flex-col items-start gap-6"
         >
-          <motion.span
-            variants={fadeUp}
-            className="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-paper/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-muted shadow-sm backdrop-blur"
-          >
-            <ShieldCheck className="h-4 w-4 text-marigold-deep" />
-            Expert O Level Bengali Educator
-          </motion.span>
-
           <motion.h1
             variants={fadeUp}
             className="text-balance text-4xl font-extrabold leading-[1.05] tracking-tight md:text-6xl"
           >
-            Meet your <ShimmerText>Bengali</ShimmerText> Teacher
+            Rofsan <ShimmerText>Khan</ShimmerText>
           </motion.h1>
 
           <motion.p
             variants={fadeUp}
-            className="font-display text-lg font-bold text-plum md:text-xl"
+            className="min-h-[6.5rem] max-w-xl text-base leading-relaxed text-muted md:min-h-[7rem] md:text-lg"
           >
-            Rofsan Khan
-          </motion.p>
-
-          <motion.p
-            variants={fadeUp}
-            className="max-w-xl text-base leading-relaxed text-muted md:text-lg"
-          >
-            With 9+ years of classroom experience teaching English-medium
-            students, he has helped thousands build confidence in Bengali and
-            achieve consistent examination success through a structured,
-            exam-focused approach.
+            {typedBio}
+            {typedBio.length < bio.length && <span className="caret" aria-hidden />}
           </motion.p>
 
           <motion.div variants={fadeUp} className="grid w-full grid-cols-2 gap-3 sm:grid-cols-4">
