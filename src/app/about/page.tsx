@@ -65,7 +65,7 @@ const method = [
 
 /** Real, checkable facts - not marketing chips. */
 const background = [
-  { Icon: BadgeCheck, text: "CAIE O Level Bengali Examiner & Assessment Specialist (current)" },
+  { Icon: BadgeCheck, text: "CAIE O Level Bengali Examiner & Assessment Specialist" },
   { Icon: GraduationCap, text: "Honours & Master's, Bengali Language and Literature, University of Chittagong" },
   { Icon: Award, text: "Cambridge Assessment International Education - O Level Bengali (3204) assessment training, Oct 2023" },
   { Icon: Briefcase, text: "Former Senior Faculty of Bengali, Oxford International School (2019-2024)" },
