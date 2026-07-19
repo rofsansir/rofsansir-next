@@ -176,7 +176,7 @@ export default function AboutPage() {
             {experience
               .filter((e) => e.featured)
               .map(({ Icon, title, subtitle, meta, featured }) => (
-                <Reveal key={title} className="mx-auto mb-4 w-full max-w-full sm:w-fit">
+                <div key={title} className="mx-auto mb-4 w-full max-w-full sm:w-fit">
                   <ExperienceCard
                     icon={<Icon className="h-4 w-4" />}
                     title={title}
@@ -184,7 +184,7 @@ export default function AboutPage() {
                     meta={meta}
                     featured={featured}
                   />
-                </Reveal>
+                </div>
               ))}
             <div className="grid gap-4 sm:grid-cols-2">
               {experience

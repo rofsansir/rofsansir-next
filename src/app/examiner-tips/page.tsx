@@ -1,23 +1,22 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { Clock, Film } from "lucide-react";
+import { Clock } from "lucide-react";
 import { PageHero } from "@/components/ui/page-hero";
-import { Container, SectionHeading, ShimmerText } from "@/components/ui/primitives";
+import { Container, ShimmerText } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
 import { getTipArticles } from "@/lib/remote-content";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Examiner Tips & Videos",
+  title: "Examiner Tips",
   description:
-    "O Level Bengali examiner insights, paper strategies and last-minute tips from Rofsan Sir. Watch the videos and read the guidance.",
+    "O Level Bengali examiner insights, paper strategies and last-minute tips from Rofsan Sir.",
   alternates: { canonical: "/examiner-tips" },
   openGraph: {
-    title: "Examiner Tips & Videos · Rofsan Sir",
-    description:
-      "Examiner-led O Level Bengali tips, paper strategies and video lessons.",
+    title: "Examiner Tips · Rofsan Sir",
+    description: "Examiner-led O Level Bengali tips, paper strategies and exam guidance.",
     url: `${site.url}/examiner-tips`,
   },
 };
@@ -34,46 +33,13 @@ export default async function ExaminerTipsPage() {
             Tips from the <ShimmerText>examiner's desk</ShimmerText>
           </>
         }
-        subtitle="Step behind the marking scheme. Watch Rofsan Sir break down papers, strategy and the mistakes that cost grades."
+        subtitle="Step behind the marking scheme. Rofsan Sir breaks down papers, strategy and the mistakes that cost grades."
       />
 
-      {/* Featured video */}
-      <section className="px-4 py-6">
-        <Container>
-          <div className="relative mx-auto max-w-4xl overflow-hidden rounded-[2rem] border-4 border-paper bg-ink shadow-luxe">
-            <div className="aspect-video w-full">
-              <iframe
-                className="h-full w-full"
-                src="https://www.youtube-nocookie.com/embed/tAlxNZrj7xU?rel=0"
-                title="Why do students miss the A* in O Level Bangla?"
-                loading="lazy"
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                referrerPolicy="strict-origin-when-cross-origin"
-              />
-            </div>
-          </div>
-          <div className="mx-auto flex max-w-4xl justify-center pt-6">
-            <Button href="/video" variant="outline">
-              <Film className="h-4 w-4" /> Watch all examiner videos
-            </Button>
-          </div>
-        </Container>
-      </section>
-
-      {/* Topics we cover */}
+      {/* Articles */}
       <section className="bg-paper/60 px-4 py-16 md:py-24">
         <Container>
-          <SectionHeading
-            eyebrow="On the Blog"
-            title={
-              <>
-                Topics we <ShimmerText>cover</ShimmerText>
-              </>
-            }
-            description="In-depth articles by Rofsan Sir - exam strategy, paper guides and the parent perspective."
-          />
-          <div className="mt-10 grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2">
             {articles.map((a, i) => (
               <Reveal key={a.slug} delay={(i % 2) * 0.05}>
                 <Link

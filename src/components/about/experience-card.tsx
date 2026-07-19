@@ -9,6 +9,17 @@ const cardVariants = {
   hover: { y: -6 },
 };
 
+/** Featured card flips face-up into view, then behaves like the rest on hover. */
+const flipVariants = {
+  hidden: { opacity: 0, rotateY: -110 },
+  visible: {
+    opacity: 1,
+    rotateY: 0,
+    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] as const },
+  },
+  hover: { y: -6 },
+};
+
 const glowVariants = {
   rest: { opacity: 0, scale: 0.5 },
   hover: { opacity: 1, scale: 1 },
@@ -35,11 +46,14 @@ export function ExperienceCard({
 }) {
   return (
     <motion.div
-      initial="rest"
-      animate="rest"
+      initial={featured ? "hidden" : "rest"}
+      animate={featured ? undefined : "rest"}
+      whileInView={featured ? "visible" : undefined}
       whileHover="hover"
-      variants={cardVariants}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      viewport={featured ? { once: true, margin: "-80px" } : undefined}
+      variants={featured ? flipVariants : cardVariants}
+      transition={featured ? undefined : { type: "spring", stiffness: 300, damping: 20 }}
+      style={featured ? { transformPerspective: 1200, backfaceVisibility: "hidden" } : undefined}
       className={cn(
         "group relative flex h-full items-start gap-3 overflow-hidden rounded-2xl border p-4 shadow-sm transition-[border-color,box-shadow] duration-300 hover:shadow-luxe",
         featured
