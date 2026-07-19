@@ -245,7 +245,7 @@ export default function AboutPage() {
           <SectionHeading
             eyebrow="Certificates & Recognition"
             title="Certificates and awards"
-            description="A few of the certificates from Cambridge and the schools he's worked with - click any of them to view the full document."
+            description="A few of the certificates from Cambridge and the schools he's worked with."
             align="center"
             className="mx-auto items-center"
           />
