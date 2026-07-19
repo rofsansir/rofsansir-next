@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import {
-  ArrowRight,
+  Award,
+  BadgeCheck,
+  Briefcase,
+  Building2,
   BookOpen,
   BookOpenCheck,
   ClipboardList,
+  GraduationCap,
   Layers,
   ShieldCheck,
   Star,
+  Trophy,
   TrendingUp,
   Users,
 } from "lucide-react";
@@ -16,11 +21,14 @@ import { Reveal } from "@/components/ui/reveal";
 import { BlobField } from "@/components/ui/blob-field";
 import {
   Container,
-  Eyebrow,
   SectionHeading,
   ShimmerText,
   Starburst,
 } from "@/components/ui/primitives";
+import {
+  CertificateGallery,
+  type Certificate,
+} from "@/components/about/certificate-lightbox";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -44,8 +52,6 @@ const stats = [
   { value: "5", label: "Published books" },
 ];
 
-const roleBadges = ["Bengali Educator", "Examiner", "Published Author", "CAIE-Certified"];
-
 const method = [
   { Icon: Layers, text: "Strong foundations before exam-focused preparation" },
   { Icon: ClipboardList, text: "Most practice completed during class" },
@@ -55,11 +61,41 @@ const method = [
   { Icon: BookOpenCheck, text: "Exam-focused guidance on real marking standards" },
 ];
 
-const authorityChips = [
-  "CAIE Specialist",
-  "Assessment Specialist",
-  "Examiner Insight",
-  "Result Focused",
+/** Real, checkable facts - not marketing chips. */
+const background = [
+  { Icon: BadgeCheck, text: "CAIE O Level Bengali Examiner & Assessment Specialist (current)" },
+  { Icon: GraduationCap, text: "Honours & Master's, Bengali Language and Literature, University of Chittagong" },
+  { Icon: Award, text: "Cambridge Assessment International Education - O Level Bengali (3204) assessment training, Oct 2023" },
+  { Icon: Briefcase, text: "Former Senior Faculty of Bengali, Oxford International School (2019-2024)" },
+  { Icon: Building2, text: "Former Lead Teacher, Bengali Department, European Standard School" },
+  { Icon: Trophy, text: "Bangla Olympiad Coordinator, Oxford International School - guided and accompanied students at the 12th Inter-School Bangla Olympiad, Feb 2023" },
+];
+
+const certificates: Certificate[] = [
+  {
+    src: "/assets/about/cambridge-caie-certificate.jpg",
+    width: 848,
+    height: 1200,
+    title: "Certificate of Participation",
+    issuer: "Cambridge Assessment International Education",
+    date: "Oct 2023",
+  },
+  {
+    src: "/assets/about/bangla-olympiad-coordinator-certificate.jpg",
+    width: 1200,
+    height: 871,
+    title: "Bangla Olympiad Coordinator's Certificate",
+    issuer: "Oxford International School",
+    date: "Feb 2023",
+  },
+  {
+    src: "/assets/about/oxford-international-efficiency-award.jpg",
+    width: 1200,
+    height: 886,
+    title: "High-Efficiency Award",
+    issuer: "Oxford International School",
+    date: "2020-2021",
+  },
 ];
 
 const jsonLd = {
@@ -70,9 +106,27 @@ const jsonLd = {
   url: `${site.url}/about`,
   image: `${site.url}/assets/teacher/1.jpg`,
   worksFor: { "@type": "EducationalOrganization", name: site.legalName },
-  alumniOf: { "@type": "CollegeOrUniversity", name: "University of Dhaka" },
+  alumniOf: { "@type": "CollegeOrUniversity", name: "University of Chittagong" },
   knowsAbout: ["O Level Bengali", "Cambridge CAIE", "CAIE Subject 3204", "Pearson Edexcel"],
-  award: "CAIE-Approved O Level Bengali Examiner",
+  hasCredential: [
+    {
+      "@type": "EducationalOccupationalCredential",
+      credentialCategory: "certificate",
+      name: "Cambridge O Level Bengali (3204) Assessment Training",
+      recognizedBy: {
+        "@type": "Organization",
+        name: "Cambridge Assessment International Education",
+      },
+      dateCreated: "2023-10-31",
+    },
+    {
+      "@type": "EducationalOccupationalCredential",
+      credentialCategory: "award",
+      name: "Bangla Olympiad Coordinator's Certificate",
+      recognizedBy: { "@type": "Organization", name: "Oxford International School" },
+      dateCreated: "2023-02-25",
+    },
+  ],
   address: {
     "@type": "PostalAddress",
     addressLocality: "Lalmatia",
@@ -108,25 +162,12 @@ export default function AboutPage() {
             </p>
 
             <p className="max-w-xl text-base leading-relaxed text-muted md:text-lg">
-              Rofsan Sir is a CAIE-trained educator and CAIE-approved O Level
-              Bengali Examiner with over nine years of experience teaching O
-              Level Bengali in English-medium academic settings. He is widely
-              respected for his clear, structured, and student-friendly teaching
-              approach   helping learners, especially those who struggle or feel
-              anxious about Bengali, build confidence and achieve consistent
-              examination success.
+              Rofsan Sir is a CAIE O Level Bengali Examiner and Assessment
+              Specialist with 9+ years of classroom experience teaching
+              English-medium students. His structured, exam-focused approach
+              has helped thousands of students build confidence in Bengali
+              and achieve consistent examination success.
             </p>
-
-            <div className="flex flex-wrap gap-2">
-              {roleBadges.map((b) => (
-                <span
-                  key={b}
-                  className="rounded-full border border-ink/10 bg-paper px-3 py-1.5 text-xs font-semibold text-ink/80"
-                >
-                  {b}
-                </span>
-              ))}
-            </div>
 
             <div className="grid w-full max-w-lg grid-cols-2 gap-3 sm:grid-cols-4">
               {stats.map((s) => (
@@ -168,8 +209,54 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      {/* The method */}
+      {/* Background (dark band) */}
+      <section className="noise relative overflow-hidden bg-plum text-cream">
+        <div aria-hidden className="pointer-events-none absolute inset-0">
+          <div className="absolute -left-16 top-0 h-72 w-72 rounded-full bg-marigold/15 blur-3xl" />
+          <div className="absolute -right-16 bottom-0 h-72 w-72 rounded-full bg-plum-3/40 blur-3xl" />
+        </div>
+        <Container className="relative py-16 md:py-24">
+          <SectionHeading
+            dark
+            eyebrow="Background"
+            title="Credentials, not claims"
+            description="A short, factual record of where his experience actually comes from."
+            align="center"
+            className="mx-auto items-center"
+          />
+          <div className="mx-auto mt-10 grid max-w-3xl gap-4 sm:grid-cols-2">
+            {background.map(({ Icon, text }, i) => (
+              <Reveal key={text} delay={(i % 3) * 0.06}>
+                <div className="flex h-full items-start gap-3 rounded-2xl border border-cream/15 bg-cream/5 p-4">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-cream/10 text-marigold-soft">
+                    <Icon className="h-4 w-4" />
+                  </span>
+                  <p className="text-sm leading-snug text-cream/90">{text}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Certificates & Recognition */}
       <section className="px-4 py-16 md:py-24">
+        <Container>
+          <SectionHeading
+            eyebrow="Certificates & Recognition"
+            title="The proof, not just the pitch"
+            description="Real certificates from Cambridge and the schools he's worked with - click any of them to view the full document."
+            align="center"
+            className="mx-auto items-center"
+          />
+          <div className="mt-10">
+            <CertificateGallery certificates={certificates} />
+          </div>
+        </Container>
+      </section>
+
+      {/* The method */}
+      <section className="bg-paper/60 px-4 py-16 md:py-24">
         <Container>
           <SectionHeading
             eyebrow="The Method"
@@ -179,7 +266,7 @@ export default function AboutPage() {
                 Sir
               </>
             }
-            description="Six principles behind the consistent results   a philosophy built for English-medium learners aiming for the top grades."
+            description="Six principles behind the consistent results - a philosophy built for English-medium learners aiming for the top grades."
             align="center"
             className="mx-auto items-center"
           />
@@ -194,44 +281,6 @@ export default function AboutPage() {
                 </div>
               </Reveal>
             ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Academic authority (dark band) */}
-      <section className="noise relative overflow-hidden bg-plum text-cream">
-        <div aria-hidden className="pointer-events-none absolute inset-0">
-          <div className="absolute -left-16 top-0 h-72 w-72 rounded-full bg-marigold/15 blur-3xl" />
-          <div className="absolute -right-16 bottom-0 h-72 w-72 rounded-full bg-plum-3/40 blur-3xl" />
-        </div>
-        <Container className="relative py-16 md:py-24">
-          <div className="mx-auto flex max-w-3xl flex-col items-center gap-5 text-center">
-            <Eyebrow dark>Academic Authority</Eyebrow>
-            <h2 className="text-balance text-3xl font-extrabold leading-tight tracking-tight md:text-4xl">
-              Examiner-led mentorship
-            </h2>
-            <p className="text-base leading-relaxed text-cream/70 md:text-lg">
-              Learn from an experienced O Level examiner who teaches Bengali
-              using simple explanations and modern techniques to help
-              English-medium students achieve{" "}
-              <span className="font-semibold text-marigold-soft">
-                A&#42; &amp; A in O Level Bengali
-              </span>
-              .
-            </p>
-            <div className="flex flex-wrap justify-center gap-2">
-              {authorityChips.map((c) => (
-                <span
-                  key={c}
-                  className="rounded-full border border-cream/15 bg-cream/5 px-4 py-2 text-sm font-semibold text-cream/90"
-                >
-                  {c}
-                </span>
-              ))}
-            </div>
-            <Button href="/courses" variant="primary" size="lg" className="mt-2">
-              Discover the courses <ArrowRight className="h-4 w-4" />
-            </Button>
           </div>
         </Container>
       </section>
