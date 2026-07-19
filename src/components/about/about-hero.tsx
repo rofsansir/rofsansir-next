@@ -112,12 +112,15 @@ export function AboutHero() {
           </motion.div>
         </motion.div>
 
-        {/* Portrait */}
+        {/* Portrait - shown first on mobile (photo builds trust before the
+            text loads) so nothing below it (the typewriter bio, the stat
+            cards that grow in after typing finishes) can ever push it
+            around once the stacked mobile layout puts it in normal flow. */}
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-          className="relative mx-auto w-full max-w-sm lg:max-w-md"
+          className="relative order-first mx-auto w-full max-w-sm lg:order-none lg:max-w-md"
         >
           <Starburst className="absolute -right-6 -top-6 h-20 w-20 text-marigold/30" />
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2.4rem] border-4 border-paper shadow-luxe">
