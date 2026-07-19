@@ -90,16 +90,19 @@ export function CertificateGallery({ certificates }: { certificates: Certificate
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
               onClick={(e) => e.stopPropagation()}
-              className="relative inline-block max-h-[92vh] max-w-[95vw]"
+              style={{
+                width: `min(95vw, calc(92vh * ${open.width} / ${open.height}))`,
+                height: `min(92vh, calc(95vw * ${open.height} / ${open.width}))`,
+              }}
+              className="relative overflow-hidden rounded-2xl shadow-luxe"
             >
               <Image
                 src={open.src}
                 alt={open.title}
-                width={open.width}
-                height={open.height}
+                fill
                 sizes="95vw"
                 priority
-                className="block max-h-[92vh] w-auto max-w-[95vw] rounded-2xl object-contain shadow-luxe"
+                className="object-contain"
               />
               <div className="absolute inset-x-0 bottom-0 rounded-b-2xl bg-gradient-to-t from-ink/85 via-ink/40 to-transparent p-4 sm:p-6">
                 <p className="font-display text-sm font-bold text-cream sm:text-base">
