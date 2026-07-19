@@ -25,6 +25,17 @@ const glowVariants = {
   hover: { opacity: 1, scale: 1 },
 };
 
+/** Featured glow: stays hidden through the flip, then pulses once it settles. */
+const flipGlowVariants = {
+  hidden: { opacity: 0, scale: 0.5 },
+  visible: {
+    opacity: [0, 0, 0.9, 0],
+    scale: [0.5, 0.5, 1.2, 0.9],
+    transition: { duration: 1.5, times: [0, 0.6, 0.8, 1], ease: "easeOut" as const },
+  },
+  hover: { opacity: 1, scale: 1 },
+};
+
 const iconVariants = {
   rest: { rotate: 0, scale: 1 },
   hover: { rotate: -8, scale: 1.14 },
@@ -63,8 +74,8 @@ export function ExperienceCard({
     >
       <motion.span
         aria-hidden
-        variants={glowVariants}
-        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+        variants={featured ? flipGlowVariants : glowVariants}
+        transition={featured ? undefined : { duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
         className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-marigold/20 blur-2xl"
       />
       <motion.span
