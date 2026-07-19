@@ -4,18 +4,17 @@ import {
   BadgeCheck,
   Briefcase,
   Building2,
-  BookOpen,
-  BookOpenCheck,
-  ClipboardList,
   GraduationCap,
-  Layers,
   Trophy,
-  TrendingUp,
-  Users,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
-import { Container, SectionHeading, ShimmerText } from "@/components/ui/primitives";
+import {
+  Container,
+  SectionHeading,
+  SectionNumber,
+  ShimmerText,
+} from "@/components/ui/primitives";
 import { AboutHero } from "@/components/about/about-hero";
 import {
   CertificateGallery,
@@ -38,12 +37,30 @@ export const metadata: Metadata = {
 };
 
 const method = [
-  { Icon: Layers, text: "Strong foundations before exam-focused preparation" },
-  { Icon: ClipboardList, text: "Most practice completed during class" },
-  { Icon: Users, text: "Specially designed for English-medium students" },
-  { Icon: BookOpen, text: "Concept-based learning, not memorisation" },
-  { Icon: TrendingUp, text: "Confidence-building that removes the fear of Bengali" },
-  { Icon: BookOpenCheck, text: "Exam-focused guidance on real marking standards" },
+  {
+    label: "Foundations before drills",
+    text: "Grammar and sentence structure are locked in first; exam-timed practice only starts once the basics are solid.",
+  },
+  {
+    label: "Practice happens in class",
+    text: "Most exercises are worked through together in session, not left as unsupervised homework.",
+  },
+  {
+    label: "Built for English-medium thinking",
+    text: "Concepts are taught in English first, the way EM students actually process Bengali, not translated from a Bengali-medium textbook.",
+  },
+  {
+    label: "Logic over memorisation",
+    text: "Students learn why an answer is correct, so they can handle a question phrased differently, not just one they've seen before.",
+  },
+  {
+    label: "Confidence before speed",
+    text: "Low-pressure practice comes first; timed, exam-condition drills are introduced only once a concept feels natural.",
+  },
+  {
+    label: "Marked against the real scheme",
+    text: 'Every practice answer is checked against the actual CAIE marking criteria Rofsan Sir uses as an examiner, not a guess at what "sounds right."',
+  },
 ];
 
 /** Real, checkable facts - not marketing chips. */
@@ -187,18 +204,22 @@ export default function AboutPage() {
                 Sir
               </>
             }
-            description="Six principles behind the consistent results - a philosophy built for English-medium learners aiming for the top grades."
             align="center"
             className="mx-auto items-center"
           />
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {method.map(({ Icon, text }, i) => (
-              <Reveal key={text} delay={(i % 3) * 0.06}>
-                <div className="flex h-full items-start gap-4 rounded-3xl border border-ink/10 bg-paper/70 p-5 shadow-sm transition-shadow hover:shadow-card">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-marigold/15 text-marigold-deep">
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <p className="font-medium leading-snug text-ink/90">{text}</p>
+            {method.map(({ label, text }, i) => (
+              <Reveal key={label} delay={(i % 3) * 0.06}>
+                <div className="flex h-full flex-col gap-2 rounded-3xl border border-ink/10 bg-paper/70 p-5 shadow-sm transition-shadow hover:shadow-card">
+                  <div className="flex items-center gap-3">
+                    <SectionNumber className="text-3xl leading-none md:text-4xl">
+                      {String(i + 1).padStart(2, "0")}
+                    </SectionNumber>
+                    <p className="font-display text-base font-bold leading-snug text-ink">
+                      {label}
+                    </p>
+                  </div>
+                  <p className="text-sm leading-relaxed text-ink/75">{text}</p>
                 </div>
               </Reveal>
             ))}
