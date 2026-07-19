@@ -68,8 +68,8 @@ const background = [
   { Icon: BadgeCheck, text: "CAIE O Level Bengali Examiner & Assessment Specialist" },
   { Icon: GraduationCap, text: "Honours & Master's, Bengali Language and Literature, University of Chittagong" },
   { Icon: Award, text: "Cambridge Assessment International Education - O Level Bengali (3204) assessment training, Oct 2023" },
-  { Icon: Briefcase, text: "Former Senior Faculty of Bengali, Oxford International School (2019-2024)" },
-  { Icon: Building2, text: "Former Lead Teacher, Bengali Department, European Standard School" },
+  { Icon: Briefcase, text: "Senior Faculty of Bengali, Oxford International School (2019-2024)" },
+  { Icon: Building2, text: "Later, Lead Teacher, Bengali Department, European Standard School" },
   { Icon: Trophy, text: "Bangla Olympiad Coordinator, Oxford International School - guided and accompanied students at the 12th Inter-School Bangla Olympiad, Feb 2023" },
 ];
 
