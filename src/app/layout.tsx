@@ -58,10 +58,19 @@ export const metadata: Metadata = {
     description: site.description,
     locale: site.locale,
   },
+  // No title/description here on purpose: Next.js doesn't cascade a page's
+  // openGraph.title/description into twitter:title/twitter:description
+  // automatically, and a static value here would apply to every page
+  // regardless of its own metadata (confirmed live - every subpage,
+  // including individual past papers, showed this generic homepage
+  // title/description in twitter:title/twitter:description while
+  // og:title/og:description were correctly page-specific). Omitting them
+  // lets Twitter/X's own documented fallback behavior take over: it reads
+  // og:title/og:description when twitter:title/twitter:description aren't
+  // present, so every page's already-correct openGraph metadata now
+  // applies to Twitter Cards too, with nothing to duplicate per page.
   twitter: {
     card: "summary_large_image",
-    title: `${site.name}   ${site.tagline}`,
-    description: site.description,
   },
   icons: {
     icon: [{ url: "/logos/favicon.svg", type: "image/svg+xml" }],
