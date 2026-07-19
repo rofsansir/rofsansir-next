@@ -43,7 +43,7 @@ function StatCard({
 }) {
   const { ref, value } = useCountUp<HTMLParagraphElement>(target, 1400);
   return (
-    <div className="rounded-2xl border border-ink/10 bg-paper/70 p-3 text-center shadow-sm">
+    <div className="flex h-full flex-col items-center justify-center rounded-2xl border border-ink/10 bg-paper/70 p-3 text-center shadow-sm">
       <p ref={ref} className="font-display text-2xl font-extrabold text-ink">
         {Math.round(value).toLocaleString()}
         {suffix}
@@ -84,12 +84,24 @@ export function AboutHero() {
             {!bioDone && <span className="caret" aria-hidden />}
           </motion.p>
 
-          {bioDone && (
+          <motion.div
+            initial="hidden"
+            animate={bioDone ? "show" : "hidden"}
+            variants={{
+              hidden: { height: 0, opacity: 0 },
+              show: {
+                height: "auto",
+                opacity: 1,
+                transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
+              },
+            }}
+            className="w-full overflow-hidden"
+          >
             <motion.div
               initial="hidden"
-              animate="show"
-              variants={{ show: { transition: { staggerChildren: 0.08 } } }}
-              className="grid w-full grid-cols-2 gap-3 sm:grid-cols-4"
+              animate={bioDone ? "show" : "hidden"}
+              variants={{ show: { transition: { staggerChildren: 0.08, delayChildren: 0.15 } } }}
+              className="grid grid-cols-2 gap-3 pt-1 sm:grid-cols-4"
             >
               {stats.map((s) => (
                 <motion.div key={s.label} variants={statCard}>
@@ -97,7 +109,7 @@ export function AboutHero() {
                 </motion.div>
               ))}
             </motion.div>
-          )}
+          </motion.div>
         </motion.div>
 
         {/* Portrait */}
