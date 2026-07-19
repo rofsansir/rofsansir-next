@@ -219,8 +219,8 @@ export default function AboutPage() {
           <SectionHeading
             dark
             eyebrow="Background"
-            title="Credentials, not claims"
-            description="A short, factual record of where his experience actually comes from."
+            title="Education and experience"
+            description="A short record of where his experience comes from."
             align="center"
             className="mx-auto items-center"
           />
@@ -244,8 +244,8 @@ export default function AboutPage() {
         <Container>
           <SectionHeading
             eyebrow="Certificates & Recognition"
-            title="The proof, not just the pitch"
-            description="Real certificates from Cambridge and the schools he's worked with - click any of them to view the full document."
+            title="Certificates and awards"
+            description="A few of the certificates from Cambridge and the schools he's worked with - click any of them to view the full document."
             align="center"
             className="mx-auto items-center"
           />
