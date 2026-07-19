@@ -109,7 +109,7 @@ export function CertificateGallery({ certificates }: { certificates: Certificate
                 />
               </div>
               <div className="mt-4 max-w-[95vw] text-center">
-                <p className="font-display text-sm font-bold text-cream sm:text-base">
+                <p className="font-display flex min-h-[2.6rem] items-center justify-center text-sm font-bold text-cream sm:min-h-[3rem] sm:text-base">
                   {open.title}
                 </p>
                 <p className="mt-0.5 text-xs text-cream/70 sm:text-sm">
