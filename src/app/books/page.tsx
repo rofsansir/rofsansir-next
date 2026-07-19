@@ -51,13 +51,13 @@ export default function BooksPage() {
         eyebrow="The Book Series"
         title={
           <>
-            The O Level Bengali <ShimmerText>bookshelf</ShimmerText>
+            The O Level Bengali <ShimmerText>book series</ShimmerText>
           </>
         }
         subtitle="Five guidebooks by Rofsan Sir, built around the CAIE 3204 marking scheme   from first foundations to final revision."
       />
 
-      <section className="px-4 pb-20 md:pb-28">
+      <section className="px-4 py-16 md:py-24">
         <Container>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {books.map((b, i) => (
