@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
-import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
+import { BadgeCheck, ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
 
 export type Certificate = {
   src: string;
@@ -12,13 +12,18 @@ export type Certificate = {
   title: string;
   issuer: string;
   date: string;
+  /** Pulled out into its own spotlight card above the grid. */
+  featured?: boolean;
 };
 
-/** Grid of certificate thumbnails that open a full-size lightbox on click. */
+/** Grid of certificate thumbnails (plus an optional featured spotlight) that open a full-size lightbox on click. */
 export function CertificateGallery({ certificates }: { certificates: Certificate[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const open = openIndex !== null ? certificates[openIndex] : null;
   const count = certificates.length;
+
+  const featuredIndex = certificates.findIndex((c) => c.featured);
+  const featured = featuredIndex !== -1 ? certificates[featuredIndex] : null;
 
   const goPrev = () => setOpenIndex((i) => (i === null ? null : (i - 1 + count) % count));
   const goNext = () => setOpenIndex((i) => (i === null ? null : (i + 1) % count));
@@ -41,37 +46,74 @@ export function CertificateGallery({ certificates }: { certificates: Certificate
 
   return (
     <>
-      <div className="grid gap-5 sm:grid-cols-3">
-        {certificates.map((c, i) => (
-          <button
-            key={c.src}
-            type="button"
-            onClick={() => setOpenIndex(i)}
-            aria-label={`View ${c.title} in full size`}
-            className="group flex flex-col overflow-hidden rounded-3xl border border-ink/10 bg-paper/70 p-3 text-left shadow-sm transition-shadow hover:shadow-card"
-          >
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-cream">
-              <Image
-                src={c.src}
-                alt={c.title}
-                fill
-                sizes="(max-width: 640px) 90vw, 360px"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <span className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-ink/70 text-cream opacity-80">
-                <Maximize2 className="h-3.5 w-3.5" />
-              </span>
-            </div>
-            <div className="px-1 pt-3">
-              <p className="font-display text-sm font-bold leading-snug text-ink">
-                {c.title}
-              </p>
-              <p className="mt-0.5 text-xs text-muted">
-                {c.issuer} · {c.date}
-              </p>
-            </div>
-          </button>
-        ))}
+      {featured && (
+        <button
+          type="button"
+          onClick={() => setOpenIndex(featuredIndex)}
+          aria-label={`View ${featured.title} in full size`}
+          className="group mx-auto mb-6 flex w-full max-w-4xl flex-col overflow-hidden rounded-3xl border border-marigold/40 bg-marigold/[0.06] p-5 text-left shadow-luxe transition-shadow hover:shadow-card sm:flex-row sm:items-center sm:gap-8 sm:p-6"
+        >
+          <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden rounded-2xl bg-cream sm:w-96">
+            <Image
+              src={featured.src}
+              alt={featured.title}
+              fill
+              sizes="(max-width: 640px) 90vw, 420px"
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            <span className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-ink/70 text-cream opacity-80">
+              <Maximize2 className="h-3.5 w-3.5" />
+            </span>
+          </div>
+          <div className="mt-4 sm:mt-0">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-marigold/15 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-marigold-deep">
+              <BadgeCheck className="h-3.5 w-3.5" />
+              Official Examiner Credential
+            </span>
+            <p className="mt-3 font-display text-lg font-bold leading-snug text-ink">
+              {featured.title}
+            </p>
+            <p className="mt-1 text-sm text-muted">
+              {featured.issuer} · {featured.date}
+            </p>
+          </div>
+        </button>
+      )}
+
+      <div className="mx-auto grid max-w-4xl gap-6 sm:grid-cols-2">
+        {certificates.map((c, i) => {
+          if (c.featured) return null;
+          return (
+            <button
+              key={c.src}
+              type="button"
+              onClick={() => setOpenIndex(i)}
+              aria-label={`View ${c.title} in full size`}
+              className="group flex flex-col overflow-hidden rounded-3xl border border-ink/10 bg-paper/70 p-4 text-left shadow-sm transition-shadow hover:shadow-card"
+            >
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-cream">
+                <Image
+                  src={c.src}
+                  alt={c.title}
+                  fill
+                  sizes="(max-width: 640px) 90vw, 480px"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <span className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-ink/70 text-cream opacity-80">
+                  <Maximize2 className="h-3.5 w-3.5" />
+                </span>
+              </div>
+              <div className="px-1 pt-3">
+                <p className="font-display text-sm font-bold leading-snug text-ink">
+                  {c.title}
+                </p>
+                <p className="mt-0.5 text-xs text-muted">
+                  {c.issuer} · {c.date}
+                </p>
+              </div>
+            </button>
+          );
+        })}
       </div>
 
       <AnimatePresence>

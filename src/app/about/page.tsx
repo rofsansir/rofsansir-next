@@ -1,11 +1,5 @@
 import type { Metadata } from "next";
-import {
-  Award,
-  BadgeCheck,
-  Briefcase,
-  GraduationCap,
-  Trophy,
-} from "lucide-react";
+import { BadgeCheck, GraduationCap, School } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import {
@@ -15,6 +9,7 @@ import {
   ShimmerText,
 } from "@/components/ui/primitives";
 import { AboutHero } from "@/components/about/about-hero";
+import { ExperienceCard } from "@/components/about/experience-card";
 import {
   CertificateGallery,
   type Certificate,
@@ -62,16 +57,38 @@ const method = [
   },
 ];
 
-/** Real, checkable facts - not marketing chips. */
-const background = [
-  { Icon: BadgeCheck, text: "CAIE O Level Bengali Examiner & Assessment Specialist" },
-  { Icon: GraduationCap, text: "Honours & Master's, Bengali Language and Literature, University of Chittagong" },
-  { Icon: Award, text: "Cambridge Assessment International Education - O Level Bengali (3204) assessment training, Oct 2023" },
+const experience = [
   {
-    Icon: Briefcase,
-    text: "Senior Faculty of Bengali at Oxford International School, then Lead Teacher, Bengali Department at European Standard School (2019-2024)",
+    Icon: BadgeCheck,
+    title: "Cambridge Approved Examiner of Bengali 3204",
+    meta: "Cambridge Assessment International Education",
+    featured: true,
   },
-  { Icon: Trophy, text: "Bangla Olympiad Coordinator, Oxford International School - guided and accompanied students at the 12th Inter-School Bangla Olympiad, Feb 2023" },
+  {
+    Icon: School,
+    title: "Oxford International School (OIS)",
+    subtitle: "Main Campus, Dhanmondi, Dhaka",
+    meta: "Senior Faculty of Bengali",
+  },
+  {
+    Icon: School,
+    title: "European Standard School (ESS)",
+    subtitle: "Main Campus, Dhanmondi, Dhaka",
+    meta: "Lead Teacher, Bengali Department",
+  },
+];
+
+const education = [
+  {
+    Icon: GraduationCap,
+    title: "Master of Arts (M.A.) in Bengali",
+    subtitle: "University of Chittagong",
+  },
+  {
+    Icon: GraduationCap,
+    title: "Bachelor of Arts (Honours) in Bengali",
+    subtitle: "University of Chittagong",
+  },
 ];
 
 const certificates: Certificate[] = [
@@ -79,9 +96,10 @@ const certificates: Certificate[] = [
     src: "/assets/about/cambridge-caie-certificate.jpg",
     width: 848,
     height: 1200,
-    title: "Certificate of Participation",
+    title: "Cambridge Approved Examiner of Bengali 3204",
     issuer: "Cambridge Assessment International Education",
     date: "Oct 2023",
+    featured: true,
   },
   {
     src: "/assets/about/bangla-olympiad-coordinator-certificate.jpg",
@@ -148,29 +166,71 @@ export default function AboutPage() {
 
       <AboutHero />
 
-      {/* Background (dark band) */}
-      <section className="noise relative overflow-hidden bg-plum text-cream">
-        <div aria-hidden className="pointer-events-none absolute inset-0">
-          <div className="absolute -left-16 top-0 h-72 w-72 rounded-full bg-marigold/15 blur-3xl" />
-          <div className="absolute -right-16 bottom-0 h-72 w-72 rounded-full bg-plum-3/40 blur-3xl" />
-        </div>
-        <Container className="relative py-16 md:py-24">
+      {/* Teaching Experience */}
+      <section className="px-4 py-16 md:py-24">
+        <Container>
           <SectionHeading
-            dark
             eyebrow="Background"
-            title="Education and experience"
-            description="A short record of where his experience comes from."
+            title="Teaching experience"
             align="center"
             className="mx-auto items-center"
           />
-          <div className="mx-auto mt-10 grid max-w-3xl gap-4 sm:grid-cols-2">
-            {background.map(({ Icon, text }, i) => (
-              <Reveal key={text} delay={(i % 3) * 0.06}>
-                <div className="flex h-full items-start gap-3 rounded-2xl border border-cream/15 bg-cream/5 p-4">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-cream/10 text-marigold-soft">
+          <div className="mx-auto mt-10 max-w-3xl">
+            {experience
+              .filter((e) => e.featured)
+              .map(({ Icon, title, subtitle, meta, featured }) => (
+                <Reveal key={title} className="mx-auto mb-4 w-full max-w-full sm:w-fit">
+                  <ExperienceCard
+                    icon={<Icon className="h-4 w-4" />}
+                    title={title}
+                    subtitle={subtitle}
+                    meta={meta}
+                    featured={featured}
+                  />
+                </Reveal>
+              ))}
+            <div className="grid gap-4 sm:grid-cols-2">
+              {experience
+                .filter((e) => !e.featured)
+                .map(({ Icon, title, subtitle, meta }, i) => (
+                  <Reveal key={title} delay={(i % 3) * 0.06}>
+                    <ExperienceCard
+                      icon={<Icon className="h-4 w-4" />}
+                      title={title}
+                      subtitle={subtitle}
+                      meta={meta}
+                    />
+                  </Reveal>
+                ))}
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Educational Background */}
+      <section className="bg-paper/60 px-4 py-16 md:py-24">
+        <Container>
+          <SectionHeading
+            eyebrow="Background"
+            title="Educational background"
+            align="center"
+            className="mx-auto items-center"
+          />
+          <div className="mx-auto mt-10 grid max-w-2xl gap-4 sm:grid-cols-2">
+            {education.map(({ Icon, title, subtitle }, i) => (
+              <Reveal key={title} delay={(i % 3) * 0.06}>
+                <div className="flex h-full items-start gap-3 rounded-2xl border border-ink/10 bg-paper/70 p-4 shadow-sm transition-shadow hover:shadow-card">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-marigold/10 text-marigold-deep">
                     <Icon className="h-4 w-4" />
                   </span>
-                  <p className="text-sm leading-snug text-cream/90">{text}</p>
+                  <div className="min-w-0">
+                    <p className="font-display text-sm font-bold leading-snug text-ink">
+                      {title}
+                    </p>
+                    <p className="mt-0.5 text-xs leading-snug text-muted">
+                      {subtitle}
+                    </p>
+                  </div>
                 </div>
               </Reveal>
             ))}
@@ -184,7 +244,6 @@ export default function AboutPage() {
           <SectionHeading
             eyebrow="Certificates & Recognition"
             title="Certificates and awards"
-            description="A few of the certificates from Cambridge and the schools he's worked with."
             align="center"
             className="mx-auto items-center"
           />
@@ -201,7 +260,7 @@ export default function AboutPage() {
             eyebrow="The Method"
             title={
               <>
-                Why Rofsan Sir&rsquo;s Teaching Method Helps Students{" "}
+                Why Rofsan Sir&rsquo;s Students{" "}
                 <ShimmerText>Stand Out</ShimmerText>
               </>
             }
