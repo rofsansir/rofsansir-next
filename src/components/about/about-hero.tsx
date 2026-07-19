@@ -12,6 +12,16 @@ const fadeUp: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
 };
 
+const statCard: Variants = {
+  hidden: { opacity: 0, y: 14, scale: 0.94 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
 const bio =
   "With 9+ years of classroom experience teaching English-medium students, he has helped thousands build confidence in Bengali and achieve consistent examination success through a structured, exam-focused approach.";
 
@@ -47,6 +57,7 @@ function StatCard({
 
 export function AboutHero() {
   const typedBio = useTypewriterOnce(bio);
+  const bioDone = typedBio.length >= bio.length;
 
   return (
     <section className="relative overflow-hidden px-4 pb-12 pt-28 md:pb-20 md:pt-36">
@@ -70,14 +81,23 @@ export function AboutHero() {
             className="min-h-[6.5rem] max-w-xl text-base leading-relaxed text-muted md:min-h-[7rem] md:text-lg"
           >
             {typedBio}
-            {typedBio.length < bio.length && <span className="caret" aria-hidden />}
+            {!bioDone && <span className="caret" aria-hidden />}
           </motion.p>
 
-          <motion.div variants={fadeUp} className="grid w-full grid-cols-2 gap-3 sm:grid-cols-4">
-            {stats.map((s) => (
-              <StatCard key={s.label} {...s} />
-            ))}
-          </motion.div>
+          {bioDone && (
+            <motion.div
+              initial="hidden"
+              animate="show"
+              variants={{ show: { transition: { staggerChildren: 0.08 } } }}
+              className="grid w-full grid-cols-2 gap-3 sm:grid-cols-4"
+            >
+              {stats.map((s) => (
+                <motion.div key={s.label} variants={statCard}>
+                  <StatCard {...s} />
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
         </motion.div>
 
         {/* Portrait */}
