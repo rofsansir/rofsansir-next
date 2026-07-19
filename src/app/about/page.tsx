@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import {
   Award,
   BadgeCheck,
@@ -10,21 +9,14 @@ import {
   ClipboardList,
   GraduationCap,
   Layers,
-  ShieldCheck,
-  Star,
   Trophy,
   TrendingUp,
   Users,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
-import { BlobField } from "@/components/ui/blob-field";
-import {
-  Container,
-  SectionHeading,
-  ShimmerText,
-  Starburst,
-} from "@/components/ui/primitives";
+import { Container, SectionHeading, ShimmerText } from "@/components/ui/primitives";
+import { AboutHero } from "@/components/about/about-hero";
 import {
   CertificateGallery,
   type Certificate,
@@ -44,13 +36,6 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
-
-const stats = [
-  { value: "9+", label: "Years teaching" },
-  { value: "3,000+", label: "Students mentored" },
-  { value: "98%", label: "A* & A success" },
-  { value: "5", label: "Published books" },
-];
 
 const method = [
   { Icon: Layers, text: "Strong foundations before exam-focused preparation" },
@@ -143,71 +128,7 @@ export default function AboutPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden px-4 pb-12 pt-28 md:pb-20 md:pt-36">
-        <BlobField />
-        <Container className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="flex flex-col items-start gap-6">
-            <span className="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-paper/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-muted shadow-sm backdrop-blur">
-              <ShieldCheck className="h-4 w-4 text-marigold-deep" />
-              Expert O Level Bengali Educator
-            </span>
-
-            <h1 className="text-balance text-4xl font-extrabold leading-[1.05] tracking-tight md:text-6xl">
-              Meet your <ShimmerText>Bengali</ShimmerText> Teacher
-            </h1>
-
-            <p className="text-base font-semibold text-plum md:text-lg">
-              Bengali Educator · Examiner · Published Author
-            </p>
-
-            <p className="max-w-xl text-base leading-relaxed text-muted md:text-lg">
-              Rofsan Sir is a CAIE O Level Bengali Examiner and Assessment
-              Specialist with 9+ years of classroom experience teaching
-              English-medium students. His structured, exam-focused approach
-              has helped thousands of students build confidence in Bengali
-              and achieve consistent examination success.
-            </p>
-
-            <div className="grid w-full max-w-lg grid-cols-2 gap-3 sm:grid-cols-4">
-              {stats.map((s) => (
-                <div
-                  key={s.label}
-                  className="rounded-2xl border border-ink/10 bg-paper/70 p-3 text-center shadow-sm"
-                >
-                  <p className="font-display text-2xl font-extrabold text-ink">
-                    {s.value}
-                  </p>
-                  <p className="text-[11px] font-medium uppercase tracking-wide text-muted">
-                    {s.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Portrait */}
-          <div className="relative mx-auto w-full max-w-sm lg:max-w-md">
-            <Starburst className="absolute -right-6 -top-6 h-20 w-20 text-marigold/30" />
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[2.4rem] border-4 border-paper shadow-luxe">
-              <Image
-                src="/assets/teacher/1.jpg"
-                alt="Rofsan Sir, CAIE O Level Bengali Examiner"
-                fill
-                priority
-                sizes="(max-width: 1024px) 80vw, 30rem"
-                className="object-cover"
-              />
-            </div>
-            <div className="absolute -bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-full border border-ink/10 bg-paper/95 px-4 py-2 shadow-card backdrop-blur">
-              <Star className="h-4 w-4 fill-marigold text-marigold" />
-              <span className="text-sm font-bold text-ink">
-                CAIE-Approved Examiner
-              </span>
-            </div>
-          </div>
-        </Container>
-      </section>
+      <AboutHero />
 
       {/* Background (dark band) */}
       <section className="noise relative overflow-hidden bg-plum text-cream">
