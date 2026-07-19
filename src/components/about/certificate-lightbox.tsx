@@ -81,7 +81,7 @@ export function CertificateGallery({ certificates }: { certificates: Certificate
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/95 p-4 sm:p-8"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-ink p-4 sm:p-8"
             onClick={() => setOpenIndex(null)}
           >
             <motion.div
@@ -90,21 +90,25 @@ export function CertificateGallery({ certificates }: { certificates: Certificate
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
               onClick={(e) => e.stopPropagation()}
-              style={{
-                width: `min(95vw, calc(92vh * ${open.width} / ${open.height}))`,
-                height: `min(92vh, calc(95vw * ${open.height} / ${open.width}))`,
-              }}
-              className="relative overflow-hidden rounded-2xl shadow-luxe"
+              className="flex max-h-[92vh] max-w-[95vw] flex-col items-center"
             >
-              <Image
-                src={open.src}
-                alt={open.title}
-                fill
-                sizes="95vw"
-                priority
-                className="object-contain"
-              />
-              <div className="absolute inset-x-0 bottom-0 rounded-b-2xl bg-gradient-to-t from-ink/85 via-ink/40 to-transparent p-4 sm:p-6">
+              <div
+                style={{
+                  width: `min(95vw, calc(80vh * ${open.width} / ${open.height}))`,
+                  height: `min(80vh, calc(95vw * ${open.height} / ${open.width}))`,
+                }}
+                className="relative overflow-hidden rounded-2xl shadow-luxe"
+              >
+                <Image
+                  src={open.src}
+                  alt={open.title}
+                  fill
+                  sizes="95vw"
+                  priority
+                  className="object-contain"
+                />
+              </div>
+              <div className="mt-4 max-w-[95vw] text-center">
                 <p className="font-display text-sm font-bold text-cream sm:text-base">
                   {open.title}
                 </p>
