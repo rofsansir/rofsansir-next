@@ -201,8 +201,8 @@ export default function AboutPage() {
             eyebrow="The Method"
             title={
               <>
-                Why students score <ShimmerText>A&#42;</ShimmerText> with Rofsan
-                Sir
+                Why Rofsan Sir&rsquo;s Teaching Method Helps Students{" "}
+                <ShimmerText>Stand Out</ShimmerText>
               </>
             }
             align="center"
