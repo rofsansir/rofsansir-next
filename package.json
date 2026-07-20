@@ -6,7 +6,8 @@
     "build": "next build",
     "dev": "next dev -H 0.0.0.0 -p 4000",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "migrate:tips": "node scripts/migrate-tips-to-dynamic-form.mjs"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
