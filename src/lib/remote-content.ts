@@ -1,18 +1,21 @@
 /**
  * Homepage content that can be swapped without a code deploy.
  *
- * Gallery, Hall of Fame, Videos, and Past Papers read live PUBLISHED entries
- * from the Revolop Institute dynamic-form engine (api.rofsansir.com's
- * admin-managed forms) - edit them via the revolopinstitute-admin dashboard,
- * no code deploy needed. Past papers' PDFs stay in the existing R2 bucket
- * (referenced by storage key, not re-uploaded) since they were already
- * hosted there. Tips still read the older R2-hosted JSON manifest and keep
- * a fallback (see getTipArticles) - it isn't dynamic-form-backed.
+ * Gallery, Hall of Fame, Videos, Past Papers, and Examiner Tips read live
+ * PUBLISHED entries from the Revolop Institute dynamic-form engine
+ * (api.rofsansir.com's admin-managed forms) - edit them via the
+ * revolopinstitute-admin dashboard, no code deploy needed. Past papers' PDFs
+ * stay in the existing R2 bucket (referenced by storage key, not
+ * re-uploaded) since they were already hosted there.
  *
  * Gallery, Hall of Fame, Videos, and Past Papers show nothing rather than
  * substituting old static content when the live source is unreachable or
  * has no published entries - showing stale placeholder photos/names/papers
- * as if they were real would be misleading.
+ * as if they were real would be misleading. Examiner Tips is the exception:
+ * until the "examiner-tips" dynamic form exists and has published entries,
+ * it falls back to the older R2-hosted JSON manifest, then to the bundled
+ * static articles (see getTipArticles) - an empty tips page is worse than a
+ * slightly stale one.
  */
 import { assetUrl } from "@/lib/assets";
 import type { Achiever, GalleryItem } from "@/data/home";
@@ -143,6 +146,31 @@ export async function getPastPapers(): Promise<PastPaper[]> {
 }
 
 export async function getTipArticles(): Promise<(TipArticle & { readTime: string })[]> {
+  const dynamicEntries = await fetchDynamicFormValues<{
+    title: string;
+    ogTitle?: string;
+    subtitle?: string;
+    category: string;
+    contentHtml: string;
+    thumb: string;
+    slug: string;
+  }>("examiner-tips");
+
+  if (dynamicEntries && dynamicEntries.length > 0) {
+    return dynamicEntries.map((e, i) => ({
+      id: i + 1,
+      slug: e.values.slug,
+      title: e.values.title,
+      ogTitle: e.values.ogTitle || e.values.title,
+      subtitle: e.values.subtitle ?? "",
+      category: e.values.category,
+      contentHtml: e.values.contentHtml,
+      thumb: resolveDynamicFormAsset(e.values.thumb),
+      isActive: 1,
+      readTime: estimateReadTime(e.values.contentHtml),
+    }));
+  }
+
   const remote = await fetchManifest<TipArticle[]>("assets/data/tips.json");
   const raw = Array.isArray(remote) && remote.length > 0 ? remote : fallbackTipArticles;
   return raw
