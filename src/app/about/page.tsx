@@ -32,28 +32,28 @@ export const metadata: Metadata = {
 
 const method = [
   {
-    label: "Foundations before drills",
-    text: "Grammar and sentence structure are locked in first; exam-timed practice only starts once the basics are solid.",
+    label: "Cambridge Examiner",
+    text: "Learn what examiners actually expect.",
   },
   {
-    label: "Practice happens in class",
-    text: "Most exercises are worked through together in session, not left as unsupervised homework.",
+    label: "English-Medium Specialist",
+    text: "Bengali taught the way English-medium students understand.",
   },
   {
-    label: "Built for English-medium thinking",
-    text: "Concepts are taught in English first, the way EM students actually process Bengali, not translated from a Bengali-medium textbook.",
+    label: "Proven A* Method",
+    text: "Structured techniques for high-scoring answers.",
   },
   {
-    label: "Logic over memorisation",
-    text: "Students learn why an answer is correct, so they can handle a question phrased differently, not just one they've seen before.",
+    label: "5 Published Books",
+    text: "Learn using exclusive study materials written by Rofsan Sir.",
   },
   {
-    label: "Confidence before speed",
-    text: "Low-pressure practice comes first; timed, exam-condition drills are introduced only once a concept feels natural.",
+    label: "Small Interactive Classes",
+    text: "Individual attention for every student.",
   },
   {
-    label: "Marked against the real scheme",
-    text: 'Every practice answer is checked against the actual CAIE marking criteria Rofsan Sir uses as an examiner, not a guess at what "sounds right."',
+    label: "Concept Before Memorisation",
+    text: "Understand first, then write confidently.",
   },
 ];
 
