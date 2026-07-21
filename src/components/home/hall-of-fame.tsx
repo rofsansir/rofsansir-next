@@ -4,6 +4,16 @@ import { InfiniteTrack } from "@/components/ui/infinite-track";
 import type { Achiever } from "@/data/home";
 import { getAchievers } from "@/lib/remote-content";
 
+/** Fisher-Yates - returns a new array, doesn't mutate the input. */
+function shuffle<T>(items: T[]): T[] {
+  const result = items.slice();
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
 function AchieverCard({ a }: { a: Achiever }) {
   return (
     <figure className="group relative aspect-[4/5] w-[45vw] shrink-0 overflow-hidden rounded-3xl border border-cream/10 shadow-card sm:w-56 md:w-64">
@@ -30,7 +40,7 @@ function AchieverCard({ a }: { a: Achiever }) {
 }
 
 export async function HallOfFame() {
-  const achievers = await getAchievers();
+  const achievers = shuffle(await getAchievers());
   const mid = Math.ceil(achievers.length / 2);
   const rowOne = achievers.slice(0, mid);
   const rowTwo = achievers.slice(mid);
