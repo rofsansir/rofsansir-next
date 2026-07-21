@@ -1,27 +1,25 @@
 /**
  * Homepage content that can be swapped without a code deploy.
  *
- * Gallery, Hall of Fame, Videos, Past Papers, and Examiner Tips read live
+ * Gallery, Hall of Fame, Videos, Past Papers, and Examiner Tips all read live
  * PUBLISHED entries from the Revolop Institute dynamic-form engine
  * (api.rofsansir.com's admin-managed forms) - edit them via the
  * revolopinstitute-admin dashboard, no code deploy needed. Past papers' PDFs
  * stay in the existing R2 bucket (referenced by storage key, not
  * re-uploaded) since they were already hosted there.
  *
- * Gallery, Hall of Fame, Videos, and Past Papers show nothing rather than
- * substituting old static content when the live source is unreachable or
- * has no published entries - showing stale placeholder photos/names/papers
- * as if they were real would be misleading. Examiner Tips is the exception:
- * until the "examiner-tips" dynamic form exists and has published entries,
- * it falls back to the older R2-hosted JSON manifest, then to the bundled
- * static articles (see getTipArticles) - an empty tips page is worse than a
- * slightly stale one.
+ * All five show nothing rather than substituting old static content when the
+ * live source is unreachable or has no published entries - showing stale
+ * placeholder photos/names/articles as if they were real would be
+ * misleading. Examiner Tips used to be the exception (a bundled static-JSON
+ * fallback, migrated onto the dynamic-form engine - see
+ * plan/examiner-tips-dynamic-form-migration.md in revolop-institute-workspace);
+ * once the migration was verified live, that fallback was removed.
  */
-import { assetUrl } from "@/lib/assets";
 import type { Achiever, GalleryItem } from "@/data/home";
 import type { Video } from "@/data/videos";
 import type { PastPaper } from "@/data/past-papers";
-import { fallbackTipArticles, type TipArticle } from "@/data/tip-articles";
+import type { TipArticle } from "@/data/tip-articles";
 import { estimateReadTime } from "@/lib/text";
 
 const REVALIDATE_SECONDS = 300;
@@ -29,18 +27,6 @@ const REVALIDATE_SECONDS = 300;
 const DYNAMIC_FORMS_API = (
   process.env.NEXT_PUBLIC_DYNAMIC_FORMS_API ?? "https://api.rofsansir.com"
 ).replace(/\/+$/, "");
-
-async function fetchManifest<T>(key: string): Promise<T | null> {
-  try {
-    const res = await fetch(assetUrl(key), {
-      next: { revalidate: REVALIDATE_SECONDS },
-    });
-    if (!res.ok) return null;
-    return (await res.json()) as T;
-  } catch {
-    return null;
-  }
-}
 
 type DynamicFormValue<T> = {
   publicId: string;
@@ -155,25 +141,18 @@ export async function getTipArticles(): Promise<(TipArticle & { readTime: string
     thumb: string;
     slug: string;
   }>("examiner-tips");
+  if (!dynamicEntries) return [];
 
-  if (dynamicEntries && dynamicEntries.length > 0) {
-    return dynamicEntries.map((e, i) => ({
-      id: i + 1,
-      slug: e.values.slug,
-      title: e.values.title,
-      ogTitle: e.values.ogTitle || e.values.title,
-      subtitle: e.values.subtitle ?? "",
-      category: e.values.category,
-      contentHtml: e.values.contentHtml,
-      thumb: resolveDynamicFormAsset(e.values.thumb),
-      isActive: 1,
-      readTime: estimateReadTime(e.values.contentHtml),
-    }));
-  }
-
-  const remote = await fetchManifest<TipArticle[]>("assets/data/tips.json");
-  const raw = Array.isArray(remote) && remote.length > 0 ? remote : fallbackTipArticles;
-  return raw
-    .filter((a) => a.isActive === 1)
-    .map((a) => ({ ...a, thumb: assetUrl(a.thumb), readTime: estimateReadTime(a.contentHtml) }));
+  return dynamicEntries.map((e, i) => ({
+    id: i + 1,
+    slug: e.values.slug,
+    title: e.values.title,
+    ogTitle: e.values.ogTitle || e.values.title,
+    subtitle: e.values.subtitle ?? "",
+    category: e.values.category,
+    contentHtml: e.values.contentHtml,
+    thumb: resolveDynamicFormAsset(e.values.thumb),
+    isActive: 1,
+    readTime: estimateReadTime(e.values.contentHtml),
+  }));
 }
