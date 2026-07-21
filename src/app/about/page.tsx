@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { BadgeCheck, GraduationCap, School } from "lucide-react";
+import { BadgeCheck, GraduationCap, Quote, School } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import {
   Container,
+  Eyebrow,
   SectionHeading,
   SectionNumber,
   ShimmerText,
@@ -163,12 +164,12 @@ export default function AboutPage() {
 
       <AboutHero />
 
-      {/* Background: Teaching Experience + Educational Background */}
+      {/* Background: Professional Experience + Educational Background */}
       <section className="px-4 py-16 md:py-24">
         <Container>
           <SectionHeading
             eyebrow="Background"
-            title="Teaching experience"
+            title="Professional experience"
             align="center"
             className="mx-auto items-center"
           />
@@ -275,6 +276,35 @@ export default function AboutPage() {
               </Reveal>
             ))}
           </div>
+        </Container>
+      </section>
+
+      {/* Philosophy */}
+      <section className="noise relative overflow-hidden bg-plum py-16 text-cream md:py-24">
+        <div aria-hidden className="pointer-events-none absolute inset-0">
+          <div className="absolute -left-20 top-0 h-72 w-72 rounded-full bg-marigold/15 blur-3xl" />
+          <div className="absolute -right-20 bottom-0 h-80 w-80 rounded-full bg-plum-3/40 blur-3xl" />
+        </div>
+        <Container className="relative">
+          <Reveal>
+            <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
+              <Eyebrow dark>Philosophy</Eyebrow>
+              <Quote className="mt-6 h-9 w-9 text-marigold/50" aria-hidden />
+              <blockquote className="mt-6 text-balance font-display text-2xl font-bold leading-snug text-cream md:text-4xl">
+                &ldquo;I believe every English-medium student can enjoy
+                learning Bengali. My goal is not simply to help students
+                pass examinations, but to build confidence, develop strong
+                language skills, and inspire a lifelong appreciation for
+                the language.&rdquo;
+              </blockquote>
+              <p className="mt-6 font-display text-lg font-bold text-marigold-soft">
+                Rofsan Sir
+              </p>
+              <p className="text-sm text-cream/60">
+                CAIE O Level Bengali Examiner
+              </p>
+            </div>
+          </Reveal>
         </Container>
       </section>
 
