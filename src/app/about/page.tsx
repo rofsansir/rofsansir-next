@@ -92,6 +92,23 @@ const education = [
   },
 ];
 
+const trainingGroups = [
+  {
+    title: "Cambridge International Education",
+    items: ["Cambridge O Level Bengali (3204): Focus on Assessment"],
+  },
+  {
+    title: "Teaching Excellence",
+    items: [
+      "Effective Classroom Management",
+      "Modern Teaching Techniques",
+      "Rapport Building with Students",
+      "Child Protection & Safeguarding",
+      "Supporting Slow Learners",
+    ],
+  },
+];
+
 const certificates: Certificate[] = [
   {
     src: "/assets/about/cambridge-caie-certificate.jpg",
@@ -164,7 +181,7 @@ export default function AboutPage() {
 
       <AboutHero />
 
-      {/* Background: Professional Experience + Educational Background */}
+      {/* Professional experience */}
       <section className="px-4 py-16 md:py-24">
         <Container>
           <SectionHeading
@@ -202,46 +219,6 @@ export default function AboutPage() {
                 ))}
             </div>
           </div>
-
-          <SectionHeading
-            title="Educational background"
-            align="center"
-            className="mx-auto mt-14 items-center md:mt-20"
-          />
-          <div className="mx-auto mt-10 grid max-w-2xl gap-4 sm:grid-cols-2">
-            {education.map(({ Icon, title, subtitle }, i) => (
-              <Reveal key={title} delay={(i % 3) * 0.06}>
-                <div className="flex h-full items-start gap-3 rounded-2xl border border-ink/10 bg-paper/70 p-4 shadow-sm transition-shadow hover:shadow-card">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-marigold/10 text-marigold-deep">
-                    <Icon className="h-4 w-4" />
-                  </span>
-                  <div className="min-w-0">
-                    <p className="font-display text-sm font-bold leading-snug text-ink">
-                      {title}
-                    </p>
-                    <p className="mt-0.5 text-xs leading-snug text-muted">
-                      {subtitle}
-                    </p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Certificates & Recognition */}
-      <section className="px-4 py-16 md:py-24">
-        <Container>
-          <SectionHeading
-            eyebrow="Certificates & Recognition"
-            title="Certificates and awards"
-            align="center"
-            className="mx-auto items-center"
-          />
-          <div className="mt-10">
-            <CertificateGallery certificates={certificates} />
-          </div>
         </Container>
       </section>
 
@@ -275,6 +252,77 @@ export default function AboutPage() {
                 </div>
               </Reveal>
             ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Educational Background + Professional Training & Certifications */}
+      <section className="px-4 py-16 md:py-24">
+        <Container>
+          <SectionHeading
+            eyebrow="Background"
+            title="Educational background"
+            align="center"
+            className="mx-auto items-center"
+          />
+          <div className="mx-auto mt-10 grid max-w-2xl gap-4 sm:grid-cols-2">
+            {education.map(({ Icon, title, subtitle }, i) => (
+              <Reveal key={title} delay={(i % 3) * 0.06}>
+                <div className="flex h-full items-start gap-3 rounded-2xl border border-ink/10 bg-paper/70 p-4 shadow-sm transition-shadow hover:shadow-card">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-marigold/10 text-marigold-deep">
+                    <Icon className="h-4 w-4" />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="font-display text-sm font-bold leading-snug text-ink">
+                      {title}
+                    </p>
+                    <p className="mt-0.5 text-xs leading-snug text-muted">
+                      {subtitle}
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <SectionHeading
+            title="Professional training & certifications"
+            align="center"
+            className="mx-auto mt-14 items-center md:mt-20"
+          />
+          <div className="mx-auto mt-10 grid max-w-3xl items-start gap-4 sm:grid-cols-2">
+            {trainingGroups.map((group, gi) => (
+              <Reveal key={group.title} delay={gi * 0.06}>
+                <div className="h-full rounded-2xl border border-ink/10 bg-paper/70 p-5 shadow-sm transition-shadow hover:shadow-card">
+                  <h3 className="font-display text-sm font-bold text-ink">
+                    {group.title}
+                  </h3>
+                  <ul className="mt-3 flex flex-col gap-2.5">
+                    {group.items.map((item) => (
+                      <li key={item} className="flex items-start gap-2 text-sm leading-snug text-muted">
+                        <BadgeCheck className="mt-0.5 h-4 w-4 shrink-0 text-marigold-deep" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Certificates & Recognition */}
+      <section className="px-4 py-16 md:py-24">
+        <Container>
+          <SectionHeading
+            eyebrow="Certificates & Recognition"
+            title="Certificates and awards"
+            align="center"
+            className="mx-auto items-center"
+          />
+          <div className="mt-10">
+            <CertificateGallery certificates={certificates} />
           </div>
         </Container>
       </section>
