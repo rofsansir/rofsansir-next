@@ -151,7 +151,7 @@ export function Hero() {
           {/* portrait (3D tilt) */}
           <motion.div
             style={{ rotateX: tiltX, rotateY: tiltY, transformPerspective: 1000 }}
-            className="relative aspect-[4/5] overflow-hidden rounded-[2.4rem] border-[5px] border-paper shadow-luxe"
+            className="relative aspect-[3/4] overflow-hidden rounded-[2.4rem] border-[5px] border-paper shadow-luxe"
           >
             <Image
               src="/assets/teacher/1-home.jpg"
