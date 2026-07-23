@@ -27,7 +27,7 @@ const bio =
 
 const stats = [
   { target: 9, suffix: "+", label: "Years teaching" },
-  { target: 3000, suffix: "+", label: "Students mentored" },
+  { target: 2200, suffix: "+", label: "Students mentored" },
   { target: 98, suffix: "%", label: "A* & A success" },
   { target: 5, suffix: "", label: "Published books" },
 ];

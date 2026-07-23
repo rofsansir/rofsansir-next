@@ -57,7 +57,7 @@ export async function HallOfFame() {
           dark
           eyebrow="Hall of Fame"
           numeral="02"
-          title="Real students. Real journeys. Real results"
+          title="A journey of learning, confidence and achievement."
         />
 
       </Container>

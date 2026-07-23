@@ -29,7 +29,7 @@ const WORDS = ["From", "fear", "to", "A*", "in", "O", "Level", "Bengali"];
 
 export function Hero() {
   const tagline = useTypewriter(heroTypewriter);
-  const { ref: countRef, value } = useCountUp<HTMLSpanElement>(3000);
+  const { ref: countRef, value } = useCountUp<HTMLSpanElement>(2200);
 
   // Section-level mouse parallax (matches prototype: move mouse anywhere in hero).
   const mx = useSpring(useMotionValue(0), { stiffness: 150, damping: 18 });
@@ -154,7 +154,7 @@ export function Hero() {
             className="relative aspect-[4/5] overflow-hidden rounded-[2.4rem] border-[5px] border-paper shadow-luxe"
           >
             <Image
-              src="/assets/teacher/1.jpg"
+              src="/assets/teacher/1-home.jpg"
               alt="Rofsan Sir, CAIE O Level Bengali Examiner"
               fill
               priority
