@@ -2,14 +2,14 @@
 
 export const heroStats: string[] = [
   "9+ Years Experience",
-  "3,000+ Students Mentored",
+  "2,200+ Students Mentored",
   "Author of O Level Bengali Book Series",
   "98% A* & A Success Rate",
 ];
 
 export const heroTypewriter: string[] = [
   "Learn from a CAIE O Level Bengali Examiner",
-  "Trusted by 3,000+ English-medium students",
+  "Trusted by 2,200+ English-medium students",
   "Author of the O Level Bengali Book Series",
   "Making A* achievable through the right guidance",
 ];
@@ -17,7 +17,7 @@ export const heroTypewriter: string[] = [
 export const tickerItems: string[] = [
   "A*",
   "99 marks",
-  "3,000+ students",
+  "2,200+ students",
   "Cambridge Examiner",
   "Author of the O Level Bengali Book Series",
   "9+ years",
