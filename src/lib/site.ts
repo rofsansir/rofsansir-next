@@ -9,7 +9,7 @@ export const site = {
   tagline: "O Level Bengali with a CAIE Examiner",
   description:
     "Master O Level Bengali with CAIE Examiner Rofsan Sir. Hall of Fame, examiner tips, free CAIE 3204 past papers, and the O Level Bengali guidebook series   built for English-medium students aiming for A*.",
-  subject: "Cambridge CAIE & Pearson Edexcel O Level Bengali (3204)",
+  subject: "Cambridge  O Level Bengali (3204)",
   locale: "en_US",
   defaultOgImage: "/opengraph-image",
 

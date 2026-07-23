@@ -38,7 +38,7 @@ const jsonLd = {
   "@type": "Course",
   name: "O Level Bengali (CAIE 3204)",
   description:
-    "Examiner-led O Level Bengali coaching for Cambridge CAIE & Pearson Edexcel, online and offline at Lalmatia, Dhaka.",
+    "Specialised Cambridge O Level Bengali (3204) preparation for English-medium students.",
   provider: {
     "@type": "EducationalOrganization",
     name: site.legalName,
