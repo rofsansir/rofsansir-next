@@ -16,7 +16,7 @@ export const heroTypewriter: string[] = [
 
 export const tickerItems: string[] = [
   "A*",
-  "99 marks",
+  "90+ marks",
   "2,200+ students",
   "Cambridge Examiner",
   "Author of the O Level Bengali Book Series",
@@ -104,11 +104,11 @@ export const testimonials: Testimonial[] = [
   },
   {
     name: "Farhan Ahmad",
-    grade: "A* · 99 marks",
+    grade: "A* · 90 marks",
     year: "CAIE O Level 2023",
     image: "/assets/students/farhan.jpeg",
     quote:
-      "Achieved 99 marks with Sir's guidance. Regular mocks and past-paper discussions improved my understanding consistently.",
+      "Achieved 90+ marks with Sir's guidance. Regular mocks and past-paper discussions improved my understanding consistently.",
   },
 ];
 
@@ -121,5 +121,5 @@ export type GalleryItem = { src: string; alt: string; title: string };
 export const aboutTeaser = {
   eyebrow: "Examiners perspective",
   title: "What examiners look for",
-  videoId: "Iv5xhoq6cAk",
+  videoId: "euZJgLczi5I",
 };
