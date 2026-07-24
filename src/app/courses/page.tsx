@@ -10,6 +10,7 @@ import { PageHero } from "@/components/ui/page-hero";
 import { Container, SectionHeading, ShimmerText } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
+import { HoverCard, HoverIcon } from "@/components/ui/hover-card";
 import { cn } from "@/lib/cn";
 import { site } from "@/lib/site";
 import { classModes, curriculum, courses } from "@/data/courses";
@@ -77,20 +78,15 @@ export default function CoursesPage() {
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             {courses.map((p, i) => (
               <Reveal key={p.title} delay={i * 0.06}>
-                <div className="flex h-full flex-col rounded-[1.75rem] border border-ink/10 bg-paper/70 p-6 shadow-sm transition-shadow hover:shadow-card">
-                  <div className="flex items-center justify-between">
-                    <span
-                      className={cn(
-                        "flex h-11 w-11 items-center justify-center rounded-2xl",
-                        accentRing[p.accent],
-                      )}
-                    >
-                      <GraduationCap className="h-5 w-5" />
-                    </span>
-                    <span className="rounded-full bg-ink/5 px-3 py-1 text-xs font-semibold text-muted">
-                      {p.duration}
-                    </span>
-                  </div>
+                <HoverCard className="flex flex-col rounded-[1.75rem] p-6">
+                  <HoverIcon
+                    className={cn(
+                      "flex h-11 w-11 items-center justify-center rounded-2xl",
+                      accentRing[p.accent],
+                    )}
+                  >
+                    <GraduationCap className="h-5 w-5" />
+                  </HoverIcon>
                   <h3 className="mt-5 font-display text-xl font-bold text-ink">
                     {p.title}
                   </h3>
@@ -121,7 +117,7 @@ export default function CoursesPage() {
                       Enquire about this batch
                     </Button>
                   </div>
-                </div>
+                </HoverCard>
               </Reveal>
             ))}
           </div>
@@ -142,7 +138,7 @@ export default function CoursesPage() {
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             {curriculum.map((c, i) => (
               <Reveal key={c.title} delay={i * 0.06}>
-                <div className="flex h-full flex-col rounded-[1.75rem] border border-ink/10 bg-cream p-6 shadow-sm">
+                <HoverCard className="flex flex-col rounded-[1.75rem] bg-cream p-6">
                   <h3 className="font-display text-lg font-bold text-ink">{c.title}</h3>
                   <ul className="mt-4 flex flex-1 flex-col gap-2.5">
                     {c.points.map((pt) => (
@@ -158,7 +154,7 @@ export default function CoursesPage() {
                   <p className="mt-5 text-[11px] font-bold uppercase tracking-widest text-muted">
                     Code · {c.code}
                   </p>
-                </div>
+                </HoverCard>
               </Reveal>
             ))}
           </div>
@@ -172,15 +168,15 @@ export default function CoursesPage() {
           <div className="mt-10 grid gap-5 md:grid-cols-2">
             {classModes.map((m, i) => (
               <Reveal key={m.title} delay={i * 0.06}>
-                <div className="flex h-full flex-col rounded-[1.75rem] border border-ink/10 bg-paper/70 p-6 shadow-sm">
+                <HoverCard className="flex flex-col rounded-[1.75rem] p-6">
                   <div className="flex items-center gap-3">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-marigold/15 text-marigold-deep">
+                    <HoverIcon className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-marigold/15 text-marigold-deep">
                       {m.title === "Offline" ? (
                         <MapPin className="h-5 w-5" />
                       ) : (
                         <Laptop className="h-5 w-5" />
                       )}
-                    </span>
+                    </HoverIcon>
                     <div>
                       <h3 className="font-display text-lg font-bold text-ink">
                         {m.title}
@@ -198,7 +194,7 @@ export default function CoursesPage() {
                       </li>
                     ))}
                   </ul>
-                </div>
+                </HoverCard>
               </Reveal>
             ))}
           </div>

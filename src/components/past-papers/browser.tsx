@@ -1,9 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
 import { Download, FileText, Search } from "lucide-react";
 import { cn } from "@/lib/cn";
+import { HoverCard } from "@/components/ui/hover-card";
 import { formatBytes, paperTypes, type PastPaper } from "@/data/past-papers";
 
 const typeTone: Record<string, string> = {
@@ -109,10 +109,10 @@ export function PastPaperBrowser({
       ) : (
         <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((p) => (
-            <Link
+            <HoverCard
               key={p.slug}
               href={`/past-papers/${p.slug}`}
-              className="group flex flex-col rounded-2xl border border-ink/10 bg-paper/70 p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-marigold/40 hover:shadow-card"
+              className="flex flex-col p-5"
             >
               <div className="flex items-center justify-between">
                 <span
@@ -138,7 +138,7 @@ export function PastPaperBrowser({
                   View
                 </span>
               </div>
-            </Link>
+            </HoverCard>
           ))}
         </div>
       )}
