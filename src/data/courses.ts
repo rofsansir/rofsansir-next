@@ -12,7 +12,7 @@ export type Course = {
 export const courses: Course[] = [
   {
     title: "Foundation Batch",
-    batch: "Class VIII",
+    batch: "Grade VIII",
     type: "Small Batch",
     duration: "1 Year",
     accent: "teal",
@@ -25,7 +25,7 @@ export const courses: Course[] = [
   },
   {
     title: "Regular Program",
-    batch: "Class IX",
+    batch: "Grade IX",
     type: "Focused Groups",
     duration: "1 Year",
     accent: "marigold",
@@ -38,7 +38,7 @@ export const courses: Course[] = [
   },
   {
     title: "Exam Focused",
-    batch: "Class X",
+    batch: "Grade X",
     type: "Exam Ready",
     duration: "1 Year",
     accent: "plum",

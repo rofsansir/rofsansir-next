@@ -29,12 +29,12 @@ export const site = {
   },
 
   contact: {
-    phonePrimary: "+880 1948-116595",
-    phonePrimaryTel: "+8801948116595",
-    phoneSecondary: "+880 1711-772662",
+    phonePrimary: "+880 1711-772662",
+    phonePrimaryTel: "+8801711772662",
+    phoneSecondary: "+880 1948-116595",
+    phoneSecondaryTel: "+8801948116595",
     email: "rofsankhan@gmail.com",
     whatsapp: "https://wa.me/8801948116595",
-    hours: "Saturday–Thursday, 10:00 AM – 9:00 PM · Friday by appointment",
   },
 
   /** External admission form (legacy, used by "Start Learning" CTAs). */

@@ -64,7 +64,7 @@ export default function CoursesPage() {
             O Level Bengali <ShimmerText>Courses</ShimmerText>
           </>
         }
-        subtitle="Examiner-led O Level Bengali (3204). Class VIII, IX and X, online or at our Lalmatia, Dhaka campus."
+        subtitle="Examiner-led O Level Bengali (3204). Grade VIII, IX and X, online or at our Lalmatia, Dhaka campus."
         image={{
           src: "/assets/courses/classroom-exam.jpg",
           alt: "Students writing an exam in the Lalmatia classroom",
@@ -88,10 +88,10 @@ export default function CoursesPage() {
                     <GraduationCap className="h-5 w-5" />
                   </HoverIcon>
                   <h3 className="mt-5 font-display text-xl font-bold text-ink">
-                    {p.title}
+                    {p.batch}
                   </h3>
                   <p className="text-sm font-semibold text-marigold-deep">
-                    {p.batch} · {p.type}
+                    {p.title}
                   </p>
                   <ul className="mt-4 flex flex-col gap-2.5">
                     {p.features.map((f) => (

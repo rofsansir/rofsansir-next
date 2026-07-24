@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Clock, Mail, MapPin, Navigation, Phone } from "lucide-react";
+import { Mail, MapPin, Navigation, Phone } from "lucide-react";
 import { PageHero } from "@/components/ui/page-hero";
 import { Container, SectionHeading, ShimmerText } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
@@ -76,7 +76,7 @@ export default function ContactPage() {
       {/* Contact cards */}
       <section className="px-4 py-6 md:py-10">
         <Container>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Reveal>
               <div className="flex h-full flex-col gap-2 rounded-[1.5rem] border border-ink/10 bg-paper/70 p-5 shadow-sm">
                 <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-marigold/15 text-marigold-deep">
@@ -92,7 +92,7 @@ export default function ContactPage() {
                   {site.contact.phonePrimary}
                 </a>
                 <a
-                  href={`tel:+8801711772662`}
+                  href={`tel:${site.contact.phoneSecondaryTel}`}
                   className="text-sm text-muted hover:text-marigold-deep"
                 >
                   {site.contact.phoneSecondary}
@@ -127,20 +127,6 @@ export default function ContactPage() {
                 </p>
                 <p className="font-semibold text-ink">{site.address.lines[0]}</p>
                 <p className="text-sm text-muted">{site.address.lines[1]}</p>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.15}>
-              <div className="flex h-full flex-col gap-2 rounded-[1.5rem] border border-ink/10 bg-paper/70 p-5 shadow-sm">
-                <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-marigold/15 text-marigold-deep">
-                  <Clock className="h-5 w-5" />
-                </span>
-                <p className="text-xs font-semibold uppercase tracking-wide text-muted">
-                  Class Hours
-                </p>
-                <p className="font-semibold text-ink">Sat – Thu</p>
-                <p className="text-sm text-muted">10:00 AM – 9:00 PM</p>
-                <p className="text-xs italic text-muted">Friday by appointment</p>
               </div>
             </Reveal>
           </div>
