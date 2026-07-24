@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Container } from "@/components/ui/primitives";
+import { PageHero } from "@/components/ui/page-hero";
+import { Container, ShimmerText } from "@/components/ui/primitives";
 import { VideoPlayer } from "@/components/videos/video-player";
 import { videoThumb } from "@/data/videos";
 import { getVideos } from "@/lib/remote-content";
@@ -46,9 +47,18 @@ export default async function VideoPage() {
         />
       )}
 
-      <section className="px-4 pb-16 pt-28 md:pt-36">
+      <PageHero
+        eyebrow="Watch & Learn"
+        title={
+          <>
+            Video <ShimmerText>Library</ShimmerText>
+          </>
+        }
+        subtitle="Browse lessons, examiner insights, study techniques, and preparation resources - all in one place."
+      />
+
+      <section className="px-4 pb-16">
         <Container>
-          <h1 className="sr-only">Examiner Tip Videos</h1>
           <VideoPlayer videos={videos} />
         </Container>
       </section>

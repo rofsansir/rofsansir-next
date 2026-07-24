@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
 import { BadgeCheck, ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
+import { cardHoverVariants, glowHoverVariants } from "@/components/ui/hover-card";
 
 export type Certificate = {
   src: string;
@@ -46,12 +47,22 @@ export function CertificateGallery({ certificates }: { certificates: Certificate
   return (
     <>
       {featured && (
-        <button
+        <motion.button
           type="button"
           onClick={() => setOpenIndex(featuredIndex)}
           aria-label={`View ${featured.title} in full size`}
-          className="group mx-auto mb-6 flex w-full max-w-4xl flex-col overflow-hidden rounded-3xl border border-marigold/40 bg-marigold/[0.06] p-5 text-left shadow-luxe transition-shadow hover:shadow-card sm:flex-row sm:items-center sm:gap-8 sm:p-6"
+          initial="rest"
+          animate="rest"
+          whileHover="hover"
+          variants={cardHoverVariants}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          className="group relative mx-auto mb-6 flex w-full max-w-4xl flex-col overflow-hidden rounded-3xl border border-marigold/40 bg-marigold/[0.06] p-5 text-left shadow-luxe transition-[border-color,box-shadow] duration-300 hover:border-marigold/70 hover:shadow-card sm:flex-row sm:items-center sm:gap-8 sm:p-6"
         >
+          <motion.span
+            aria-hidden
+            variants={glowHoverVariants}
+            className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-marigold/20 blur-2xl"
+          />
           <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden rounded-2xl bg-cream sm:w-96">
             <Image
               src={featured.src}
@@ -64,7 +75,7 @@ export function CertificateGallery({ certificates }: { certificates: Certificate
               <Maximize2 className="h-3.5 w-3.5" />
             </span>
           </div>
-          <div className="mt-4 sm:mt-0">
+          <div className="relative mt-4 sm:mt-0">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-marigold/15 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-marigold-deep">
               <BadgeCheck className="h-3.5 w-3.5" />
               Official Examiner Credential
@@ -74,20 +85,30 @@ export function CertificateGallery({ certificates }: { certificates: Certificate
             </p>
             <p className="mt-1 text-sm text-muted">{featured.issuer}</p>
           </div>
-        </button>
+        </motion.button>
       )}
 
       <div className="mx-auto grid max-w-4xl gap-6 sm:grid-cols-2">
         {certificates.map((c, i) => {
           if (c.featured) return null;
           return (
-            <button
+            <motion.button
               key={c.src}
               type="button"
               onClick={() => setOpenIndex(i)}
               aria-label={`View ${c.title} in full size`}
-              className="group flex flex-col overflow-hidden rounded-3xl border border-ink/10 bg-paper/70 p-4 text-left shadow-sm transition-shadow hover:shadow-card"
+              initial="rest"
+              animate="rest"
+              whileHover="hover"
+              variants={cardHoverVariants}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="group relative flex flex-col overflow-hidden rounded-3xl border border-ink/10 bg-paper/70 p-4 text-left shadow-sm transition-[border-color,box-shadow] duration-300 hover:border-marigold/40 hover:shadow-card"
             >
+              <motion.span
+                aria-hidden
+                variants={glowHoverVariants}
+                className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-marigold/20 blur-2xl"
+              />
               <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-cream">
                 <Image
                   src={c.src}
@@ -100,13 +121,13 @@ export function CertificateGallery({ certificates }: { certificates: Certificate
                   <Maximize2 className="h-3.5 w-3.5" />
                 </span>
               </div>
-              <div className="px-1 pt-3">
+              <div className="relative px-1 pt-3">
                 <p className="font-display text-sm font-bold leading-snug text-ink">
                   {c.title}
                 </p>
                 <p className="mt-0.5 text-xs text-muted">{c.issuer}</p>
               </div>
-            </button>
+            </motion.button>
           );
         })}
       </div>

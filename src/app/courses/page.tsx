@@ -17,12 +17,12 @@ import { classModes, curriculum, courses } from "@/data/courses";
 export const metadata: Metadata = {
   title: "Courses & Admission",
   description:
-    "O Level Bengali batches for Class VIII (Foundation), IX (Regular) and X (Exam Focused), online & offline at Lalmatia, Dhaka. Aligned with Cambridge CAIE & Pearson Edexcel 3204.",
+    "O Level Bengali batches for Class VIII (Foundation), IX (Regular) and X (Exam Focused), online & offline at Lalmatia, Dhaka. Aligned with syllabus 3204.",
   alternates: { canonical: "/courses" },
   openGraph: {
     title: "Courses & Admission · Rofsan Sir",
     description:
-      "O Level Bengali batches for Class VIII, IX and X, online & offline, aligned with CAIE & Edexcel 3204.",
+      "O Level Bengali batches for Class VIII, IX and X, online & offline, aligned with syllabus 3204.",
     url: `${site.url}/courses`,
   },
 };
@@ -36,7 +36,7 @@ const accentRing: Record<string, string> = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Course",
-  name: "O Level Bengali (CAIE 3204)",
+  name: "O Level Bengali (3204)",
   description:
     "Specialised Cambridge O Level Bengali (3204) preparation for English-medium students.",
   provider: {
@@ -63,7 +63,11 @@ export default function CoursesPage() {
             O Level Bengali <ShimmerText>Courses</ShimmerText>
           </>
         }
-        subtitle="Examiner-led O Level Bengali for Cambridge CAIE & Pearson Edexcel (3204). Class VIII, IX and X, online or at our Lalmatia, Dhaka campus."
+        subtitle="Examiner-led O Level Bengali (3204). Class VIII, IX and X, online or at our Lalmatia, Dhaka campus."
+        image={{
+          src: "/assets/courses/classroom-exam.jpg",
+          alt: "Students writing an exam in the Lalmatia classroom",
+        }}
       />
 
       {/* Programs */}

@@ -129,18 +129,14 @@ export function AboutHero() {
           className="relative mx-auto w-full max-w-sm lg:max-w-md"
         >
           <Starburst className="absolute -right-6 -top-6 h-20 w-20 text-marigold/30" />
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[2.4rem] border-4 border-paper shadow-luxe">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[2.4rem] border-4 border-paper bg-paper shadow-luxe">
             <Image
               src="/assets/teacher/1.jpg"
               alt="Rofsan Sir, CAIE O Level Bengali Examiner"
               fill
               priority
               sizes="(max-width: 1024px) 80vw, 30rem"
-              className="object-cover"
-            />
-            <div
-              aria-hidden
-              className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink/50 to-transparent"
+              className="object-contain"
             />
           </div>
         </motion.div>

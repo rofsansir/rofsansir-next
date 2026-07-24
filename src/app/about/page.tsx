@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/primitives";
 import { AboutHero } from "@/components/about/about-hero";
 import { ExperienceCard } from "@/components/about/experience-card";
+import { HoverCard, HoverIcon } from "@/components/ui/hover-card";
 import {
   CertificateGallery,
   type Certificate,
@@ -239,17 +240,21 @@ export default function AboutPage() {
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {method.map(({ label, text }, i) => (
               <Reveal key={label} delay={(i % 3) * 0.06}>
-                <div className="flex h-full flex-col gap-2 rounded-3xl border border-ink/10 bg-paper/70 p-5 shadow-sm transition-shadow hover:shadow-card">
+                <HoverCard className="flex flex-col gap-2 rounded-3xl p-5">
                   <div className="flex items-center gap-3">
-                    <SectionNumber className="text-3xl leading-none md:text-4xl">
-                      {String(i + 1).padStart(2, "0")}
-                    </SectionNumber>
+                    <HoverIcon
+                      variants={{ rest: { scale: 1 }, hover: { scale: 1.14 } }}
+                    >
+                      <SectionNumber className="text-3xl leading-none md:text-4xl">
+                        {String(i + 1).padStart(2, "0")}
+                      </SectionNumber>
+                    </HoverIcon>
                     <p className="font-display text-base font-bold leading-snug text-ink">
                       {label}
                     </p>
                   </div>
                   <p className="text-sm leading-relaxed text-ink/75">{text}</p>
-                </div>
+                </HoverCard>
               </Reveal>
             ))}
           </div>
@@ -268,10 +273,10 @@ export default function AboutPage() {
           <div className="mx-auto mt-10 grid max-w-2xl gap-4 sm:grid-cols-2">
             {education.map(({ Icon, title, subtitle }, i) => (
               <Reveal key={title} delay={(i % 3) * 0.06}>
-                <div className="flex h-full items-start gap-3 rounded-2xl border border-ink/10 bg-paper/70 p-4 shadow-sm transition-shadow hover:shadow-card">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-marigold/10 text-marigold-deep">
+                <HoverCard className="flex items-start gap-3 p-4">
+                  <HoverIcon className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-marigold/10 text-marigold-deep transition-colors duration-300 group-hover:bg-marigold/20">
                     <Icon className="h-4 w-4" />
-                  </span>
+                  </HoverIcon>
                   <div className="min-w-0">
                     <p className="font-display text-sm font-bold leading-snug text-ink">
                       {title}
@@ -280,7 +285,7 @@ export default function AboutPage() {
                       {subtitle}
                     </p>
                   </div>
-                </div>
+                </HoverCard>
               </Reveal>
             ))}
           </div>
@@ -293,7 +298,7 @@ export default function AboutPage() {
           <div className="mx-auto mt-10 grid max-w-3xl items-start gap-4 sm:grid-cols-2">
             {trainingGroups.map((group, gi) => (
               <Reveal key={group.title} delay={gi * 0.06}>
-                <div className="h-full rounded-2xl border border-ink/10 bg-paper/70 p-5 shadow-sm transition-shadow hover:shadow-card">
+                <HoverCard className="p-5">
                   <h3 className="font-display text-sm font-bold text-ink">
                     {group.title}
                   </h3>
@@ -305,7 +310,7 @@ export default function AboutPage() {
                       </li>
                     ))}
                   </ul>
-                </div>
+                </HoverCard>
               </Reveal>
             ))}
           </div>

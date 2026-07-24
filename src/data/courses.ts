@@ -32,7 +32,7 @@ export const courses: Course[] = [
     features: [
       "Composition writing skills",
       "Vocabulary expansion",
-      "CAIE assessment prep",
+      "Exam assessment prep",
       "Comprehension development",
     ],
   },

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
 import { Clock } from "lucide-react";
 import { PageHero } from "@/components/ui/page-hero";
 import { Container, ShimmerText } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
+import { HoverCard } from "@/components/ui/hover-card";
 import { getTipArticles } from "@/lib/remote-content";
 import { site } from "@/lib/site";
 
@@ -39,40 +39,40 @@ export default async function ExaminerTipsPage() {
       {/* Articles */}
       <section className="bg-paper/60 px-4 py-16 md:py-24">
         <Container>
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {articles.map((a, i) => (
-              <Reveal key={a.slug} delay={(i % 2) * 0.05}>
-                <Link
+              <Reveal key={a.slug} delay={(i % 3) * 0.06}>
+                <HoverCard
                   href={`/examiner-tips/${a.slug}`}
-                  className="group flex h-full items-start gap-4 rounded-[1.5rem] border border-ink/10 bg-cream p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-marigold/40 hover:shadow-card"
+                  className="flex flex-col rounded-[1.5rem] bg-cream"
                 >
-                  <Image
-                    src={a.thumb}
-                    alt=""
-                    width={64}
-                    height={64}
-                    className="h-16 w-16 shrink-0 rounded-xl object-cover"
-                  />
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-2">
-                      <span className="rounded-full bg-marigold/15 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-marigold-deep">
-                        {a.category}
-                      </span>
-                      <span className="flex items-center gap-1 text-[11px] text-muted">
-                        <Clock className="h-3 w-3" />
-                        {a.readTime}
-                      </span>
-                    </div>
-                    <h3 className="mt-2 font-semibold leading-snug text-ink">
+                  <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden">
+                    <Image
+                      src={a.thumb}
+                      alt=""
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover"
+                    />
+                    <span className="absolute left-3 top-3 rounded-full bg-marigold/90 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-plum shadow-sm">
+                      {a.category}
+                    </span>
+                  </div>
+                  <div className="flex flex-1 flex-col gap-1.5 p-5">
+                    <span className="flex items-center gap-1 text-[11px] text-muted">
+                      <Clock className="h-3 w-3" />
+                      {a.readTime}
+                    </span>
+                    <h3 className="font-display text-base font-bold leading-snug text-ink">
                       {a.title}
                     </h3>
                     {a.subtitle && (
-                      <p className="mt-1 line-clamp-2 text-sm text-muted">
+                      <p className="line-clamp-2 text-sm text-muted">
                         {a.subtitle}
                       </p>
                     )}
                   </div>
-                </Link>
+                </HoverCard>
               </Reveal>
             ))}
           </div>

@@ -11,7 +11,7 @@ export default function Image() {
       eyebrow: "Courses",
       title: "O Level Bengali Courses",
       description:
-        "Batches for Class VIII, IX and X - online & offline, aligned with Cambridge CAIE & Edexcel 3204.",
+        "Batches for Class VIII, IX and X - online & offline, aligned with syllabus 3204.",
     }),
     OG_SIZE,
   );
