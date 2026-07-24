@@ -34,13 +34,13 @@ export function Footer() {
             <Link
               href="/"
               aria-label="Rofsan Sir   home"
-              className="mx-auto inline-flex w-fit items-center justify-center rounded-[2rem] border border-cream/10 bg-cream/5 p-5 shadow-luxe backdrop-blur-sm transition-colors hover:border-marigold/30 md:mx-0"
+              className="mx-auto inline-flex w-fit items-center justify-center md:mx-0"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/assets/brand-logo-white.svg"
                 alt="Rofsan Sir, O Level Bengali"
-                className="h-28 w-auto md:h-32"
+                className="h-20 w-auto md:h-24"
               />
             </Link>
             <p className="mx-auto max-w-xs text-center text-sm leading-relaxed text-cream/50 md:mx-0 md:text-left">
