@@ -54,7 +54,7 @@ export default async function VideoPage() {
             Video <ShimmerText>Library</ShimmerText>
           </>
         }
-        subtitle="Browse lessons, examiner insights, study techniques, and preparation resources - all in one place."
+        subtitle="Browse lessons, examiner insights, study techniques, and preparation resources, all in one place."
       />
 
       <section className="px-4 pb-16">

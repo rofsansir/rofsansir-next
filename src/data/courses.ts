@@ -62,7 +62,7 @@ export const classModes = [
     title: "Online",
     subtitle: "Virtual Classroom",
     desc: "Live sessions with recorded modules and Google Classroom integration.",
-    points: ["Live Zoom / Google Meet", "Recorded sessions", "Google Classroom integration"],
+    points: ["Live Zoom / Google Meet", "Online materials", "Google Classroom integration"],
   },
 ];
 

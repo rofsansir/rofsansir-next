@@ -43,7 +43,7 @@ export function Footer() {
                 className="h-28 w-auto md:h-32"
               />
             </Link>
-            <p className="max-w-xs text-sm leading-relaxed text-cream/50">
+            <p className="mx-auto max-w-xs text-center text-sm leading-relaxed text-cream/50 md:mx-0 md:text-left">
               {site.tagline}. Examiner-led courses, books and past papers built
               for English-medium students.
             </p>

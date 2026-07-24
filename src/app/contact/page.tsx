@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Mail, MapPin, Navigation, Phone } from "lucide-react";
+import { HoverCard, HoverIcon } from "@/components/ui/hover-card";
 import { PageHero } from "@/components/ui/page-hero";
 import { Container, SectionHeading, ShimmerText } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
@@ -78,56 +79,56 @@ export default function ContactPage() {
         <Container>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Reveal>
-              <div className="flex h-full flex-col gap-2 rounded-[1.5rem] border border-ink/10 bg-paper/70 p-5 shadow-sm">
-                <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-marigold/15 text-marigold-deep">
+              <HoverCard className="flex flex-col gap-2 p-5">
+                <HoverIcon className="flex h-10 w-10 items-center justify-center rounded-2xl bg-marigold/15 text-marigold-deep transition-colors duration-300 group-hover:bg-marigold group-hover:text-ink">
                   <Phone className="h-5 w-5" />
-                </span>
+                </HoverIcon>
                 <p className="text-xs font-semibold uppercase tracking-wide text-muted">
                   Phone
                 </p>
                 <a
                   href={`tel:${site.contact.phonePrimaryTel}`}
-                  className="font-semibold text-ink hover:text-marigold-deep"
+                  className="relative z-10 font-semibold text-ink hover:text-marigold-deep"
                 >
                   {site.contact.phonePrimary}
                 </a>
                 <a
                   href={`tel:${site.contact.phoneSecondaryTel}`}
-                  className="text-sm text-muted hover:text-marigold-deep"
+                  className="relative z-10 text-sm text-muted hover:text-marigold-deep"
                 >
                   {site.contact.phoneSecondary}
                 </a>
-              </div>
+              </HoverCard>
             </Reveal>
 
             <Reveal delay={0.05}>
-              <div className="flex h-full flex-col gap-2 rounded-[1.5rem] border border-ink/10 bg-paper/70 p-5 shadow-sm">
-                <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-marigold/15 text-marigold-deep">
+              <HoverCard className="flex flex-col gap-2 p-5">
+                <HoverIcon className="flex h-10 w-10 items-center justify-center rounded-2xl bg-marigold/15 text-marigold-deep transition-colors duration-300 group-hover:bg-marigold group-hover:text-ink">
                   <Mail className="h-5 w-5" />
-                </span>
+                </HoverIcon>
                 <p className="text-xs font-semibold uppercase tracking-wide text-muted">
                   Email
                 </p>
                 <a
                   href={`mailto:${site.contact.email}`}
-                  className="font-semibold text-ink hover:text-marigold-deep"
+                  className="relative z-10 font-semibold text-ink hover:text-marigold-deep"
                 >
                   {site.contact.email}
                 </a>
-              </div>
+              </HoverCard>
             </Reveal>
 
             <Reveal delay={0.1}>
-              <div className="flex h-full flex-col gap-2 rounded-[1.5rem] border border-ink/10 bg-paper/70 p-5 shadow-sm">
-                <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-marigold/15 text-marigold-deep">
+              <HoverCard className="flex flex-col gap-2 p-5">
+                <HoverIcon className="flex h-10 w-10 items-center justify-center rounded-2xl bg-marigold/15 text-marigold-deep transition-colors duration-300 group-hover:bg-marigold group-hover:text-ink">
                   <MapPin className="h-5 w-5" />
-                </span>
+                </HoverIcon>
                 <p className="text-xs font-semibold uppercase tracking-wide text-muted">
                   Campus
                 </p>
                 <p className="font-semibold text-ink">{site.address.lines[0]}</p>
                 <p className="text-sm text-muted">{site.address.lines[1]}</p>
-              </div>
+              </HoverCard>
             </Reveal>
           </div>
         </Container>

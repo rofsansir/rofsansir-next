@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Download, FileText } from "lucide-react";
+import { HoverCard, HoverIcon } from "@/components/ui/hover-card";
 import { PageHero } from "@/components/ui/page-hero";
 import { Container, SectionHeading, ShimmerText } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
@@ -51,15 +52,15 @@ export default function ResourcesPage() {
               <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {items.map((r, i) => (
                   <Reveal key={r.file} delay={(i % 3) * 0.05}>
-                    <a
+                    <HoverCard
                       href={resourceHref(r.file)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex h-full items-start gap-4 rounded-[1.5rem] border border-ink/10 bg-paper/70 p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-marigold/40 hover:shadow-card"
+                      className="flex items-start gap-4 p-5"
                     >
-                      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-marigold/15 text-marigold-deep transition-colors group-hover:bg-marigold group-hover:text-ink">
+                      <HoverIcon className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-marigold/15 text-marigold-deep transition-colors duration-300 group-hover:bg-marigold group-hover:text-ink">
                         <FileText className="h-6 w-6" />
-                      </span>
+                      </HoverIcon>
                       <div className="min-w-0 flex-1">
                         <h3
                           lang={r.bengali ? "bn" : undefined}
@@ -74,7 +75,7 @@ export default function ResourcesPage() {
                         </p>
                       </div>
                       <Download className="mt-1 h-5 w-5 shrink-0 text-muted transition-colors group-hover:text-marigold-deep" />
-                    </a>
+                    </HoverCard>
                   </Reveal>
                 ))}
               </div>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, BookOpen } from "lucide-react";
+import { HoverCard, HoverIcon } from "@/components/ui/hover-card";
 import { PageHero } from "@/components/ui/page-hero";
 import { Container, ShimmerText } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/reveal";
@@ -62,21 +62,18 @@ export default function BooksPage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {books.map((b, i) => (
               <Reveal key={b.slug} delay={(i % 3) * 0.06}>
-                <Link
-                  href={`/books/${b.slug}`}
-                  className="group flex h-full flex-col rounded-[1.75rem] border border-ink/10 bg-paper/70 p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-marigold/40 hover:shadow-card"
-                >
-                  <div className="relative mx-auto aspect-[3/4] w-44 overflow-hidden rounded-2xl bg-cream p-3 shadow-luxe">
+                <HoverCard href={`/books/${b.slug}`} className="flex h-full flex-col p-5">
+                  <HoverIcon className="relative mx-auto block aspect-[3/4] w-44 overflow-hidden rounded-2xl bg-cream p-3 shadow-luxe">
                     <div className="relative h-full w-full">
                       <Image
                         src={b.image}
                         alt={b.title}
                         fill
                         sizes="176px"
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="object-cover"
                       />
                     </div>
-                  </div>
+                  </HoverIcon>
 
                   <div className="mt-5 flex flex-1 flex-col">
                     <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-marigold-deep">
@@ -98,7 +95,7 @@ export default function BooksPage() {
                     View details
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                   </span>
-                </Link>
+                </HoverCard>
               </Reveal>
             ))}
           </div>

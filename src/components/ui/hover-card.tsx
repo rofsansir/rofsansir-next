@@ -28,11 +28,15 @@ export function HoverCard({
   className,
   glowClassName,
   href,
+  target,
+  rel,
 }: {
   children: ReactNode;
   className?: string;
   glowClassName?: string;
   href?: string;
+  target?: string;
+  rel?: string;
 }) {
   const glow = (
     <motion.span
@@ -55,6 +59,8 @@ export function HoverCard({
     return (
       <MotionLink
         href={href}
+        target={target}
+        rel={rel}
         initial="rest"
         animate="rest"
         whileHover="hover"
