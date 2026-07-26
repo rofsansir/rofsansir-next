@@ -34,11 +34,11 @@ export function Footer() {
             <Link
               href="/"
               aria-label="Rofsan Sir   home"
-              className="mx-auto inline-flex w-fit items-center justify-center md:mx-0"
+              className="mx-auto inline-flex w-fit items-center justify-center rounded-2xl bg-paper px-7 py-6 shadow-card transition-opacity hover:opacity-90 md:mx-0"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/assets/brand-logo-white.svg"
+                src="/assets/brand-logo.png"
                 alt="Rofsan Sir, O Level Bengali"
                 className="h-20 w-auto md:h-24"
               />
